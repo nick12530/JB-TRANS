@@ -3,12 +3,19 @@ import { FormInput } from '../../../../components/FormInput';
 import { FormSelect } from '../../../../components/FormSelect';
 import { SourceRecord } from '../../../../types';
 
-const pickupPoints = [
-  { value: 'A', label: 'Point A (100-300)' },
-  { value: 'B', label: 'Point B (400-600)' },
-  { value: 'C', label: 'Point C (700-900)' },
-  { value: 'D', label: 'Point D (1000-1200)' },
-] as const;
+const pickupStations = [
+  { value: 'ST001', label: 'Station ST001' },
+  { value: 'ST002', label: 'Station ST002' },
+  { value: 'ST003', label: 'Station ST003' },
+  { value: 'ST004', label: 'Station ST004' },
+];
+
+const areaCodes = [
+  { value: 'AC001', label: 'Area Code AC001' },
+  { value: 'AC002', label: 'Area Code AC002' },
+  { value: 'AC003', label: 'Area Code AC003' },
+  { value: 'AC004', label: 'Area Code AC004' },
+];
 
 interface BasicInfoProps {
   formData: Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost'>;
@@ -31,22 +38,21 @@ export const BasicInfo: React.FC<BasicInfoProps> = ({ formData, setFormData, err
         />
 
         <FormSelect
-          label="Pickup Point"
-          value={formData.pickupPoint}
-          onChange={(value) => setFormData({ ...formData, pickupPoint: value as any })}
-          options={pickupPoints}
-          error={errors.pickupPoint}
+          label="Pickup Station"
+          value={formData.pickupStationCode}
+          onChange={(value) => setFormData({ ...formData, pickupStationCode: value as string })}
+          options={pickupStations}
+          error={errors.pickupStationCode}
           required
         />
 
-        <FormInput
-          label="Farmer ID"
-          type="text"
-          value={formData.farmerId}
-          onChange={(value) => setFormData({ ...formData, farmerId: value as string })}
-          error={errors.farmerId}
+        <FormSelect
+          label="Area Code"
+          value={formData.areaCode}
+          onChange={(value) => setFormData({ ...formData, areaCode: value as string })}
+          options={areaCodes}
+          error={errors.areaCode}
           required
-          placeholder="Farmer identification"
         />
 
         <FormInput
@@ -70,14 +76,22 @@ export const BasicInfo: React.FC<BasicInfoProps> = ({ formData, setFormData, err
         />
 
         <FormInput
-          label="Payment Methods"
+          label="Drop-off Point"
           type="text"
-          value={formData.paymentMethods?.join(', ') || ''}
-          onChange={(value) => {
-            const methods = (value as string).split(',').map(m => m.trim()).filter(Boolean);
-            setFormData({ ...formData, paymentMethods: methods as any });
-          }}
-          placeholder="Cash, M-Pesa, Bank"
+          value={formData.dropOffPoint}
+          onChange={(value) => setFormData({ ...formData, dropOffPoint: value as string })}
+          error={errors.dropOffPoint}
+          required
+          placeholder="Destination location"
+        />
+
+        <FormInput
+          label="Estimated Delivery Time"
+          type="text"
+          value={formData.estimatedDeliveryTime}
+          onChange={(value) => setFormData({ ...formData, estimatedDeliveryTime: value as string })}
+          error={errors.estimatedDeliveryTime}
+          placeholder="e.g., 2-3 hours"
         />
       </div>
     </div>
