@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormInput } from '../../../../../components/FormInput';
-import { formatCurrency } from '../../../../../utils/helpers';
+import { FormInput } from '../../../../components/FormInput';
+import { formatCurrency } from '../../../../utils/helpers';
 
 interface PackagingInfoProps {
   formData: any;

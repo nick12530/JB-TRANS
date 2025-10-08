@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency } from '../../../../../utils/helpers';
+import { formatCurrency } from '../../../../utils/helpers';
 
 interface CostCalculationProps {
   formData: any;

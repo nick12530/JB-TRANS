@@ -1,6 +1,7 @@
 import React from 'react';
-import { FormInput, FormSelect } from '../../../../../components/FormInput';
-import { SourceRecord } from '../../../../../types';
+import { FormInput } from '../../../../components/FormInput';
+import { FormSelect } from '../../../../components/FormSelect';
+import { SourceRecord } from '../../../../types';
 
 const pickupPoints = [
   { value: 'A', label: 'Point A (100-300)' },
