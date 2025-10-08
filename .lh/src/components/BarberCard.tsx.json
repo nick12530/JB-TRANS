@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/BarberCard.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1757633427808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1757633427808,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\nimport { Link } from \"react-router-dom\";\r\n\r\nexport interface Barber {\r\n  id: number;\r\n  name: string;\r\n  specialty: string;\r\n  rating: number;\r\n  image?: string;\r\n}\r\n\r\ninterface BarberCardProps {\r\n  barber: Barber;\r\n}\r\n\r\nexport default function BarberCard({ barber }: BarberCardProps) {\r\n  return (\r\n    <div className=\"border rounded-lg shadow p-4 hover:shadow-lg transition\">\r\n      <img\r\n        src={barber.image || \"https://via.placeholder.com/150\"}\r\n        alt={barber.name}\r\n        className=\"w-full h-40 object-cover rounded-md mb-3\"\r\n      />\r\n      <h3 className=\"text-lg font-bold\">{barber.name}</h3>\r\n      <p className=\"text-sm text-gray-600\">{barber.specialty}</p>\r\n      <p className=\"text-yellow-500\">⭐ {barber.rating}</p>\r\n      <Link to={`/barber/${barber.id}`}>\r\n        <button className=\"mt-3 bg-blue-500 text-white px-4 py-2 rounded\">\r\n          View Profile\r\n        </button>\r\n      </Link>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

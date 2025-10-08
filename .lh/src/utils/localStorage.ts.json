@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/utils/localStorage.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1757674917322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1757676069533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +1,33 @@\n // Utility functions for localStorage with error handling\r\n \r\n export const safeGetItem = (key: string): any => {\r\n   try {\r\n+    if (typeof window === 'undefined' || !localStorage) return null;\r\n     const item = localStorage.getItem(key);\r\n     if (item === null) return null;\r\n     return JSON.parse(item);\r\n   } catch (error) {\r\n     console.error(`Error parsing localStorage item \"${key}\":`, error);\r\n-    localStorage.removeItem(key);\r\n+    if (typeof window !== 'undefined' && localStorage) {\r\n+      localStorage.removeItem(key);\r\n+    }\r\n     return null;\r\n   }\r\n };\r\n \r\n export const safeSetItem = (key: string, value: any): void => {\r\n   try {\r\n+    if (typeof window === 'undefined' || !localStorage) return;\r\n     localStorage.setItem(key, JSON.stringify(value));\r\n   } catch (error) {\r\n     console.error(`Error setting localStorage item \"${key}\":`, error);\r\n   }\r\n };\r\n \r\n export const clearCorruptedData = (): void => {\r\n+  if (typeof window === 'undefined' || !localStorage) return;\r\n+  \r\n   const keys = ['user', 'bookingData', 'theme'];\r\n   keys.forEach(key => {\r\n     try {\r\n       const item = localStorage.getItem(key);\r\n"
+                }
+            ],
+            "date": 1757674917322,
+            "name": "Commit-0",
+            "content": "// Utility functions for localStorage with error handling\r\n\r\nexport const safeGetItem = (key: string): any => {\r\n  try {\r\n    const item = localStorage.getItem(key);\r\n    if (item === null) return null;\r\n    return JSON.parse(item);\r\n  } catch (error) {\r\n    console.error(`Error parsing localStorage item \"${key}\":`, error);\r\n    localStorage.removeItem(key);\r\n    return null;\r\n  }\r\n};\r\n\r\nexport const safeSetItem = (key: string, value: any): void => {\r\n  try {\r\n    localStorage.setItem(key, JSON.stringify(value));\r\n  } catch (error) {\r\n    console.error(`Error setting localStorage item \"${key}\":`, error);\r\n  }\r\n};\r\n\r\nexport const clearCorruptedData = (): void => {\r\n  const keys = ['user', 'bookingData', 'theme'];\r\n  keys.forEach(key => {\r\n    try {\r\n      const item = localStorage.getItem(key);\r\n      if (item) {\r\n        JSON.parse(item);\r\n      }\r\n    } catch (error) {\r\n      console.error(`Clearing corrupted data for key \"${key}\":`, error);\r\n      localStorage.removeItem(key);\r\n    }\r\n  });\r\n};\r\n"
+        }
+    ]
+}

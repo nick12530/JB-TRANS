@@ -1,0 +1,38 @@
+{
+    "sourceFile": "postcss.config.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1757633941790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1757634065624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n module.exports = {\r\n   plugins: {\r\n-    tailwindcss: {},\r\n+    '@tailwindcss/postcss': {},\r\n     autoprefixer: {},\r\n   },\r\n }\r\n"
+                },
+                {
+                    "date": 1757634198926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n module.exports = {\r\n-  plugins: {\r\n-    '@tailwindcss/postcss': {},\r\n-    autoprefixer: {},\r\n-  },\r\n+  plugins: [\r\n+    require('tailwindcss'),\r\n+    require('autoprefixer'),\r\n+  ],\r\n }\r\n"
+                },
+                {
+                    "date": 1757634246769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,1 @@\n-module.exports = {\r\n-  plugins: [\r\n-    require('tailwindcss'),\r\n-    require('autoprefixer'),\r\n-  ],\r\n-}\r\n+ \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759565066475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n- \n\\ No newline at end of file\n+export default {\r\n+  plugins: {\r\n+    tailwindcss: {},\r\n+    autoprefixer: {},\r\n+  },\r\n+}\r\n"
+                },
+                {
+                    "date": 1759565210134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n   plugins: {\r\n     tailwindcss: {},\r\n     autoprefixer: {},\r\n   },\r\n-}\r\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1757633941790,
+            "name": "Commit-0",
+            "content": "module.exports = {\r\n  plugins: {\r\n    tailwindcss: {},\r\n    autoprefixer: {},\r\n  },\r\n}\r\n"
+        }
+    ]
+}

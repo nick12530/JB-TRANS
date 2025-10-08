@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/pages/SourceRecords/components/SourceRecordModal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1759569332077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759911110265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react';\r\n import { Modal } from '../../../../components/Modal';\r\n-import { FormInput } from '../../../../components/FormInput;\r\n+import { FormInput } from '../../../../components/FormInput';\r\n import { BasicInfo } from './FormSections/BasicInfo';\r\n import { DriverVehicleInfo } from './FormSections/DriverVehicleInfo';\r\n import { PackagingInfo } from './FormSections/PackagingInfo';\r\n import { CostCalculation } from './FormSections/CostCalculation';\r\n"
+                }
+            ],
+            "date": 1759569332077,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Modal } from '../../../../components/Modal';\r\nimport { FormInput } from '../../../../components/FormInput;\r\nimport { BasicInfo } from './FormSections/BasicInfo';\r\nimport { DriverVehicleInfo } from './FormSections/DriverVehicleInfo';\r\nimport { PackagingInfo } from './FormSections/PackagingInfo';\r\nimport { CostCalculation } from './FormSections/CostCalculation';\r\nimport { SourceRecord } from '../../../../types';\r\n\r\ninterface SourceRecordModalProps {\r\n  isOpen: boolean;\r\n  onClose: () => void;\r\n  onSubmit: (e: React.FormEvent) => void;\r\n  formData: Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost'>;\r\n  setFormData: React.Dispatch<React.SetStateAction<Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost'>>>;\r\n  errors: Record<string, string>;\r\n  editingRecord: SourceRecord | null;\r\n  user: any;\r\n}\r\n\r\nexport const SourceRecordModal: React.FC<SourceRecordModalProps> = ({\r\n  isOpen,\r\n  onClose,\r\n  onSubmit,\r\n  formData,\r\n  setFormData,\r\n  errors,\r\n  editingRecord,\r\n  user,\r\n}) => {\r\n  return (\r\n    <Modal\r\n      isOpen={isOpen}\r\n      onClose={onClose}\r\n      title={editingRecord ? 'Edit Source Record' : 'Add Source Record'}\r\n      size=\"lg\"\r\n    >\r\n      <form onSubmit={onSubmit} className=\"space-y-6\">\r\n        <BasicInfo\r\n          formData={formData}\r\n          setFormData={setFormData}\r\n          errors={errors}\r\n        />\r\n\r\n        <DriverVehicleInfo\r\n          formData={formData}\r\n          setFormData={setFormData}\r\n          errors={errors}\r\n        />\r\n\r\n        <PackagingInfo\r\n          formData={formData}\r\n          setFormData={setFormData}\r\n          errors={errors}\r\n        />\r\n\r\n        <div>\r\n          <FormInput\r\n            label=\"Entered By\"\r\n            type=\"text\"\r\n            value={formData.assignedBy || user?.name || ''}\r\n            onChange={(value) => setFormData({ ...formData, assignedBy: value as string })}\r\n            error={errors.assignedBy}\r\n            required\r\n            placeholder=\"Person entering this data\"\r\n          />\r\n        </div>\r\n\r\n        <CostCalculation formData={formData} />\r\n\r\n        <div className=\"flex justify-end space-x-3 pt-4\">\r\n          <button\r\n            type=\"button\"\r\n            onClick={onClose}\r\n            className=\"btn-secondary\"\r\n          >\r\n            Cancel\r\n          </button>\r\n          <button type=\"submit\" className=\"btn-primary\">\r\n            {editingRecord ? 'Update Record' : 'Add Record'}\r\n          </button>\r\n        </div>\r\n      </form>\r\n    </Modal>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/Logo.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759905018141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759905018141,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Truck, Package } from 'lucide-react';\r\n\r\ninterface LogoProps {\r\n  size?: 'sm' | 'md' | 'lg';\r\n  showText?: boolean;\r\n  className?: string;\r\n}\r\n\r\nexport const Logo: React.FC<LogoProps> = ({ \r\n  size = 'md', \r\n  showText = true, \r\n  className = '' \r\n}) => {\r\n  const sizeClasses = {\r\n    sm: 'h-6 w-6',\r\n    md: 'h-8 w-8',\r\n    lg: 'h-12 w-12'\r\n  };\r\n\r\n  const textSizeClasses = {\r\n    sm: 'text-sm',\r\n    md: 'text-lg',\r\n    lg: 'text-2xl'\r\n  };\r\n\r\n  return (\r\n    <div className={`flex items-center space-x-2 ${className}`}>\r\n      {/* Logo Icon */}\r\n      <div className={`${sizeClasses[size]} bg-gradient-to-br from-bright-green to-green-600 rounded-lg flex items-center justify-center shadow-lg`}>\r\n        <div className=\"relative\">\r\n          <Truck className={`${size === 'sm' ? 'h-3 w-3' : size === 'md' ? 'h-4 w-4' : 'h-6 w-6'} text-white`} />\r\n          <Package className={`${size === 'sm' ? 'h-2 w-2' : size === 'md' ? 'h-2.5 w-2.5' : 'h-3 w-3'} text-white absolute -top-1 -right-1`} />\r\n        </div>\r\n      </div>\r\n      \r\n      {/* Company Name */}\r\n      {showText && (\r\n        <div className=\"flex flex-col\">\r\n          <span className={`${textSizeClasses[size]} font-bold text-gray-900 dark:text-gray-100`}>\r\n            Mwalimu\r\n          </span>\r\n          <span className={`${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : 'text-base'} font-medium text-bright-green`}>\r\n            Transporters\r\n          </span>\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

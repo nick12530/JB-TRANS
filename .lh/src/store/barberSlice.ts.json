@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/store/barberSlice.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1757633622853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1757633640213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,4 +9,5 @@\n   reducers: {}\r\n });\r\n \r\n export default barberSlice.reducer;\r\n+export {};\r\n"
+                }
+            ],
+            "date": 1757633622853,
+            "name": "Commit-0",
+            "content": "import { createSlice, PayloadAction } from \"@reduxjs/toolkit\";\r\n\r\nconst barberSlice = createSlice({\r\n  name: \"barbers\",\r\n  initialState: [\r\n    { id: 1, name: \"John Smith\", specialty: \"Fade & Beard\", rating: 4.8 },\r\n    { id: 2, name: \"Mike Jones\", specialty: \"Classic Cuts\", rating: 4.6 },\r\n  ],\r\n  reducers: {}\r\n});\r\n\r\nexport default barberSlice.reducer;\r\n"
+        }
+    ]
+}

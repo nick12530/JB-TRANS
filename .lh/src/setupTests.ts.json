@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/setupTests.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1757633537732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759564770680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,1 @@\n-// jest-dom adds custom jest matchers for asserting on DOM nodes.\n-// allows you to do things like:\n-// expect(element).toHaveTextContent(/react/i)\n-// learn more: https://github.com/testing-library/jest-dom\n-import '@testing-library/jest-dom';\n\\ No newline at end of file\n+ \n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1757633537732,
+            "name": "Commit-0",
+            "content": "// jest-dom adds custom jest matchers for asserting on DOM nodes.\n// allows you to do things like:\n// expect(element).toHaveTextContent(/react/i)\n// learn more: https://github.com/testing-library/jest-dom\nimport '@testing-library/jest-dom';"
+        }
+    ]
+}

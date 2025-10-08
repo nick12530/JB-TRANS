@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/ErrorBoundary.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1757676341625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1757676341625,
+            "name": "Commit-0",
+            "content": "import React, { Component, ErrorInfo, ReactNode } from 'react';\r\n\r\ninterface Props {\r\n  children: ReactNode;\r\n}\r\n\r\ninterface State {\r\n  hasError: boolean;\r\n  error?: Error;\r\n  errorInfo?: ErrorInfo;\r\n}\r\n\r\nclass ErrorBoundary extends Component<Props, State> {\r\n  constructor(props: Props) {\r\n    super(props);\r\n    this.state = { hasError: false };\r\n  }\r\n\r\n  static getDerivedStateFromError(error: Error): State {\r\n    return { hasError: true, error };\r\n  }\r\n\r\n  componentDidCatch(error: Error, errorInfo: ErrorInfo) {\r\n    console.error('ErrorBoundary caught an error:', error, errorInfo);\r\n    this.setState({\r\n      error,\r\n      errorInfo\r\n    });\r\n  }\r\n\r\n  render() {\r\n    if (this.state.hasError) {\r\n      return (\r\n        <div style={{\r\n          padding: '20px',\r\n          textAlign: 'center',\r\n          backgroundColor: '#f8f9fa',\r\n          minHeight: '100vh',\r\n          display: 'flex',\r\n          flexDirection: 'column',\r\n          justifyContent: 'center',\r\n          alignItems: 'center'\r\n        }}>\r\n          <h1 style={{ color: '#dc3545', marginBottom: '20px' }}>\r\n            Something went wrong\r\n          </h1>\r\n          <p style={{ color: '#6c757d', marginBottom: '20px' }}>\r\n            The application encountered an error and couldn't render properly.\r\n          </p>\r\n          <details style={{ \r\n            backgroundColor: '#e9ecef', \r\n            padding: '15px', \r\n            borderRadius: '5px',\r\n            maxWidth: '600px',\r\n            textAlign: 'left'\r\n          }}>\r\n            <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>\r\n              Error Details\r\n            </summary>\r\n            <pre style={{ \r\n              marginTop: '10px', \r\n              whiteSpace: 'pre-wrap',\r\n              fontSize: '12px',\r\n              color: '#dc3545'\r\n            }}>\r\n              {this.state.error && this.state.error.toString()}\r\n              {this.state.errorInfo && this.state.errorInfo.componentStack}\r\n            </pre>\r\n          </details>\r\n          <button\r\n            onClick={() => window.location.reload()}\r\n            style={{\r\n              marginTop: '20px',\r\n              padding: '10px 20px',\r\n              backgroundColor: '#007bff',\r\n              color: 'white',\r\n              border: 'none',\r\n              borderRadius: '5px',\r\n              cursor: 'pointer'\r\n            }}\r\n          >\r\n            Reload Page\r\n          </button>\r\n        </div>\r\n      );\r\n    }\r\n\r\n    return this.props.children;\r\n  }\r\n}\r\n\r\nexport default ErrorBoundary;\r\n"
+        }
+    ]
+}

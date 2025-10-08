@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/services/notificationService.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759905529644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759905529644,
+            "name": "Commit-0",
+            "content": "import { useNotifications } from '../context/NotificationsContext';\r\n\r\nexport const useNotificationService = () => {\r\n  const { addNotification } = useNotifications();\r\n\r\n  const showSuccessNotification = (title: string, message: string, action?: { label: string; onClick: () => void }) => {\r\n    addNotification({\r\n      type: 'success',\r\n      title,\r\n      message,\r\n      action,\r\n    });\r\n  };\r\n\r\n  const showErrorNotification = (title: string, message: string, action?: { label: string; onClick: () => void }) => {\r\n    addNotification({\r\n      type: 'error',\r\n      title,\r\n      message,\r\n      action,\r\n    });\r\n  };\r\n\r\n  const showWarningNotification = (title: string, message: string, action?: { label: string; onClick: () => void }) => {\r\n    addNotification({\r\n      type: 'warning',\r\n      title,\r\n      message,\r\n      action,\r\n    });\r\n  };\r\n\r\n  const showInfoNotification = (title: string, message: string, action?: { label: string; onClick: () => void }) => {\r\n    addNotification({\r\n      type: 'info',\r\n      title,\r\n      message,\r\n      action,\r\n    });\r\n  };\r\n\r\n  // Sample notifications for demonstration\r\n  const addSampleNotifications = () => {\r\n    // Add some sample notifications\r\n    showSuccessNotification(\r\n      'New Record Added',\r\n      'Successfully added pickup record for Area AC001 with 50kg of goods.',\r\n      {\r\n        label: 'View Record',\r\n        onClick: () => console.log('Navigate to record')\r\n      }\r\n    );\r\n\r\n    showWarningNotification(\r\n      'Low Stock Alert',\r\n      'Area AC002 is running low on miraa stock. Consider restocking soon.',\r\n      {\r\n        label: 'Check Stock',\r\n        onClick: () => console.log('Navigate to stock')\r\n      }\r\n    );\r\n\r\n    showErrorNotification(\r\n      'Delivery Failed',\r\n      'Delivery to Nairobi CBD failed due to vehicle breakdown. Driver John Kimani needs assistance.',\r\n      {\r\n        label: 'View Details',\r\n        onClick: () => console.log('Navigate to delivery details')\r\n      }\r\n    );\r\n\r\n    showInfoNotification(\r\n      'System Update',\r\n      'New features have been added to the dashboard. Check out the enhanced analytics section.',\r\n      {\r\n        label: 'Learn More',\r\n        onClick: () => console.log('Navigate to help')\r\n      }\r\n    );\r\n  };\r\n\r\n  return {\r\n    showSuccessNotification,\r\n    showErrorNotification,\r\n    showWarningNotification,\r\n    showInfoNotification,\r\n    addSampleNotifications,\r\n  };\r\n};\r\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/utils/helpers.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759565453571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759565453571,
+            "name": "Commit-0",
+            "content": "export function generateTrackingId(): string {\r\n  const timestamp = Date.now().toString(36);\r\n  const random = Math.random().toString(36).substr(2, 5);\r\n  return `${timestamp}-${random}`.toUpperCase();\r\n}\r\n\r\nexport function formatCurrency(amount: number): string {\r\n  return new Intl.NumberFormat('en-KE', {\r\n    style: 'currency',\r\n    currency: 'KES',\r\n  }).format(amount);\r\n}\r\n\r\nexport function formatDate(date: string | Date): string {\r\n  return new Date(date).toLocaleDateString('en-KE', {\r\n    year: 'numeric',\r\n    month: 'short',\r\n    day: 'numeric',\r\n  });\r\n}\r\n\r\nexport function getProfitMargin(cost: number, revenue: number): number {\r\n  if (cost === 0) return 0;\r\n  return ((revenue - cost) / cost) * 100;\r\n}\r\n\r\nexport function generateTripId(): string {\r\n  const timestamp = Date.now().toString(36);\r\n  const random = Math.random().toString(36).substr(2, 3);\r\n  return `TRIP-${timestamp}-${random}`.toUpperCase();\r\n}\r\n\r\nexport function getPickupPointCode(point: 'A' | 'B' | 'C' | 'D'): { min: number; max: number } {\r\n  const codes: Record<string, { min: number; max: number }> = {\r\n    A: { min: 100, max: 300 },\r\n    B: { min: 400, max: 600 },\r\n    C: { min: 700, max: 900 },\r\n    D: { min: 1000, max: 1200 },\r\n  };\r\n  return codes[point];\r\n}\r\n"
+        }
+    ]
+}

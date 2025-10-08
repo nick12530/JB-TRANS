@@ -1,0 +1,22 @@
+{
+    "sourceFile": "tsconfig.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1759565070481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759565175869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,18 +4,14 @@\n     \"useDefineForClassFields\": true,\r\n     \"lib\": [\"ES2020\", \"DOM\", \"DOM.Iterable\"],\r\n     \"module\": \"ESNext\",\r\n     \"skipLibCheck\": true,\r\n-\r\n-    /* Bundler mode */\r\n     \"moduleResolution\": \"bundler\",\r\n     \"allowImportingTsExtensions\": true,\r\n     \"resolveJsonModule\": true,\r\n     \"isolatedModules\": true,\r\n     \"noEmit\": true,\r\n     \"jsx\": \"react-jsx\",\r\n-\r\n-    /* Linting */\r\n     \"strict\": true,\r\n     \"noUnusedLocals\": true,\r\n     \"noUnusedParameters\": true,\r\n     \"noFallthroughCasesInSwitch\": true\r\n"
+                }
+            ],
+            "date": 1759565070481,
+            "name": "Commit-0",
+            "content": "{\r\n  \"compilerOptions\": {\r\n    \"target\": \"ES2020\",\r\n    \"useDefineForClassFields\": true,\r\n    \"lib\": [\"ES2020\", \"DOM\", \"DOM.Iterable\"],\r\n    \"module\": \"ESNext\",\r\n    \"skipLibCheck\": true,\r\n\r\n    /* Bundler mode */\r\n    \"moduleResolution\": \"bundler\",\r\n    \"allowImportingTsExtensions\": true,\r\n    \"resolveJsonModule\": true,\r\n    \"isolatedModules\": true,\r\n    \"noEmit\": true,\r\n    \"jsx\": \"react-jsx\",\r\n\r\n    /* Linting */\r\n    \"strict\": true,\r\n    \"noUnusedLocals\": true,\r\n    \"noUnusedParameters\": true,\r\n    \"noFallthroughCasesInSwitch\": true\r\n  },\r\n  \"include\": [\"src\"],\r\n  \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\r\n}"
+        }
+    ]
+}

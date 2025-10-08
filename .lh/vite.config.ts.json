@@ -1,0 +1,26 @@
+{
+    "sourceFile": "vite.config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1759565057597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759565164514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,9 @@\n import { defineConfig } from 'vite'\r\n import react from '@vitejs/plugin-react'\r\n \r\n-// https://vitejs.dev/config/\r\n export default defineConfig({\r\n   plugins: [react()],\r\n   server: {\r\n     port: 3000,\r\n-    open: true\r\n-  }\r\n-})\r\n+  },\r\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759566300473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n \r\n export default defineConfig({\r\n   plugins: [react()],\r\n   server: {\r\n-    port: 3000,\r\n+    port: 3001,\r\n   },\r\n })\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1759565057597,
+            "name": "Commit-0",
+            "content": "import { defineConfig } from 'vite'\r\nimport react from '@vitejs/plugin-react'\r\n\r\n// https://vitejs.dev/config/\r\nexport default defineConfig({\r\n  plugins: [react()],\r\n  server: {\r\n    port: 3000,\r\n    open: true\r\n  }\r\n})\r\n"
+        }
+    ]
+}

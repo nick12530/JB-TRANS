@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/SourceRecords/components/FormSections/DriverVehicleInfo.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759569306210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759569306210,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { FormInput } from '../../../../../components/FormInput';\r\n\r\ninterface DriverVehicleInfoProps {\r\n  formData: any;\r\n  setFormData: any;\r\n  errors: Record<string, string>;\r\n}\r\n\r\nexport const DriverVehicleInfo: React.FC<DriverVehicleInfoProps> = ({ formData, setFormData, errors }) => {\r\n  return (\r\n    <div>\r\n      <h4 className=\"text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3\">Driver & Vehicle Details</h4>\r\n      <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\r\n        <FormInput\r\n          label=\"Driver Name\"\r\n          type=\"text\"\r\n          value={formData.driverName}\r\n          onChange={(value) => setFormData({ ...formData, driverName: value as string })}\r\n          error={errors.driverName}\r\n          required\r\n          placeholder=\"Driver full name\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Driver ID\"\r\n          type=\"text\"\r\n          value={formData.driverId}\r\n          onChange={(value) => setFormData({ ...formData, driverId: value as string })}\r\n          error={errors.driverId}\r\n          required\r\n          placeholder=\"Driver identification\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Driver Phone\"\r\n          type=\"tel\"\r\n          value={formData.driverPhone}\r\n          onChange={(value) => setFormData({ ...formData, driverPhone: value as string })}\r\n          placeholder=\"Driver phone number\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Vehicle Registration\"\r\n          type=\"text\"\r\n          value={formData.vehicleReg}\r\n          onChange={(value) => setFormData({ ...formData, vehicleReg: value as string })}\r\n          error={errors.vehicleReg}\r\n          required\r\n          placeholder=\"e.g., KAA 123A\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Vehicle Make\"\r\n          type=\"text\"\r\n          value={formData.vehicleMake || ''}\r\n          onChange={(value) => setFormData({ ...formData, vehicleMake: value as string })}\r\n          placeholder=\"e.g., Toyota Hiace\"\r\n          className=\"md:col-span-1\"\r\n        />\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/App.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1757633324018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1757754275289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import React from 'react';\n-import { render, screen } from '@testing-library/react';\n+import { render } from '@testing-library/react';\n import '@testing-library/jest-dom';\n import App from './App';\n \n test('renders welcome message', () => {\n-  render(<App />);\n-  const welcomeElement = screen.getByText(/Welcome to Trimly/i);\n+  const { getByText } = render(<App />);\n+  const welcomeElement = getByText(/Welcome to Trimly/i);\n   expect(welcomeElement).toBeInTheDocument();\n });\n"
+                }
+            ],
+            "date": 1757633324018,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport '@testing-library/jest-dom';\nimport App from './App';\n\ntest('renders welcome message', () => {\n  render(<App />);\n  const welcomeElement = screen.getByText(/Welcome to Trimly/i);\n  expect(welcomeElement).toBeInTheDocument();\n});\n"
+        }
+    ]
+}

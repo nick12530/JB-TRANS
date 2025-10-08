@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/SourceRecords/components/FormSections/CostCalculation.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759569313172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759569313172,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { formatCurrency } from '../../../../../utils/helpers';\r\n\r\ninterface CostCalculationProps {\r\n  formData: any;\r\n}\r\n\r\nexport const CostCalculation: React.FC<CostCalculationProps> = ({ formData }) => {\r\n  const goodsCost = (formData.quantitySold || 0) * (formData.itemPrice || 0);\r\n  const packagingCost = \r\n    ((formData.packaging?.basins || 0) * (formData.packagingCosts?.basinCost || 0)) +\r\n    ((formData.packaging?.sacks || 0) * (formData.packagingCosts?.sackCost || 0)) +\r\n    ((formData.packaging?.boxes || 0) * (formData.packagingCosts?.boxCost || 0));\r\n  \r\n  const grandTotal = goodsCost + packagingCost;\r\n\r\n  if (goodsCost === 0 && packagingCost === 0) return null;\r\n\r\n  return (\r\n    <div className=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg space-y-2\">\r\n      {goodsCost > 0 && (\r\n        <p className=\"text-sm text-green-800 dark:text-green-200\">\r\n          <strong>Goods Cost:</strong> {formatCurrency(goodsCost)}\r\n        </p>\r\n      )}\r\n      \r\n      {packagingCost > 0 && (\r\n        <div className=\"text-sm text-green-800 dark:text-green-200\">\r\n          <strong>Packaging Cost:</strong>\r\n          <div className=\"ml-4 space-y-1\">\r\n            {(formData.packaging?.basins?.basins || 0) > 0 && (\r\n              <div>Basins: {formData.packaging.basins} × {formatCurrency(formData.packagingCosts?.basinCost || 0)} = {formatCurrency((formData.packaging.basins * (formData.packagingCosts?.basinCost || 0)))}</div>\r\n            )}\r\n            {(formData.packaging?.sacks || 0) > 0 && (\r\n              <div>Sacks: {formData.packaging.sacks} × {formatCurrency(formData.packagingCosts?.sackCost || 0)} = {formatCurrency((formData.packaging.sacks * (formData.packagingCosts?.sackCost || 0)))}</div>\r\n            )}\r\n            {(formData.packaging?.boxes || 0) > 0 && (\r\n              <div>Boxes: {formData.packaging.boxes} × {formatCurrency(formData.packagingCosts?.boxCost || 0)} = {formatCurrency((formData.packaging.boxes * (formData.packagingCosts?.boxCost || 0)))}</div>\r\n            )}\r\n            <div className=\"font-bold border-t pt-1 mt-1\">\r\n              Total Packaging: {formatCurrency(packagingCost)}\r\n            </div>\r\n          </div>\r\n        </div>\r\n      )}\r\n      \r\n      <div className=\"text-sm font-bold text-green-800 dark:text-green-200 border-t pt-2\">\r\n        <strong>Grand Total:</strong> {formatCurrency(grandTotal)}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

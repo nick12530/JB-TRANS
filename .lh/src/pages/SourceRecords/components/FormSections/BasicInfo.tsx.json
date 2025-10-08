@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/SourceRecords/components/FormSections/BasicInfo.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1759569301461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1759569301461,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { FormInput, FormSelect } from '../../../../../components/FormInput';\r\nimport { SourceRecord } from '../../../../../types';\r\n\r\nconst pickupPoints = [\r\n  { value: 'A', label: 'Point A (100-300)' },\r\n  { value: 'B', label: 'Point B (400-600)' },\r\n  { value: 'C', label: 'Point C (700-900)' },\r\n  { value: 'D', label: 'Point D (1000-1200)' },\r\n] as const;\r\n\r\ninterface BasicInfoProps {\r\n  formData: Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost'>;\r\n  setFormData: React.Dispatch<React.SetStateAction<Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost'>>>;\r\n  errors: Record<string, string>;\r\n}\r\n\r\nexport const BasicInfo: React.FC<BasicInfoProps> = ({ formData, setFormData, errors }) => {\r\n  return (\r\n    <div>\r\n      <h4 className=\"text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3\">Basic Information</h4>\r\n      <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\r\n        <FormInput\r\n          label=\"Date\"\r\n          type=\"date\"\r\n          value={formData.date}\r\n          onChange={(value) => setFormData({ ...formData, date: value as string })}\r\n          error={errors.date}\r\n          required\r\n        />\r\n\r\n        <FormSelect\r\n          label=\"Pickup Point\"\r\n          value={formData.pickupPoint}\r\n          onChange={(value) => setFormData({ ...formData, pickupPoint: value as any })}\r\n          options={pickupPoints}\r\n          error={errors.pickupPoint}\r\n          required\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Farmer ID\"\r\n          type=\"text\"\r\n          value={formData.farmerId}\r\n          onChange={(value) => setFormData({ ...formData, farmerId: value as string })}\r\n          error={errors.farmerId}\r\n          required\r\n          placeholder=\"Farmer identification\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Quantity (kg)\"\r\n          type=\"number\"\r\n          value={formData.quantitySold}\r\n          onChange={(value) => setFormData({ ...formData, quantitySold: value as number })}\r\n          error={errors.quantitySold}\r\n          required\r\n          placeholder=\"Weight in kilograms\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Price per kg\"\r\n          type=\"number\"\r\n          value={formData.itemPrice}\r\n          onChange={(value) => setFormData({ ...formData, itemPrice: value as number })}\r\n          error={errors.itemPrice}\r\n          required\r\n          placeholder=\"Price per kilogram\"\r\n        />\r\n\r\n        <FormInput\r\n          label=\"Payment Methods\"\r\n          type=\"text\"\r\n          value={formData.paymentMethods?.join(', ') || ''}\r\n          onChange={(value) => {\r\n            const methods = (value as string).split(',').map(m => m.trim()).filter(Boolean);\r\n            setFormData({ ...formData, paymentMethods: methods as any });\r\n          }}\r\n          placeholder=\"Cash, M-Pesa, Bank\"\r\n        />\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

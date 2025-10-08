@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/components/Layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1759565693638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759905068591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,15 @@\n import React, { useState } from 'react';\r\n import { Sidebar } from './Sidebar';\r\n-import { Navbar } from './Navbar';\r\n+import { Header } from './Header';\r\n \r\n interface LayoutProps {\r\n   children: React.ReactNode;\r\n+  title?: string;\r\n+  subtitle?: string;\r\n }\r\n \r\n-export const Layout: React.FC<LayoutProps> = ({ children }) => {\r\n+export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n   const [sidebarOpen, setSidebarOpen] = useState(false);\r\n \r\n   const toggleSidebar = () => {\r\n     setSidebarOpen(!sidebarOpen);\r\n@@ -17,9 +19,9 @@\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n       <Sidebar />\r\n       \r\n       <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n-        <Navbar onToggleSidebar={toggleSidebar} />\r\n+        <Header title={title} subtitle={subtitle} />\r\n         \r\n         <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n           <div className=\"container mx-auto px-6 py-8\">\r\n             {children}\r\n"
+                },
+                {
+                    "date": 1759905230233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,8 @@\n   subtitle?: string;\r\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n-  const [sidebarOpen, setSidebarOpen] = useState(false);\r\n-\r\n-  const toggleSidebar = () => {\r\n-    setSidebarOpen(!sidebarOpen);\r\n-  };\r\n-\r\n   return (\r\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n       <Sidebar />\r\n       \r\n"
+                },
+                {
+                    "date": 1759905248344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React, { useState } from 'react';\r\n+import React from 'react';\r\n import { Sidebar } from './Sidebar';\r\n import { Header } from './Header';\r\n \r\n interface LayoutProps {\r\n"
+                },
+                {
+                    "date": 1759907313162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,12 @@\n       <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n         <Header title={title} subtitle={subtitle} />\r\n         \r\n         <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n-          <div className=\"container mx-auto px-6 py-8\">\r\n-            {children}\r\n+          <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n+            <div className=\"space-y-6\">\r\n+              {children}\r\n+            </div>\r\n           </div>\r\n         </main>\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1759908687787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React from 'react';\r\n+import React, { useState } from 'react';\r\n import { Sidebar } from './Sidebar';\r\n import { Header } from './Header';\r\n \r\n interface LayoutProps {\r\n@@ -8,14 +8,16 @@\n   subtitle?: string;\r\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);\r\n+\r\n   return (\r\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n-      <Sidebar />\r\n+      <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen} />\r\n       \r\n-      <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n-        <Header title={title} subtitle={subtitle} />\r\n+      <div className=\"flex-1 flex flex-col overflow-hidden ml-64 lg:ml-0\">\r\n+        <Header title={title} subtitle={subtitle} onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />\r\n         \r\n         <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n           <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n             <div className=\"space-y-6\">\r\n"
+                },
+                {
+                    "date": 1759909038965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React, { useState } from 'react';\r\n+import React from 'react';\r\n import { Sidebar } from './Sidebar';\r\n import { Header } from './Header';\r\n \r\n interface LayoutProps {\r\n@@ -8,16 +8,14 @@\n   subtitle?: string;\r\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);\r\n-\r\n   return (\r\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n-      <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen} />\r\n+      <Sidebar />\r\n       \r\n-      <div className=\"flex-1 flex flex-col overflow-hidden ml-64 lg:ml-0\">\r\n-        <Header title={title} subtitle={subtitle} onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />\r\n+      <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n+        <Header title={title} subtitle={subtitle} />\r\n         \r\n         <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n           <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n             <div className=\"space-y-6\">\r\n"
+                },
+                {
+                    "date": 1759909332317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,15 +9,15 @@\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n   return (\r\n-    <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n+    <div className=\"flex h-screen bg-slate-900 dark:bg-slate-950\">\r\n       <Sidebar />\r\n       \r\n       <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n         <Header title={title} subtitle={subtitle} />\r\n         \r\n-        <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n+        <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-slate-900 dark:bg-slate-950\">\r\n           <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n             <div className=\"space-y-6\">\r\n               {children}\r\n             </div>\r\n"
+                },
+                {
+                    "date": 1759909655179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n   return (\r\n-    <div className=\"flex h-screen bg-slate-900 dark:bg-slate-950\">\r\n+    <div className=\"flex h-screen bg-slate-900 dark:bg-slate-950 overflow-hidden\">\r\n       <Sidebar />\r\n       \r\n-      <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n+      <div className=\"flex-1 flex flex-col overflow-hidden ml-64 lg:ml-0\">\r\n         <Header title={title} subtitle={subtitle} />\r\n         \r\n         <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-slate-900 dark:bg-slate-950\">\r\n           <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n"
+                },
+                {
+                    "date": 1759909866551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,15 +9,15 @@\n }\r\n \r\n export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {\r\n   return (\r\n-    <div className=\"flex h-screen bg-slate-900 dark:bg-slate-950 overflow-hidden\">\r\n+    <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden\">\r\n       <Sidebar />\r\n       \r\n       <div className=\"flex-1 flex flex-col overflow-hidden ml-64 lg:ml-0\">\r\n         <Header title={title} subtitle={subtitle} />\r\n         \r\n-        <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-slate-900 dark:bg-slate-950\">\r\n+        <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n           <div className=\"container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl\">\r\n             <div className=\"space-y-6\">\r\n               {children}\r\n             </div>\r\n"
+                }
+            ],
+            "date": 1759565693638,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\r\nimport { Sidebar } from './Sidebar';\r\nimport { Navbar } from './Navbar';\r\n\r\ninterface LayoutProps {\r\n  children: React.ReactNode;\r\n}\r\n\r\nexport const Layout: React.FC<LayoutProps> = ({ children }) => {\r\n  const [sidebarOpen, setSidebarOpen] = useState(false);\r\n\r\n  const toggleSidebar = () => {\r\n    setSidebarOpen(!sidebarOpen);\r\n  };\r\n\r\n  return (\r\n    <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\r\n      <Sidebar />\r\n      \r\n      <div className=\"flex-1 flex flex-col overflow-hidden\">\r\n        <Navbar onToggleSidebar={toggleSidebar} />\r\n        \r\n        <main className=\"flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900\">\r\n          <div className=\"container mx-auto px-6 py-8\">\r\n            {children}\r\n          </div>\r\n        </main>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+        }
+    ]
+}
