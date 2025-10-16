@@ -76,6 +76,8 @@ const defaultRecord: Omit<DestinationRecord, 'id' | 'totalRevenue' | 'quantityDi
   discrepancyResolved: false,
   lastModifiedBy: '',
   lastModifiedDate: new Date().toISOString(),
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
 };
 
 export const DestinationRecordsPage: React.FC = () => {
@@ -806,8 +808,8 @@ export const DestinationRecordsPage: React.FC = () => {
               <FormInput
                 label="Delivery Time"
                 type="datetime-local"
-                value={formData.deliveryTime}
-                onChange={(value) => setFormData({ ...formData, deliveryTime: value as string })}
+                value={formData.deliveryTime || ''}
+                onChange={(value) => setFormData({ ...formData, deliveryTime: value as string || '' })}
                 error={errors.deliveryTime}
                 required
               />

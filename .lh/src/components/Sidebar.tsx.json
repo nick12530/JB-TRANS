@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1759565584037,
@@ -72,6 +72,14 @@
                 {
                     "date": 1759911858491,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n   const navigate = useNavigate();\r\n   const { user } = useApp();\r\n \r\n   const sidebarClasses = clsx(\r\n-    'w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 px-6 py-4 fixed left-0 top-0 bottom-0 h-screen transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0',\r\n+    'w-64 glass-sidebar px-6 py-4 fixed left-0 top-0 bottom-0 h-screen transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0',\r\n     '[&.mobile-closed]:transform [&.mobile-closed]:-translate-x-full lg:[&.mobile-closed]:translate-x-0',\r\n     !user && 'translate-x-full lg:translate-x-0'\r\n   );\r\n \r\n"
+                },
+                {
+                    "date": 1760600681588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \r\n const navItems = [\r\n   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', adminOnly: false },\r\n   { icon: Package, label: 'Source Records', path: '/source-records', adminOnly: false },\r\n+  { icon: Package, label: 'Inventory', path: '/inventory', adminOnly: false },\r\n   { icon: Truck, label: 'Transport Log', path: '/transport-log', adminOnly: false },\r\n   { icon: MapPin, label: 'Destination Records', path: '/destination-records', adminOnly: false },\r\n   \r\n   // Admin-only sections\r\n"
+                },
+                {
+                    "date": 1760601325748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n \r\n const navItems = [\r\n   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', adminOnly: false },\r\n   { icon: Package, label: 'Source Records', path: '/source-records', adminOnly: false },\r\n-  { icon: Package, label: 'Inventory', path: '/inventory', adminOnly: false },\r\n   { icon: Truck, label: 'Transport Log', path: '/transport-log', adminOnly: false },\r\n   { icon: MapPin, label: 'Destination Records', path: '/destination-records', adminOnly: false },\r\n   \r\n   // Admin-only sections\r\n"
                 }
             ],
             "date": 1759565584037,

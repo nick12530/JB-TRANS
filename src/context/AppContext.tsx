@@ -1,5 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { User, SourceRecord, PickupRecord, DeliveryRecord, DestinationRecord, TransportLog, ProfitRecord } from '../types';
+import { User, SourceRecord, PickupRecord, DeliveryRecord, DestinationRecord, TransportLog, ProfitRecord, InventoryItem } from '../types';
+import { SAMPLE_SOURCE_RECORDS, SAMPLE_DESTINATION_RECORDS } from '../data/sampleRecords';
+import { SAMPLE_INVENTORY_ITEMS } from '../data/sampleInventory';
+import { SAMPLE_BUYERS, SAMPLE_DRIVERS, SAMPLE_STAFF } from '../data/sampleEntities';
 
 export interface AppContextType {
   user: User | null;
@@ -20,6 +23,14 @@ export interface AppContextType {
   setTransportLogs: (logs: TransportLog[]) => void;
   profitRecords: ProfitRecord[];
   setProfitRecords: (records: ProfitRecord[]) => void;
+  inventoryItems: InventoryItem[];
+  setInventoryItems: (items: InventoryItem[]) => void;
+  buyers: any[];
+  setBuyers: (buyers: any[]) => void;
+  drivers: any[];
+  setDrivers: (drivers: any[]) => void;
+  staff: any[];
+  setStaff: (staff: any[]) => void;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -28,12 +39,16 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isDark, setIsDark] = useState(false);
-  const [sourceRecords, setSourceRecords] = useState<SourceRecord[]>([]);
+  const [sourceRecords, setSourceRecords] = useState<SourceRecord[]>(SAMPLE_SOURCE_RECORDS);
   const [pickupRecords, setPickupRecords] = useState<PickupRecord[]>([]);
   const [deliveryRecords, setDeliveryRecords] = useState<DeliveryRecord[]>([]);
-  const [destinationRecords, setDestinationRecords] = useState<DestinationRecord[]>([]);
+  const [destinationRecords, setDestinationRecords] = useState<DestinationRecord[]>(SAMPLE_DESTINATION_RECORDS);
   const [transportLogs, setTransportLogs] = useState<TransportLog[]>([]);
   const [profitRecords, setProfitRecords] = useState<ProfitRecord[]>([]);
+  const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>(SAMPLE_INVENTORY_ITEMS);
+  const [buyers, setBuyers] = useState<any[]>(SAMPLE_BUYERS);
+  const [drivers, setDrivers] = useState<any[]>(SAMPLE_DRIVERS);
+  const [staff, setStaff] = useState<any[]>(SAMPLE_STAFF);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -68,6 +83,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setTransportLogs,
         profitRecords,
         setProfitRecords,
+        inventoryItems,
+        setInventoryItems,
+        buyers,
+        setBuyers,
+        drivers,
+        setDrivers,
+        staff,
+        setStaff,
       }}
     >
       {children}

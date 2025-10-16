@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { Truck, User, Shield } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const [role, setRole] = useState<'admin' | 'user'>('user');
@@ -25,19 +26,22 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat bg-fixed"
+      className="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat bg-fixed"
       style={{
-        backgroundImage: 'url("/login-bg.jpg")',
+        backgroundImage: 'url("/login-forest.jpg?v=1")',
       }}
     >
-      <div className="w-full max-w-md">
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-black/20" />
+
+      <div className="relative w-full max-w-md">
         {/* Main Login Card */}
-        <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <div className="bg-white/60 dark:bg-gray-800/50 backdrop-blur-xl shadow-2xl rounded-2xl border border-white/30 dark:border-gray-700/50 overflow-hidden">
           
           {/* Header Section */}
-          <div className="bg-gradient-to-br from-bright-green to-miraa-green p-8 text-center">
-            <div className="mx-auto w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-              <span className="text-white font-bold text-2xl">🚛</span>
+          <div className="bg-gradient-to-br from-bright-green to-miraa-green/90 p-8 text-center">
+            <div className="mx-auto w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4 shadow-inner">
+              <Truck className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-2xl font-extrabold text-white mb-2">
               Mwalimu Transporters
@@ -48,95 +52,63 @@ export const LoginPage: React.FC = () => {
           </div>
 
           {/* Divider */}
-          <div className="border-t border-gray-100 dark:border-gray-700"></div>
+          <div className="border-t border-white/30 dark:border-gray-700/50" />
 
           {/* Form Section */}
           <div className="p-8">
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 text-center mb-2">
-                Welcome Back
+                {role === 'admin' ? 'Welcome Back, Admin' : 'Welcome Back, Regular User'}
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-center text-sm">
+              <p className="text-gray-800/90 dark:text-gray-200/90 text-center text-sm">
                 Select your role to continue
               </p>
+
+              {/* Role Tabs (Segmented Control) */}
+              <div
+                role="tablist"
+                aria-label="Login role selector"
+                className="mt-4 grid grid-cols-2 rounded-xl overflow-hidden border border-white/30 dark:border-gray-700/50 bg-white/40 dark:bg-gray-800/40 backdrop-blur"
+              >
+                <button
+                  role="tab"
+                  aria-selected={role === 'user'}
+                  aria-controls="panel-user"
+                  className={`py-2.5 px-3 text-sm font-medium transition-colors ${
+                    role === 'user'
+                      ? 'bg-bright-green/90 text-white'
+                      : 'text-gray-800 dark:text-gray-200 hover:bg-white/50 dark:hover:bg-gray-700/40'
+                  }`}
+                  onClick={() => setRole('user')}
+                  type="button"
+                >
+                  <span className="inline-flex items-center gap-2"><User className="h-4 w-4" /> User</span>
+                </button>
+                <button
+                  role="tab"
+                  aria-selected={role === 'admin'}
+                  aria-controls="panel-admin"
+                  className={`py-2.5 px-3 text-sm font-medium transition-colors ${
+                    role === 'admin'
+                      ? 'bg-bright-green/90 text-white'
+                      : 'text-gray-800 dark:text-gray-200 hover:bg-white/50 dark:hover:bg-gray-700/40'
+                  }`}
+                  onClick={() => setRole('admin')}
+                  type="button"
+                >
+                  <span className="inline-flex items-center gap-2"><Shield className="h-4 w-4" /> Admin</span>
+                </button>
+              </div>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-6">
-              {/* Role Selection */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  Access Role
-                </label>
-                <div className="grid grid-cols-1 gap-3">
-                  {/* User Role Option */}
-                  <label className={`relative flex p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                    role === 'user' 
-                      ? 'border-bright-green bg-green-50 dark:bg-green-900/20' 
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                  }`}>
-                    <input
-                      type="radio"
-                      name="role"
-                      value="user"
-                      checked={role === 'user'}
-                      onChange={(e) => setRole(e.target.value as 'admin' | 'user')}
-                      className="sr-only"
-                    />
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        role === 'user' ? 'border-bright-green' : 'border-gray-300 dark:border-gray-500'
-                      }`}>
-                        {role === 'user' && <div className="w-2 h-2 bg-bright-green rounded-full"></div>}
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900 dark:text-gray-100">User Portal</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Record daily activities</div>
-                      </div>
-                    </div>
-                    <div className={`ml-auto ${role === 'user' ? 'text-bright-green' : 'text-gray-400'}`}>
-                      👤
-                    </div>
-                  </label>
-
-                  {/* Admin Role Option */}
-                  <label className={`relative flex p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                    role === 'admin' 
-                      ? 'border-bright-green bg-green-50 dark:bg-green-900/20' 
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                  }`}>
-                    <input
-                      type="radio"
-                      name="role"
-                      value="admin"
-                      checked={role === 'admin'}
-                      onChange={(e) => setRole(e.target.value as 'admin' | 'user')}
-                      className="sr-only"
-                    />
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        role === 'admin' ? 'border-bright-green' : 'border-gray-300 dark:border-gray-500'
-                      }`}>
-                        {role === 'admin' && <div className="w-2 h-2 bg-bright-green rounded-full"></div>}
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900 dark:text-gray-100">Admin Portal</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Manage all records</div>
-                      </div>
-                    </div>
-                    <div className={`ml-auto ${role === 'admin' ? 'text-bright-green' : 'text-gray-400'}`}>
-                      ⚙️
-                    </div>
-                  </label>
-                </div>
-              </div>
-
               {/* Divider */}
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                  <div className="w-full border-t border-white/30 dark:border-gray-700/50"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                  <span className="px-2 bg-white/60 dark:bg-gray-800/50 backdrop-blur-md text-gray-800 dark:text-gray-200 rounded-md">
                     Ready to continue?
                   </span>
                 </div>
@@ -145,23 +117,23 @@ export const LoginPage: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-bright-green to-miraa-green text-white font-semibold py-3 px-6 rounded-xl hover:from-miraa-green hover:to-bright-green focus:outline-none focus:ring-2 focus:ring-bright-green focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                className="w-full bg-gradient-to-r from-bright-green to-miraa-green text-white font-semibold py-3 px-6 rounded-xl hover:from-miraa-green hover:to-bright-green focus:outline-none focus:ring-2 focus:ring-bright-green focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-xl"
               >
                 Access Portal →
               </button>
             </form>
 
             {/* Divider */}
-            <div className="border-t border-gray-100 dark:border-gray-700 mt-6"></div>
+            <div className="border-t border-white/30 dark:border-gray-700/50 mt-6"></div>
 
             {/* Footer */}
             <div className="mt-6 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-900 dark:text-gray-200">
                 Demo Mode • Select role to access portal
               </p>
               <div className="flex items-center justify-center space-x-2 mt-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-gray-500 dark:text-gray-400">System Online</span>
+                <span className="text-xs text-gray-900 dark:text-gray-200">System Online</span>
               </div>
             </div>
           </div>

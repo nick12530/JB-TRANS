@@ -9,14 +9,10 @@ import {
   ChevronDown,
   Filter,
   Download,
-  MoreHorizontal,
   CheckSquare,
   Square,
   RefreshCw,
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  X
+  AlertCircle
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -222,28 +218,6 @@ export function DataTable<T extends { id: string }>({
       <ChevronDown className="h-4 w-4 text-bright-green" />;
   };
 
-  const getStatusIcon = (row: T) => {
-    // This is a placeholder - you can customize based on your data structure
-    if ('status' in row) {
-      const status = (row as any).status;
-      switch (status) {
-        case 'active':
-        case 'completed':
-        case 'delivered':
-          return <CheckCircle className="h-4 w-4 text-green-500" />;
-        case 'pending':
-        case 'in-progress':
-          return <Clock className="h-4 w-4 text-yellow-500" />;
-        case 'error':
-        case 'failed':
-          return <AlertCircle className="h-4 w-4 text-red-500" />;
-        default:
-          return null;
-      }
-    }
-    return null;
-  };
-
   return (
     <div className={`space-y-4 ${className}`} ref={tableRef}>
       {/* Header Controls */}
@@ -395,12 +369,12 @@ export function DataTable<T extends { id: string }>({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="w-full overflow-hidden">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
+            <tr className="border-b-2 border-emerald-200 dark:border-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
               {selectable && (
-                <th className="px-4 py-3 text-left">
+                <th className="px-2 py-2 text-left">
                   <button
                     onClick={handleSelectAll}
                     className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -417,7 +391,7 @@ export function DataTable<T extends { id: string }>({
                 <th
                   key={String(column.key)}
                   className={clsx(
-                    'px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300',
+                    'px-2 py-2 text-xs font-medium text-gray-700 dark:text-gray-300',
                     column.headerAlign === 'center' && 'text-center',
                     column.headerAlign === 'right' && 'text-right',
                     column.headerClassName
@@ -438,7 +412,7 @@ export function DataTable<T extends { id: string }>({
                 </th>
               ))}
               {(onEdit || onDelete || onView || actions.length > 0) && (
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
+                <th className="px-2 py-2 text-right text-xs font-medium text-gray-700 dark:text-gray-300">
                   Actions
                 </th>
               )}
@@ -468,14 +442,14 @@ export function DataTable<T extends { id: string }>({
                 <tr
                   key={row.id}
                   className={clsx(
-                    'border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors',
+                    'border-b border-gray-100 dark:border-gray-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 dark:hover:from-emerald-900/10 dark:hover:to-teal-900/10 transition-all duration-200',
                     onRowClick && 'cursor-pointer',
                     rowClassName?.(row)
                   )}
                   onClick={() => onRowClick?.(row)}
                 >
                   {selectable && (
-                    <td className="px-4 py-3">
+                    <td className="px-2 py-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -495,7 +469,7 @@ export function DataTable<T extends { id: string }>({
                     <td
                       key={String(column.key)}
                       className={clsx(
-                        'px-4 py-3 text-sm text-gray-900 dark:text-gray-100',
+                        'px-2 py-2 text-xs text-gray-900 dark:text-gray-100',
                         column.align === 'center' && 'text-center',
                         column.align === 'right' && 'text-right',
                         column.className
@@ -505,7 +479,7 @@ export function DataTable<T extends { id: string }>({
                     </td>
                   ))}
                   {(onEdit || onDelete || onView || actions.length > 0) && (
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-2 py-2 text-right">
                       <div className="flex items-center justify-end space-x-2">
                         {actions.map((action, index) => {
                           if (action.condition && !action.condition(row)) return null;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Card } from '../../components/Card';
 import { useApp } from '../../context/AppContext';
 import { useNotificationService } from '../../services/notificationService';
@@ -51,7 +52,9 @@ export const DashboardPage: React.FC = () => {
   const { sourceRecords, user } = useApp();
   const { showSuccessNotification } = useNotificationService();
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState<'overview' | 'activities' | 'analytics' | 'tools' | 'notifications' | 'settings'>('overview');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = (searchParams.get('tab') as 'overview' | 'activities' | 'analytics' | 'tools' | 'notifications' | 'settings') || 'overview';
+  const [activeSection, setActiveSection] = useState<'overview' | 'activities' | 'analytics' | 'tools' | 'notifications' | 'settings'>(initialTab);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isOnline] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -321,6 +324,29 @@ export const DashboardPage: React.FC = () => {
 
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
+  const selectSection = (section: typeof activeSection) => {
+    setActiveSection(section);
+    setSearchParams(prev => {
+      const next = new URLSearchParams(prev);
+      next.set('tab', section);
+      return next;
+    });
+    // Optional lightweight feedback so the user knows the tab changed
+    // Avoid spamming when repeatedly clicking the same tab
+    showSuccessNotification('Switched', `${section.charAt(0).toUpperCase()}${section.slice(1)} view`);
+    // Scroll to top for clarity on section change
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Keep state in sync if user navigates browser history changing the tab param
+  React.useEffect(() => {
+    const urlTab = (searchParams.get('tab') as typeof activeSection) || 'overview';
+    if (urlTab !== activeSection) {
+      setActiveSection(urlTab);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
   return (
     <div className="space-y-6">
       {/* Enhanced Header with Status Bar */}
@@ -375,6 +401,7 @@ export const DashboardPage: React.FC = () => {
               onClick={handleRefresh}
               disabled={isRefreshing}
               className="btn-glass flex items-center gap-2 hover:bg-green-50 dark:hover:bg-green-900/20"
+              type="button"
             >
               <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
               Refresh
@@ -382,52 +409,62 @@ export const DashboardPage: React.FC = () => {
             
             <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
               <button
-                onClick={() => setActiveSection('overview')}
+                onClick={() => selectSection('overview')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   activeSection === 'overview' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'overview'}
               >
                 Overview
               </button>
               <button
-                onClick={() => setActiveSection('activities')}
+                onClick={() => selectSection('activities')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   activeSection === 'activities' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'activities'}
               >
                 Activities
               </button>
               <button
-                onClick={() => setActiveSection('analytics')}
+                onClick={() => selectSection('analytics')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   activeSection === 'analytics' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'analytics'}
               >
                 Analytics
               </button>
               <button
-                onClick={() => setActiveSection('tools')}
+                onClick={() => selectSection('tools')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   activeSection === 'tools' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'tools'}
               >
                 Tools
               </button>
               <button
-                onClick={() => setActiveSection('notifications')}
+                onClick={() => selectSection('notifications')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 relative ${
                   activeSection === 'notifications' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'notifications'}
               >
                 Notifications
                 {unreadNotifications > 0 && (
@@ -437,12 +474,14 @@ export const DashboardPage: React.FC = () => {
                 )}
               </button>
               <button
-                onClick={() => setActiveSection('settings')}
+                onClick={() => selectSection('settings')}
+                type="button"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   activeSection === 'settings' 
                     ? 'btn-emerald text-white shadow-sm' 
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
+                aria-pressed={activeSection === 'settings'}
               >
                 Settings
               </button>

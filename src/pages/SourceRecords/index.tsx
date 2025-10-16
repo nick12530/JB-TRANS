@@ -97,6 +97,8 @@ const defaultRecord: Omit<SourceRecord, 'id' | 'totalCost' | 'totalPackagingCost
   
   assignedBy: '',
   status: 'loaded',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
 };
 
 export const SourceRecordsPage: React.FC = () => {
@@ -188,9 +190,11 @@ export const SourceRecordsPage: React.FC = () => {
           record.id === editingRecord.id ? { ...newRecord, id: editingRecord.id } : record
         )
       );
+      showSuccessNotification('Success', 'Record updated successfully');
     } else {
       const id = `SRC-${Date.now()}`;
       setSourceRecords([...sourceRecords, { ...newRecord, id }]);
+      showSuccessNotification('Success', 'Record added successfully');
     }
 
     handleCloseModal();
@@ -342,26 +346,31 @@ export const SourceRecordsPage: React.FC = () => {
       label: 'Date',
       render: (value: string) => formatDate(value),
       sortable: true,
+      width: '100px',
     },
     {
       key: 'pickupStationCode' as keyof SourceRecord,
-      label: 'Station Code',
+      label: 'Station',
       sortable: true,
+      width: '80px',
     },
     {
       key: 'areaCode' as keyof SourceRecord,
-      label: 'Area Code',
+      label: 'Area',
       sortable: true,
+      width: '80px',
     },
     {
       key: 'driverName' as keyof SourceRecord,
       label: 'Driver',
       sortable: true,
+      width: '120px',
     },
     {
       key: 'dropOffPoint' as keyof SourceRecord,
-      label: 'Drop-off Point',
+      label: 'Drop-off',
       sortable: true,
+      width: '120px',
     },
     {
       key: 'status' as keyof SourceRecord,
@@ -376,6 +385,7 @@ export const SourceRecordsPage: React.FC = () => {
         </span>
       ),
       sortable: true,
+      width: '100px',
     },
     {
       key: 'packaging' as keyof SourceRecord,
@@ -388,52 +398,56 @@ export const SourceRecordsPage: React.FC = () => {
         if (boxes > 0) parts.push(`${boxes}BG`);
         return parts.join(', ') || 'None';
       },
+      width: '100px',
     },
     {
       key: 'quantitySold' as keyof SourceRecord,
-      label: 'Quantity (kg)',
+      label: 'Qty (kg)',
       render: (value: number) => `${value} kg`,
+      width: '80px',
     },
     {
       key: 'totalCost' as keyof SourceRecord,
       label: 'Total Cost',
       render: (value: number) => formatCurrency(value),
       sortable: true,
+      width: '100px',
     },
     {
       key: 'assignedBy' as keyof SourceRecord,
       label: 'Entered By',
       sortable: true,
+      width: '100px',
     },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Enhanced Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gradient-emerald">Source Records</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gradient-emerald">Source Records</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm sm:text-base">
             Track miraa goods received from pickup points with enhanced analytics
           </p>
-          <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             <span>Last updated: {new Date().toLocaleString()}</span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>{filteredRecords.length} of {sourceRecords.length} records</span>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="btn-teal flex items-center gap-2"
+            className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-            Refresh
+            <span className="hidden sm:inline">Refresh</span>
           </button>
           <button
             onClick={() => handleOpenModal()}
-            className="btn-emerald flex items-center space-x-2"
+            className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <Plus className="h-5 w-5" />
             <span>Add Record</span>
@@ -442,62 +456,62 @@ export const SourceRecordsPage: React.FC = () => {
       </div>
 
       {/* Enhanced Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card variant="emerald" className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="p-3 rounded-lg gradient-emerald">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <Card variant="emerald" className="p-4 sm:p-6 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 border-emerald-200 dark:border-emerald-700">
+          <div className="flex items-start justify-between gap-3 min-w-0">
+            <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg flex-shrink-0">
               <Package className="h-6 w-6 text-white" />
             </div>
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Records</p>
-              <p className="text-2xl font-bold text-gradient-emerald">{stats.totalRecords}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">+{stats.recentRecords} this week</p>
+            <div className="text-right min-w-0">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Total Records</p>
+              <p className="text-xl sm:text-2xl font-bold text-gradient-emerald truncate">{stats.totalRecords}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal">+{stats.recentRecords} this week</p>
             </div>
           </div>
         </Card>
 
-        <Card variant="teal" className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="p-3 rounded-lg gradient-teal">
+        <Card variant="teal" className="p-4 sm:p-6 bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 border-teal-200 dark:border-teal-700">
+          <div className="flex items-start justify-between gap-3 min-w-0">
+            <div className="p-3 rounded-lg bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg flex-shrink-0">
               <Package className="h-6 w-6 text-white" />
             </div>
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Goods In</p>
-              <p className="text-2xl font-bold text-gradient-teal">{stats.totalGoodsIn} kg</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Avg: {stats.avgCostPerKg.toFixed(0)}/kg</p>
+            <div className="text-right min-w-0">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Total Goods In</p>
+              <p className="text-xl sm:text-2xl font-bold text-gradient-teal truncate">{stats.totalGoodsIn} kg</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal">Avg: {stats.avgCostPerKg.toFixed(0)}/kg</p>
             </div>
           </div>
         </Card>
 
-        <Card variant="purple" className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="p-3 rounded-lg gradient-purple">
+        <Card variant="purple" className="p-4 sm:p-6 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border-purple-200 dark:border-purple-700">
+          <div className="flex items-start justify-between gap-3 min-w-0">
+            <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg flex-shrink-0">
               <BarChart3 className="h-6 w-6 text-white" />
             </div>
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Cost</p>
-              <p className="text-2xl font-bold text-gradient-purple">{formatCurrency(stats.totalCostValue)}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Investment</p>
+            <div className="text-right min-w-0">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Total Cost</p>
+              <p className="text-xl sm:text-2xl font-bold text-gradient-purple truncate">{formatCurrency(stats.totalCostValue)}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal">Investment</p>
             </div>
           </div>
         </Card>
 
-        <Card variant="red" className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="p-3 rounded-lg gradient-red">
+        <Card variant="red" className="p-4 sm:p-6 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border-red-200 dark:border-red-700">
+          <div className="flex items-start justify-between gap-3 min-w-0">
+            <div className="p-3 rounded-lg bg-gradient-to-br from-red-500 to-red-600 shadow-lg flex-shrink-0">
               <Package className="h-6 w-6 text-white" />
             </div>
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Packaging Cost</p>
-              <p className="text-2xl font-bold text-gradient-red">{formatCurrency(stats.totalPackagingCost)}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Avg: {formatCurrency(stats.avgPackagingPerRecord)}</p>
+            <div className="text-right min-w-0">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Packaging Cost</p>
+              <p className="text-xl sm:text-2xl font-bold text-gradient-red truncate">{formatCurrency(stats.totalPackagingCost)}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal">Avg: {formatCurrency(stats.avgPackagingPerRecord)}</p>
             </div>
           </div>
         </Card>
       </div>
 
       {/* Enhanced Filters and Controls */}
-      <Card variant="blue" className="p-6">
+      <Card variant="blue" className="p-4 sm:p-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Filters & Controls</h3>
           <div className="flex items-center gap-2">
@@ -520,7 +534,7 @@ export const SourceRecordsPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <FormInput
             label="Search"
             type="text"
@@ -634,16 +648,74 @@ export const SourceRecordsPage: React.FC = () => {
         )}
       </Card>
 
+      {/* Cards View */}
+      {viewMode === 'cards' && (
+        <Card variant="green" className="p-4 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {filteredRecords.map((rec) => (
+              <div key={rec.id} className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-800 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">{formatDate(rec.date)}</div>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    rec.status === 'delivered' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-200' :
+                    rec.status === 'in-transit' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200' :
+                    'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-200'
+                  }`}>{rec.status}</span>
+                </div>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div className="space-y-1 break-words">
+                    <p className="text-xs text-gray-500">Area</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{rec.areaCode}</p>
+                  </div>
+                  <div className="space-y-1 break-words">
+                    <p className="text-xs text-gray-500">Station</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{rec.pickupStationCode}</p>
+                  </div>
+                  <div className="space-y-1 col-span-2 break-words">
+                    <p className="text-xs text-gray-500">Drop-off</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{rec.dropOffPoint || '-'}</p>
+                  </div>
+                  <div className="space-y-1 break-words">
+                    <p className="text-xs text-gray-500">Driver</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{rec.driverName}</p>
+                  </div>
+                  <div className="space-y-1 break-words">
+                    <p className="text-xs text-gray-500">Vehicle</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{rec.vehicleReg}</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <p className="text-xs text-gray-500">Quantity</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">{rec.quantitySold} kg</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-500">Total Cost</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(rec.totalCost)}</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                  <button onClick={() => handleOpenModal(rec)} className="btn-blue text-xs">Edit</button>
+                  <button onClick={() => handleDelete(rec)} className="btn-red text-xs">Delete</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
       {/* Enhanced Data Table */}
-      <Card variant="green" className="p-6">
-        <DataTable
-          data={filteredRecords}
-          columns={columns}
-          onEdit={handleOpenModal}
-          onDelete={handleDelete}
-          emptyMessage="No source records found. Try adjusting your filters or click 'Add Record' to get started."
-        />
-      </Card>
+      {viewMode === 'table' && (
+        <Card variant="green" className="p-4 sm:p-6">
+          <DataTable
+            data={filteredRecords}
+            columns={columns}
+            onEdit={handleOpenModal}
+            onDelete={handleDelete}
+            emptyMessage="No source records found. Try adjusting your filters or click 'Add Record' to get started."
+          />
+        </Card>
+      )}
 
       {/* Modal */}
       <Modal

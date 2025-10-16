@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1759901073443,
@@ -12,6 +12,14 @@
                 {
                     "date": 1760598994322,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,13 +43,12 @@\n   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'quarter'>('month');\r\n \r\n   // Area codes data\r\n   const areaCodes = [\r\n-    { code: 'AC001', name: 'Central Highlands', region: 'Meru County' },\r\n-    { code: 'AC002', name: 'Eastern Plains', region: 'Kitui County' },\r\n-    { code: 'AC003', name: 'Coastal Region', region: 'Mombasa County' },\r\n-    { code: 'AC004', name: 'Northern Frontier', region: 'Garissa County' },\r\n-    { code: 'AC005', name: 'Metropolitan Area', region: 'Nairobi County' },\r\n+    { code: 'AC001', name: 'Embu Area', region: 'Embu County' },\r\n+    { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },\r\n+    { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },\r\n+    { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },\r\n   ];\r\n \r\n   // Calculate area performance\r\n   const areaPerformance = useMemo(() => {\r\n"
+                },
+                {
+                    "date": 1760604552375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,12 +43,12 @@\n   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'quarter'>('month');\r\n \r\n   // Area codes data\r\n   const areaCodes = [\r\n-    { code: 'AC001', name: 'Embu Area', region: 'Embu County' },\r\n-    { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },\r\n-    { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },\r\n-    { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },\r\n+    { code: 'AC001', name: 'Embu town', region: 'Embu County' },\r\n+    { code: 'AC002', name: 'Mecca', region: 'Mecca Region' },\r\n+    { code: 'AC003', name: 'Ena', region: 'Ena Region' },\r\n+    { code: 'AC004', name: 'Ugweri', region: 'Ugweri Region' },\r\n   ];\r\n \r\n   // Calculate area performance\r\n   const areaPerformance = useMemo(() => {\r\n"
+                },
+                {
+                    "date": 1760605223872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,14 @@\n import React, { useState, useMemo } from 'react';\r\n import { useApp } from '../../context/AppContext';\r\n import { Card } from '../../components/Card';\r\n-import { formatCurrency } from '../../utils/helpers';\r\n import { \r\n   MapPin, \r\n   TrendingUp, \r\n-  TrendingDown, \r\n   BarChart3, \r\n-  Filter,\r\n   Download,\r\n   RefreshCw,\r\n   Target,\r\n-  Clock,\r\n   Package\r\n } from 'lucide-react';\r\n \r\n interface AreaPerformance {\r\n@@ -324,9 +320,9 @@\n             {/* Top Drop-off Points */}\r\n             <div>\r\n               <h4 className=\"text-sm font-medium text-gray-900 dark:text-gray-100 mb-2\">Top Drop-off Points</h4>\r\n               <div className=\"space-y-2\">\r\n-                {area.topDropOffs.map((dropOff, index) => (\r\n+                {area.topDropOffs.map((dropOff) => (\r\n                   <div key={dropOff.dropOff} className=\"flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded\">\r\n                     <div className=\"flex items-center space-x-2\">\r\n                       <MapPin className=\"h-3 w-3 text-gray-400\" />\r\n                       <span className=\"text-sm font-medium text-gray-900 dark:text-gray-100\">{dropOff.dropOff}</span>\r\n"
                 }
             ],
             "date": 1759901073443,

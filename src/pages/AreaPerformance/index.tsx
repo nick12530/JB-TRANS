@@ -1,17 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Card } from '../../components/Card';
-import { formatCurrency } from '../../utils/helpers';
 import { 
   MapPin, 
   TrendingUp, 
-  TrendingDown, 
   BarChart3, 
-  Filter,
   Download,
   RefreshCw,
   Target,
-  Clock,
   Package
 } from 'lucide-react';
 
@@ -44,10 +40,10 @@ export const AreaPerformancePage: React.FC = () => {
 
   // Area codes data
   const areaCodes = [
-    { code: 'AC001', name: 'Embu Area', region: 'Embu County' },
-    { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },
-    { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },
-    { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },
+    { code: 'AC001', name: 'Embu town', region: 'Embu County' },
+    { code: 'AC002', name: 'Mecca', region: 'Mecca Region' },
+    { code: 'AC003', name: 'Ena', region: 'Ena Region' },
+    { code: 'AC004', name: 'Ugweri', region: 'Ugweri Region' },
   ];
 
   // Calculate area performance
@@ -325,7 +321,7 @@ export const AreaPerformancePage: React.FC = () => {
             <div>
               <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Top Drop-off Points</h4>
               <div className="space-y-2">
-                {area.topDropOffs.map((dropOff, index) => (
+                {area.topDropOffs.map((dropOff) => (
                   <div key={dropOff.dropOff} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded">
                     <div className="flex items-center space-x-2">
                       <MapPin className="h-3 w-3 text-gray-400" />

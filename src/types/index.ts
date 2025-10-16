@@ -77,6 +77,8 @@ export interface SourceRecord {
   
   assignedBy: string; // User who entered the data
   status: 'loaded' | 'in-transit' | 'delivered';
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface PickupPointRecord {
@@ -148,7 +150,7 @@ export interface DestinationRecord {
   totalRevenue: number; // Auto-calculated
   
   // Delivery details
-  deliveryTime: string;
+  deliveryTime: string | null;
   deliveryStatus: 'pending' | 'in-transit' | 'delivered' | 'failed' | 'disputed';
   driverName: string;
   driverId: string;
@@ -170,6 +172,11 @@ export interface DestinationRecord {
   adminActions?: string[];
   lastModifiedBy: string;
   lastModifiedDate: string;
+  
+  // Additional properties
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface DeliveryVerification {
@@ -375,3 +382,6 @@ export interface ContainmentUnit {
   avgKilos: number; // average weight per unit
   color: string; // for UI display
 }
+
+// Re-export inventory types
+export * from './inventory';

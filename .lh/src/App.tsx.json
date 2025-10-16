@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 31,
+            "activePatchIndex": 34,
             "patches": [
                 {
                     "date": 1757636387978,
@@ -132,6 +132,18 @@
                 {
                     "date": 1759910413838,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n import { SystemMonitoringPage } from './pages/SystemMonitoring';\r\n import { DiscrepancyReportsPage } from './pages/DiscrepancyReports';\r\n import { AdminControlsPage } from './pages/AdminControls';\r\n import { AuditLogsPage } from './pages/AuditLogs';\r\n+import { StaffControlPage } from './pages/StaffControl';\r\n+import { SettingsCardPage } from './pages/SettingsCard';\r\n \r\n function App() {\r\n   return (\r\n     <AppProvider>\r\n@@ -182,8 +184,30 @@\n               </ProtectedRoute>\r\n             }\r\n           />\r\n           \r\n+          <Route\r\n+            path=\"/staff-control\"\r\n+            element={\r\n+              <ProtectedRoute>\r\n+                <Layout title=\"Staff Control\" subtitle=\"Staff management and access control system\">\r\n+                  <StaffControlPage />\r\n+                </Layout>\r\n+              </ProtectedRoute>\r\n+            }\r\n+          />\r\n+          \r\n+          <Route\r\n+            path=\"/settings-card\"\r\n+            element={\r\n+              <ProtectedRoute>\r\n+                <Layout title=\"Settings Card\" subtitle=\"System configuration and application settings\">\r\n+                  <SettingsCardPage />\r\n+                </Layout>\r\n+              </ProtectedRoute>\r\n+            }\r\n+          />\r\n+          \r\n           {/* Redirect root to dashboard or login */}\r\n           <Route path=\"/\" element={<Navigate to=\"/dashboard\" replace />} />\r\n           <Route path=\"*\" element={<Navigate to=\"/dashboard\" replace />} />\r\n         </Routes>\r\n"
+                },
+                {
+                    "date": 1760600685954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import { ProtectedRoute } from './components/ProtectedRoute';\r\n import { LoginPage } from './pages/Login';\r\n import { DashboardPage } from './pages/Dashboard';\r\n import { SourceRecordsPage } from './pages/SourceRecords';\r\n+import { InventoryPage } from './pages/Inventory';\r\n import { TransportLogPage } from './pages/TransportLog';\r\n import { ProfitReportsPage } from './pages/ProfitReports';\r\n import { DestinationRecordsPage } from './pages/DestinationRecords';\r\n import { AreaPerformancePage } from './pages/AreaPerformance';\r\n@@ -52,8 +53,19 @@\n             }\r\n           />\r\n           \r\n           <Route\r\n+            path=\"/inventory\"\r\n+            element={\r\n+              <ProtectedRoute>\r\n+                <Layout title=\"Inventory Management\" subtitle=\"Manage inventory items from handwritten records\">\r\n+                  <InventoryPage />\r\n+                </Layout>\r\n+              </ProtectedRoute>\r\n+            }\r\n+          />\r\n+          \r\n+          <Route\r\n             path=\"/transport-log\"\r\n             element={\r\n               <ProtectedRoute>\r\n                 <Layout title=\"Transport Log\" subtitle=\"Track vehicles, drivers, and deliveries\">\r\n"
+                },
+                {
+                    "date": 1760601298237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n import { ProtectedRoute } from './components/ProtectedRoute';\r\n import { LoginPage } from './pages/Login';\r\n import { DashboardPage } from './pages/Dashboard';\r\n import { SourceRecordsPage } from './pages/SourceRecords';\r\n-import { InventoryPage } from './pages/Inventory';\r\n import { TransportLogPage } from './pages/TransportLog';\r\n import { ProfitReportsPage } from './pages/ProfitReports';\r\n import { DestinationRecordsPage } from './pages/DestinationRecords';\r\n import { AreaPerformancePage } from './pages/AreaPerformance';\r\n"
+                },
+                {
+                    "date": 1760601307615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,19 +52,8 @@\n             }\r\n           />\r\n           \r\n           <Route\r\n-            path=\"/inventory\"\r\n-            element={\r\n-              <ProtectedRoute>\r\n-                <Layout title=\"Inventory Management\" subtitle=\"Manage inventory items from handwritten records\">\r\n-                  <InventoryPage />\r\n-                </Layout>\r\n-              </ProtectedRoute>\r\n-            }\r\n-          />\r\n-          \r\n-          <Route\r\n             path=\"/transport-log\"\r\n             element={\r\n               <ProtectedRoute>\r\n                 <Layout title=\"Transport Log\" subtitle=\"Track vehicles, drivers, and deliveries\">\r\n"
                 }
             ],
             "date": 1757636387978,

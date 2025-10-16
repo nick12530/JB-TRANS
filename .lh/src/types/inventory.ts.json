@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/types/inventory.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760599705883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760599705883,
+            "name": "Commit-0",
+            "content": "export interface InventoryItem {\r\n  id: string;\r\n  name: string;\r\n  code: string;\r\n  category: ItemCategory;\r\n  location: string;\r\n  quantity?: number;\r\n  description?: string;\r\n  createdAt: string;\r\n  updatedAt: string;\r\n}\r\n\r\nexport interface ItemCategory {\r\n  id: string;\r\n  name: string;\r\n  description: string;\r\n  color: string;\r\n}\r\n\r\nexport interface InventoryLocation {\r\n  id: string;\r\n  name: string;\r\n  code: string;\r\n  region: string;\r\n}\r\n\r\n// Sample categories based on your data\r\nexport const ITEM_CATEGORIES: ItemCategory[] = [\r\n  { id: 'CAT001', name: 'ITEM BOXES', description: 'Boxed items and containers', color: 'blue' },\r\n  { id: 'CAT002', name: 'ITEM SACKS', description: 'Sack items and bags', color: 'green' },\r\n  { id: 'CAT003', name: 'ITEM BASINS', description: 'Basin items and containers', color: 'purple' },\r\n  { id: 'CAT004', name: 'MIRITIN', description: 'Miritin related items', color: 'orange' },\r\n  { id: 'CAT005', name: 'PAIN KILLER', description: 'Pain killer related items', color: 'red' },\r\n];\r\n\r\n// Sample locations based on your data\r\nexport const INVENTORY_LOCATIONS: InventoryLocation[] = [\r\n  { id: 'LOC001', name: 'Embu', code: 'EMB', region: 'Embu County' },\r\n  { id: 'LOC002', name: 'Malindi', code: 'MAL', region: 'Kilifi County' },\r\n  { id: 'LOC003', name: 'Samburu', code: 'SAM', region: 'Samburu County' },\r\n];\r\n"
+        }
+    ]
+}
