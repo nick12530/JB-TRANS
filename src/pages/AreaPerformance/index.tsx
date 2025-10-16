@@ -44,11 +44,10 @@ export const AreaPerformancePage: React.FC = () => {
 
   // Area codes data
   const areaCodes = [
-    { code: 'AC001', name: 'Central Highlands', region: 'Meru County' },
-    { code: 'AC002', name: 'Eastern Plains', region: 'Kitui County' },
-    { code: 'AC003', name: 'Coastal Region', region: 'Mombasa County' },
-    { code: 'AC004', name: 'Northern Frontier', region: 'Garissa County' },
-    { code: 'AC005', name: 'Metropolitan Area', region: 'Nairobi County' },
+    { code: 'AC001', name: 'Embu Area', region: 'Embu County' },
+    { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },
+    { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },
+    { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },
   ];
 
   // Calculate area performance

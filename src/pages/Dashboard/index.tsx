@@ -104,7 +104,6 @@ export const DashboardPage: React.FC = () => {
     { point: 'AC002', records: sourceRecords.filter(r => r.areaCode === 'AC002').length, goods: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.quantitySold, 0) },
     { point: 'AC003', records: sourceRecords.filter(r => r.areaCode === 'AC003').length, goods: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.quantitySold, 0) },
     { point: 'AC004', records: sourceRecords.filter(r => r.areaCode === 'AC004').length, goods: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.quantitySold, 0) },
-    { point: 'AC005', records: sourceRecords.filter(r => r.areaCode === 'AC005').length, goods: sourceRecords.filter(r => r.areaCode === 'AC005').reduce((sum, r) => sum + r.quantitySold, 0) },
   ];
 
   // Simplified stats cards with blue, green, red, purple palette

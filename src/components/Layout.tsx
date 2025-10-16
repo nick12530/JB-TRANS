@@ -10,10 +10,10 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       <Sidebar />
       
-      <div className="flex-1 flex flex-col overflow-hidden ml-64 lg:ml-0">
+      <div className="flex-1 flex flex-col ml-64 lg:ml-0">
         <Header title={title} subtitle={subtitle} />
         
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900">

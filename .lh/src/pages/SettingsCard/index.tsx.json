@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1759910398891,
@@ -36,6 +36,10 @@
                 {
                     "date": 1759917793756,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -561,8 +561,10 @@\n         isOpen={isModalOpen}\r\n         onClose={handleCloseModal}\r\n         title={editingSetting ? `Edit ${editingSetting.label}` : 'Add New Setting'}\r\n         size=\"lg\"\r\n+        type=\"default\"\r\n+        icon={<Settings className=\"h-6 w-6\" />}\r\n       >\r\n         <form onSubmit={handleSubmit} className=\"space-y-6\">\r\n           {editingSetting && (\r\n             <>\r\n"
+                },
+                {
+                    "date": 1760598948243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -393,9 +393,9 @@\n     }\r\n   };\r\n \r\n   return (\r\n-    <div className=\"space-y-6 max-w-full overflow-hidden\">\r\n+    <div className=\"space-y-6 max-w-full\">\r\n       {/* Enhanced Header */}\r\n       <div className=\"flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4\">\r\n         <div>\r\n           <h1 className=\"text-3xl font-bold text-gradient-purple\">Settings & Configuration</h1>\r\n"
                 }
             ],
             "date": 1759910398891,

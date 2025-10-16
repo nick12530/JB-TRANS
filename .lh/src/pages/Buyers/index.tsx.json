@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1759904107252,
@@ -40,6 +40,14 @@
                 {
                     "date": 1759908346765,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -863,8 +863,9 @@\n               {editingBuyer ? 'Update Buyer' : 'Create Buyer'}\r\n             </button>\r\n           </div>\r\n         </form>\r\n+        </div>\r\n       </Modal>\r\n \r\n     </div>\r\n   );\r\n"
+                },
+                {
+                    "date": 1760598917201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -430,9 +430,9 @@\n     );\r\n   }\r\n \r\n   return (\r\n-    <div className=\"space-y-6 max-w-full overflow-hidden\">\r\n+    <div className=\"space-y-6 max-w-full\">\r\n       {/* Header */}\r\n       <div className=\"flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4\">\r\n         <div>\r\n           <h1 className=\"text-2xl font-bold text-gray-900 dark:text-gray-100\">Buyers Management</h1>\r\n"
+                },
+                {
+                    "date": 1760599056076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -568,13 +568,12 @@\n             value={filters.areaCode}\r\n             onChange={(value) => setFilters({ ...filters, areaCode: value as string })}\r\n             options={[\r\n               { value: 'all', label: 'All Areas' },\r\n-              { value: 'AC001', label: 'AC001 - Central Highlands' },\r\n-              { value: 'AC002', label: 'AC002 - Eastern Plains' },\r\n-              { value: 'AC003', label: 'AC003 - Coastal Region' },\r\n-              { value: 'AC004', label: 'AC004 - Northern Frontier' },\r\n-              { value: 'AC005', label: 'AC005 - Metropolitan Area' },\r\n+              { value: 'AC001', label: 'AC001 - Embu Area' },\r\n+              { value: 'AC002', label: 'AC002 - Mecca Area' },\r\n+              { value: 'AC003', label: 'AC003 - Ena Area' },\r\n+              { value: 'AC004', label: 'AC004 - Ugweri Area' },\r\n             ]}\r\n           />\r\n           \r\n           <FormSelect\r\n@@ -685,13 +684,12 @@\n                 label=\"Area Code\"\r\n                 value={formData.areaCode}\r\n                 onChange={(value) => setFormData({ ...formData, areaCode: value as string })}\r\n                 options={[\r\n-                  { value: 'AC001', label: 'AC001 - Central Highlands' },\r\n-                  { value: 'AC002', label: 'AC002 - Eastern Plains' },\r\n-                  { value: 'AC003', label: 'AC003 - Coastal Region' },\r\n-                  { value: 'AC004', label: 'AC004 - Northern Frontier' },\r\n-                  { value: 'AC005', label: 'AC005 - Metropolitan Area' },\r\n+                  { value: 'AC001', label: 'AC001 - Embu Area' },\r\n+                  { value: 'AC002', label: 'AC002 - Mecca Area' },\r\n+                  { value: 'AC003', label: 'AC003 - Ena Area' },\r\n+                  { value: 'AC004', label: 'AC004 - Ugweri Area' },\r\n                 ]}\r\n                 required\r\n               />\r\n               \r\n"
                 }
             ],
             "date": 1759904107252,

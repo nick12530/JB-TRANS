@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1759566581266,
@@ -32,6 +32,10 @@
                 {
                     "date": 1759918578203,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -193,9 +193,9 @@\n           )}\r\n         >\r\n           {/* Left Icon */}\r\n           {leftIcon && (\r\n-            <div className=\"absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-600 dark:text-blue-400\">\r\n+            <div className=\"absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-700 dark:text-blue-400\">\r\n               {leftIcon}\r\n             </div>\r\n           )}\r\n \r\n@@ -234,22 +234,22 @@\n           {/* Right Icons */}\r\n           <div className=\"flex items-center space-x-1\">\r\n             {getStatusIcon()}\r\n             {rightIcon && (\r\n-              <div className=\"text-gray-500 dark:text-gray-400\">\r\n+              <div className=\"text-gray-600 dark:text-gray-400\">\r\n                 {rightIcon}\r\n               </div>\r\n             )}\r\n             {clearable && value && (\r\n               <button\r\n                 onClick={handleClear}\r\n-                className=\"text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors\"\r\n+                className=\"text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors\"\r\n               >\r\n                 <X className=\"h-4 w-4\" />\r\n               </button>\r\n             )}\r\n             <ChevronDown className={clsx(\r\n-              'h-4 w-4 text-gray-500 dark:text-gray-400 transition-transform duration-200',\r\n+              'h-4 w-4 text-gray-600 dark:text-gray-400 transition-transform duration-200',\r\n               isOpen && 'rotate-180'\r\n             )} />\r\n           </div>\r\n         </button>\r\n"
+                },
+                {
+                    "date": 1760598868275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -255,9 +255,9 @@\n         </button>\r\n \r\n         {/* Dropdown */}\r\n         {isOpen && (\r\n-          <div className=\"absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-hidden\">\r\n+          <div className=\"absolute z-[9999] w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl max-h-60 overflow-hidden\">\r\n             {/* Search Input */}\r\n             {searchable && (\r\n               <div className=\"p-2 border-b border-gray-200 dark:border-gray-700\">\r\n                 <div className=\"relative\">\r\n"
                 }
             ],
             "date": 1759566581266,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1759910295637,
@@ -20,6 +20,10 @@
                 {
                     "date": 1759918578247,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n   UserCheck, \r\n   UserX, \r\n   Shield,\r\n   Settings,\r\n-  Activity,\r\n   CheckCircle,\r\n   XCircle\r\n } from 'lucide-react';\r\n \r\n@@ -208,24 +207,8 @@\n       showSuccessNotification('Success', 'Staff member deleted successfully!');\r\n     }\r\n   };\r\n \r\n-  const handleToggleStatus = (staff: StaffControl) => {\r\n-    const newStatus = staff.status === 'active' ? 'suspended' : 'active';\r\n-    setStaffControls(\r\n-      staffControls.map((s) =>\r\n-        s.id === staff.id ? { ...s, status: newStatus } : s\r\n-      )\r\n-    );\r\n-    showSuccessNotification('Success', `Staff member ${newStatus === 'active' ? 'activated' : 'suspended'} successfully!`);\r\n-  };\r\n-\r\n-  const handleResetPassword = (staff: StaffControl) => {\r\n-    if (window.confirm(`Reset password for ${staff.name}?`)) {\r\n-      showSuccessNotification('Success', `Password reset email sent to ${staff.email}`);\r\n-    }\r\n-  };\r\n-\r\n   // Filter staff controls\r\n   const filteredStaffControls = useMemo(() => {\r\n     return staffControls.filter((staff) => {\r\n       const matchesSearch = filters.search === '' || \r\n"
+                },
+                {
+                    "date": 1760598921540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,9 +334,9 @@\n     );\r\n   }\r\n \r\n   return (\r\n-    <div className=\"space-y-6 max-w-full overflow-hidden\">\r\n+    <div className=\"space-y-6 max-w-full\">\r\n       {/* Header */}\r\n       <div className=\"flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4\">\r\n         <div>\r\n           <h1 className=\"text-2xl font-bold text-gray-900 dark:text-gray-100\">Staff Control</h1>\r\n"
                 }
             ],
             "date": 1759910295637,

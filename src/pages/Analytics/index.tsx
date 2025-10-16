@@ -43,11 +43,10 @@ export const AnalyticsDashboardPage: React.FC = () => {
     
     // Area code performance
     const areaPerformance = [
-      { code: 'AC001', name: 'Central Highlands', volume: sourceRecords.filter(r => r.areaCode === 'AC001').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC001').reduce((sum, r) => sum + r.totalCost, 0) },
-      { code: 'AC002', name: 'Eastern Plains', volume: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.totalCost, 0) },
-      { code: 'AC003', name: 'Coastal Region', volume: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.totalCost, 0) },
-      { code: 'AC004', name: 'Northern Frontier', volume: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.totalCost, 0) },
-      { code: 'AC005', name: 'Metropolitan Area', volume: sourceRecords.filter(r => r.areaCode === 'AC005').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC005').reduce((sum, r) => sum + r.totalCost, 0) },
+      { code: 'AC001', name: 'Embu Area', volume: sourceRecords.filter(r => r.areaCode === 'AC001').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC001').reduce((sum, r) => sum + r.totalCost, 0) },
+      { code: 'AC002', name: 'Mecca Area', volume: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.totalCost, 0) },
+      { code: 'AC003', name: 'Ena Area', volume: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.totalCost, 0) },
+      { code: 'AC004', name: 'Ugweri Area', volume: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.quantitySold, 0), revenue: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.totalCost, 0) },
     ];
 
     // Monthly trends (mock data for demonstration)

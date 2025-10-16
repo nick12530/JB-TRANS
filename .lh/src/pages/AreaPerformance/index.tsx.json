@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1759901073443,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1760598994322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,13 +43,12 @@\n   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'quarter'>('month');\r\n \r\n   // Area codes data\r\n   const areaCodes = [\r\n-    { code: 'AC001', name: 'Central Highlands', region: 'Meru County' },\r\n-    { code: 'AC002', name: 'Eastern Plains', region: 'Kitui County' },\r\n-    { code: 'AC003', name: 'Coastal Region', region: 'Mombasa County' },\r\n-    { code: 'AC004', name: 'Northern Frontier', region: 'Garissa County' },\r\n-    { code: 'AC005', name: 'Metropolitan Area', region: 'Nairobi County' },\r\n+    { code: 'AC001', name: 'Embu Area', region: 'Embu County' },\r\n+    { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },\r\n+    { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },\r\n+    { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },\r\n   ];\r\n \r\n   // Calculate area performance\r\n   const areaPerformance = useMemo(() => {\r\n"
                 }
             ],
             "date": 1759901073443,

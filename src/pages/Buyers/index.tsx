@@ -431,7 +431,7 @@ export const BuyersPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6 max-w-full overflow-hidden">
+    <div className="space-y-6 max-w-full">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -569,11 +569,10 @@ export const BuyersPage: React.FC = () => {
             onChange={(value) => setFilters({ ...filters, areaCode: value as string })}
             options={[
               { value: 'all', label: 'All Areas' },
-              { value: 'AC001', label: 'AC001 - Central Highlands' },
-              { value: 'AC002', label: 'AC002 - Eastern Plains' },
-              { value: 'AC003', label: 'AC003 - Coastal Region' },
-              { value: 'AC004', label: 'AC004 - Northern Frontier' },
-              { value: 'AC005', label: 'AC005 - Metropolitan Area' },
+              { value: 'AC001', label: 'AC001 - Embu Area' },
+              { value: 'AC002', label: 'AC002 - Mecca Area' },
+              { value: 'AC003', label: 'AC003 - Ena Area' },
+              { value: 'AC004', label: 'AC004 - Ugweri Area' },
             ]}
           />
           
@@ -686,11 +685,10 @@ export const BuyersPage: React.FC = () => {
                 value={formData.areaCode}
                 onChange={(value) => setFormData({ ...formData, areaCode: value as string })}
                 options={[
-                  { value: 'AC001', label: 'AC001 - Central Highlands' },
-                  { value: 'AC002', label: 'AC002 - Eastern Plains' },
-                  { value: 'AC003', label: 'AC003 - Coastal Region' },
-                  { value: 'AC004', label: 'AC004 - Northern Frontier' },
-                  { value: 'AC005', label: 'AC005 - Metropolitan Area' },
+                  { value: 'AC001', label: 'AC001 - Embu Area' },
+                  { value: 'AC002', label: 'AC002 - Mecca Area' },
+                  { value: 'AC003', label: 'AC003 - Ena Area' },
+                  { value: 'AC004', label: 'AC004 - Ugweri Area' },
                 ]}
                 required
               />

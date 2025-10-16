@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 47,
+            "activePatchIndex": 48,
             "patches": [
                 {
                     "date": 1759565916258,
@@ -196,6 +196,10 @@
                 {
                     "date": 1759917049643,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -299,9 +299,9 @@\n     try {\n       await new Promise(resolve => setTimeout(resolve, 2000));\n       showSuccessNotification('Success', `${format.toUpperCase()} export completed`);\n     } catch (error) {\n-      showErrorNotification('Error', `Failed to export ${format.toUpperCase()}`);\n+      showSuccessNotification('Error', `Failed to export ${format.toUpperCase()}`);\n     }\n   };\n \n   const toggleFavorite = (actionTitle: string) => {\n"
+                },
+                {
+                    "date": 1760599051706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,8 @@\n     { point: 'AC001', records: sourceRecords.filter(r => r.areaCode === 'AC001').length, goods: sourceRecords.filter(r => r.areaCode === 'AC001').reduce((sum, r) => sum + r.quantitySold, 0) },\n     { point: 'AC002', records: sourceRecords.filter(r => r.areaCode === 'AC002').length, goods: sourceRecords.filter(r => r.areaCode === 'AC002').reduce((sum, r) => sum + r.quantitySold, 0) },\n     { point: 'AC003', records: sourceRecords.filter(r => r.areaCode === 'AC003').length, goods: sourceRecords.filter(r => r.areaCode === 'AC003').reduce((sum, r) => sum + r.quantitySold, 0) },\n     { point: 'AC004', records: sourceRecords.filter(r => r.areaCode === 'AC004').length, goods: sourceRecords.filter(r => r.areaCode === 'AC004').reduce((sum, r) => sum + r.quantitySold, 0) },\n-    { point: 'AC005', records: sourceRecords.filter(r => r.areaCode === 'AC005').length, goods: sourceRecords.filter(r => r.areaCode === 'AC005').reduce((sum, r) => sum + r.quantitySold, 0) },\n   ];\n \n   // Simplified stats cards with blue, green, red, purple palette\n   const statsCards = user?.role === 'admin' ? [\n"
                 }
             ],
             "date": 1759565916258,
