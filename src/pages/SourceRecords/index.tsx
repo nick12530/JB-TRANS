@@ -10,56 +10,38 @@ import { SourceRecord } from '../../types';
 import { formatDate, formatCurrency } from '../../utils/helpers';
 import { useNotificationService } from '../../services/notificationService';
 
-// 5 Key Area Codes with their pickup stations
+// 4 Key Area Codes with their pickup stations
 const areaCodes = [
   {
     code: 'AC001',
-    name: 'Central Highlands',
-    region: 'Meru County',
+    name: 'Embu Area',
+    region: 'Embu County',
     pickupStations: [
-      { code: 'ST001', name: 'Meru Central Station', location: 'Meru Town Center' },
-      { code: 'ST002', name: 'Maua Station', location: 'Maua Market' },
-      { code: 'ST003', name: 'Chuka Station', location: 'Chuka Town' },
+      { code: 'ST001', name: 'Embu Town Station', location: 'Embu Town Center' },
     ]
   },
   {
     code: 'AC002', 
-    name: 'Eastern Plains',
-    region: 'Kitui County',
+    name: 'Mecca Area',
+    region: 'Mecca Region',
     pickupStations: [
-      { code: 'ST004', name: 'Kitui Central Station', location: 'Kitui Town' },
-      { code: 'ST005', name: 'Mwingi Station', location: 'Mwingi Market' },
-      { code: 'ST006', name: 'Mutomo Station', location: 'Mutomo Center' },
+      { code: 'ST002', name: 'Mecca Station', location: 'Mecca Center' },
     ]
   },
   {
     code: 'AC003',
-    name: 'Coastal Region', 
-    region: 'Mombasa County',
+    name: 'Ena Area', 
+    region: 'Ena Region',
     pickupStations: [
-      { code: 'ST007', name: 'Mombasa Port Station', location: 'Port Area' },
-      { code: 'ST008', name: 'Kilifi Station', location: 'Kilifi Town' },
-      { code: 'ST009', name: 'Malindi Station', location: 'Malindi Center' },
+      { code: 'ST003', name: 'Ena Station', location: 'Ena Center' },
     ]
   },
   {
     code: 'AC004',
-    name: 'Northern Frontier',
-    region: 'Garissa County', 
+    name: 'Ugweri Area',
+    region: 'Ugweri Region', 
     pickupStations: [
-      { code: 'ST010', name: 'Garissa Central Station', location: 'Garissa Town' },
-      { code: 'ST011', name: 'Dadaab Station', location: 'Dadaab Area' },
-      { code: 'ST012', name: 'Fafi Station', location: 'Fafi Center' },
-    ]
-  },
-  {
-    code: 'AC005',
-    name: 'Metropolitan Area',
-    region: 'Nairobi County',
-    pickupStations: [
-      { code: 'ST013', name: 'Nairobi CBD Station', location: 'City Center' },
-      { code: 'ST014', name: 'Eastleigh Station', location: 'Eastleigh Market' },
-      { code: 'ST015', name: 'Kasarani Station', location: 'Kasarani Area' },
+      { code: 'ST004', name: 'Ugweri Station', location: 'Ugweri Center' },
     ]
   }
 ];
@@ -76,11 +58,10 @@ const pickupStations = areaCodes.flatMap(area =>
 
 // Drop-off points for each area
 const dropOffPoints = {
-  'AC001': ['Meru Town', 'Maua Market', 'Chuka Center', 'Nkubu', 'Mitunguu'],
-  'AC002': ['Kitui Town', 'Mwingi Market', 'Mutomo', 'Kibwezi', 'Makindu'],
-  'AC003': ['Mombasa CBD', 'Kilifi Town', 'Malindi', 'Watamu', 'Diani'],
-  'AC004': ['Garissa Town', 'Dadaab', 'Fafi', 'Hulugho', 'Ijara'],
-  'AC005': ['Nairobi CBD', 'Eastleigh', 'Kasarani', 'Ruaraka', 'Kahawa']
+  'AC001': ['Embu Town Center', 'Embu Market', 'Embu Industrial Area'],
+  'AC002': ['Mecca Center', 'Mecca Market', 'Mecca Business District'],
+  'AC003': ['Ena Center', 'Ena Market', 'Ena Commercial Area'],
+  'AC004': ['Ugweri Center', 'Ugweri Market', 'Ugweri Business Hub']
 };
 
 

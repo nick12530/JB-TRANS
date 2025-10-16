@@ -4,17 +4,17 @@ import { FormSelect } from '../../../../components/FormSelect';
 import { SourceRecord } from '../../../../types';
 
 const pickupStations = [
-  { value: 'ST001', label: 'Station ST001' },
-  { value: 'ST002', label: 'Station ST002' },
-  { value: 'ST003', label: 'Station ST003' },
-  { value: 'ST004', label: 'Station ST004' },
+  { value: 'ST001', label: 'Embu Town Station' },
+  { value: 'ST002', label: 'Mecca Station' },
+  { value: 'ST003', label: 'Ena Station' },
+  { value: 'ST004', label: 'Ugweri Station' },
 ];
 
 const areaCodes = [
-  { value: 'AC001', label: 'Area Code AC001' },
-  { value: 'AC002', label: 'Area Code AC002' },
-  { value: 'AC003', label: 'Area Code AC003' },
-  { value: 'AC004', label: 'Area Code AC004' },
+  { value: 'AC001', label: 'Embu Area' },
+  { value: 'AC002', label: 'Mecca Area' },
+  { value: 'AC003', label: 'Ena Area' },
+  { value: 'AC004', label: 'Ugweri Area' },
 ];
 
 interface BasicInfoProps {

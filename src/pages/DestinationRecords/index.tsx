@@ -12,49 +12,41 @@ import { formatDate, formatCurrency } from '../../utils/helpers';
 
 // Destination locations with their area codes
 const destinationLocations = {
-  'AC001': [ // Central Highlands
-    { location: 'Meru Town Market', type: 'market' },
-    { location: 'Maua Wholesale Center', type: 'wholesale' },
-    { location: 'Chuka Retail Hub', type: 'retail' },
-    { location: 'Nkubu Export Center', type: 'export' },
-    { location: 'Mitunguu Warehouse', type: 'warehouse' },
+  'AC001': [ // Embu Area
+    { location: 'Embu Town Market', type: 'market' },
+    { location: 'Embu Wholesale Center', type: 'wholesale' },
+    { location: 'Embu Retail Hub', type: 'retail' },
+    { location: 'Embu Export Center', type: 'export' },
+    { location: 'Embu Warehouse', type: 'warehouse' },
   ],
-  'AC002': [ // Eastern Plains
-    { location: 'Kitui Central Market', type: 'market' },
-    { location: 'Mwingi Wholesale', type: 'wholesale' },
-    { location: 'Mutomo Retail', type: 'retail' },
-    { location: 'Kibwezi Export', type: 'export' },
-    { location: 'Makindu Warehouse', type: 'warehouse' },
+  'AC002': [ // Mecca Area
+    { location: 'Mecca Central Market', type: 'market' },
+    { location: 'Mecca Wholesale', type: 'wholesale' },
+    { location: 'Mecca Retail', type: 'retail' },
+    { location: 'Mecca Export', type: 'export' },
+    { location: 'Mecca Warehouse', type: 'warehouse' },
   ],
-  'AC003': [ // Coastal Region
-    { location: 'Mombasa CBD Market', type: 'market' },
-    { location: 'Kilifi Wholesale', type: 'wholesale' },
-    { location: 'Malindi Retail', type: 'retail' },
-    { location: 'Watamu Export', type: 'export' },
-    { location: 'Diani Warehouse', type: 'warehouse' },
+  'AC003': [ // Ena Area
+    { location: 'Ena CBD Market', type: 'market' },
+    { location: 'Ena Wholesale', type: 'wholesale' },
+    { location: 'Ena Retail', type: 'retail' },
+    { location: 'Ena Export', type: 'export' },
+    { location: 'Ena Warehouse', type: 'warehouse' },
   ],
-  'AC004': [ // Northern Frontier
-    { location: 'Garissa Central Market', type: 'market' },
-    { location: 'Dadaab Wholesale', type: 'wholesale' },
-    { location: 'Fafi Retail', type: 'retail' },
-    { location: 'Hulugho Export', type: 'export' },
-    { location: 'Ijara Warehouse', type: 'warehouse' },
-  ],
-  'AC005': [ // Metropolitan Area
-    { location: 'Nairobi CBD Market', type: 'market' },
-    { location: 'Eastleigh Wholesale', type: 'wholesale' },
-    { location: 'Kasarani Retail', type: 'retail' },
-    { location: 'Ruaraka Export', type: 'export' },
-    { location: 'Kahawa Warehouse', type: 'warehouse' },
+  'AC004': [ // Ugweri Area
+    { location: 'Ugweri Central Market', type: 'market' },
+    { location: 'Ugweri Wholesale', type: 'wholesale' },
+    { location: 'Ugweri Retail', type: 'retail' },
+    { location: 'Ugweri Export', type: 'export' },
+    { location: 'Ugweri Warehouse', type: 'warehouse' },
   ],
 };
 
 const areaCodes = [
-  { code: 'AC001', name: 'Central Highlands', region: 'Meru County' },
-  { code: 'AC002', name: 'Eastern Plains', region: 'Kitui County' },
-  { code: 'AC003', name: 'Coastal Region', region: 'Mombasa County' },
-  { code: 'AC004', name: 'Northern Frontier', region: 'Garissa County' },
-  { code: 'AC005', name: 'Metropolitan Area', region: 'Nairobi County' },
+  { code: 'AC001', name: 'Embu Area', region: 'Embu County' },
+  { code: 'AC002', name: 'Mecca Area', region: 'Mecca Region' },
+  { code: 'AC003', name: 'Ena Area', region: 'Ena Region' },
+  { code: 'AC004', name: 'Ugweri Area', region: 'Ugweri Region' },
 ];
 
 const defaultRecord: Omit<DestinationRecord, 'id' | 'totalRevenue' | 'quantityDifference'> = {
