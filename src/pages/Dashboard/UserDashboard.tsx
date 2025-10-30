@@ -4,7 +4,6 @@ import { Button } from '../../components/Button';
 import { useApp } from '../../context/AppContext';
 import { 
   Package, 
-  MapPin,
   CheckCircle,
   Clock,
   FileText,
@@ -70,7 +69,7 @@ export const UserDashboard: React.FC = () => {
         <Card variant="enhanced" padding="md" className="relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-signal-300/20 to-signal-500/20 rounded-bl-full"></div>
           <div className="relative z-10">
-            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4">
               <div className="p-3 rounded-lg bg-signal-400 text-white">
                 <CheckCircle className="h-6 w-6" />
               </div>
