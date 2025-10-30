@@ -1,0 +1,18 @@
+{
+    "sourceFile": "public/sw.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761811214998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761811214998,
+            "name": "Commit-0",
+            "content": "self.addEventListener('install', (event) => {\r\n  self.skipWaiting();\r\n});\r\n\r\nself.addEventListener('activate', (event) => {\r\n  event.waitUntil(self.clients.claim());\r\n});\r\n\r\n// Optional: basic offline fallback for root\r\nself.addEventListener('fetch', (event) => {\r\n  // Network first, no aggressive caching by default to avoid stale data during dev\r\n});\r\n\r\n\r\n"
+        }
+    ]
+}

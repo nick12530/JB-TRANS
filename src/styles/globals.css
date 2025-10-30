@@ -152,13 +152,13 @@
   /* Upscale typography on small phones for better readability */
   @media (max-width: 480px) {
     html {
-      font-size: 22px; /* maximize readability on typical phones */
+      font-size: 24px; /* maximize readability on typical phones */
       line-height: 1.5;
     }
   }
   @media (max-width: 360px) {
     html {
-      font-size: 20px; /* tiny screens slightly smaller than phones above */
+      font-size: 22px; /* tiny screens slightly smaller than phones above */
     }
   }
 

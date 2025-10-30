@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1759565306709,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761811260580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,4 +7,11 @@\n   <React.StrictMode>\r\n     <App />\r\n   </React.StrictMode>,\r\n )\r\n+\r\n+// Register service worker for PWA installability\r\n+if ('serviceWorker' in navigator) {\r\n+  window.addEventListener('load', () => {\r\n+    navigator.serviceWorker.register('/sw.js').catch(() => {});\r\n+  });\r\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1759565306709,
