@@ -19,6 +19,7 @@ import { useApp } from '../context/AppContext';
 interface SidebarProps {
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
+  fullHeight?: boolean; // mobile dropdown sets this to false so it doesn't take screen height
 }
 
 // Admin navigation items
@@ -42,14 +43,15 @@ const staffNavItems = [
 // Client navigation (clients don't use the UI; keep empty to avoid showing menu)
 const clientNavItems: any[] = [];
 
-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse, fullHeight = true }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useApp();
 
   // Let Layout control fixed positioning and visibility. Sidebar itself stays relative
   const sidebarClasses = clsx(
-    'h-full glass-sidebar transition-all duration-300 relative',
+    fullHeight && 'h-full',
+    'glass-sidebar transition-all duration-300 relative',
     isCollapsed ? 'px-2 py-4' : 'px-6 py-4',
     !user && 'lg:translate-x-0'
   );
