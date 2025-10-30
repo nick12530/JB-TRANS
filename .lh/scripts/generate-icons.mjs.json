@@ -1,0 +1,18 @@
+{
+    "sourceFile": "scripts/generate-icons.mjs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761814269957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761814269957,
+            "name": "Commit-0",
+            "content": "import sharp from 'sharp';\r\nimport { mkdirSync, existsSync, copyFileSync } from 'fs';\r\nimport { resolve } from 'path';\r\n\r\nconst SRC = resolve('src/mwalimuicon.jpeg');\r\nconst OUT = resolve('public');\r\n\r\nif (!existsSync(SRC)) {\r\n  console.error('Source image not found at src/mwalimuicon.jpeg');\r\n  process.exit(1);\r\n}\r\n\r\nmkdirSync(OUT, { recursive: true });\r\n\r\nasync function run() {\r\n  await sharp(SRC)\r\n    .resize(192, 192, { fit: 'cover' })\r\n    .png({ quality: 90 })\r\n    .toFile(resolve(OUT, 'logo192.png'));\r\n\r\n  await sharp(SRC)\r\n    .resize(512, 512, { fit: 'cover' })\r\n    .png({ quality: 95 })\r\n    .toFile(resolve(OUT, 'logo512.png'));\r\n\r\n  await sharp(SRC)\r\n    .resize(48, 48, { fit: 'cover' })\r\n    .toFile(resolve(OUT, 'favicon.ico'));\r\n\r\n  console.log('Icons generated: public/logo192.png, public/logo512.png, public/favicon.ico');\r\n}\r\n\r\nrun().catch((e) => {\r\n  console.error(e);\r\n  process.exit(1);\r\n});\r\n\r\n\r\n"
+        }
+    ]
+}
