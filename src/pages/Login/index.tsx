@@ -39,12 +39,12 @@ export const LoginPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
       </div>
 
-      <div className="relative w-full max-w-lg z-10">
+      <div className="relative w-full max-w-full sm:max-w-lg z-10 px-3 sm:px-0">
         {/* Main Login Card with Glass Morphism */}
         <div className="bg-white/20 dark:bg-gray-900/20 backdrop-blur-2xl shadow-2xl rounded-3xl border-2 border-white/30 dark:border-white/10 overflow-hidden">
           
           {/* Header Section */}
-          <div className="bg-gradient-to-br from-navy-700/70 via-navy-600/70 to-eco-600/70 backdrop-blur-xl p-8 text-center shadow-inner border-b-2 border-white/20">
+          <div className="bg-gradient-to-br from-navy-700/70 via-navy-600/70 to-eco-600/70 backdrop-blur-xl p-6 sm:p-8 text-center shadow-inner border-b-2 border-white/20">
             {/* Enhanced Animated Logo */}
             <div className="relative mx-auto mb-3 w-24 h-24 anim-float">
               {/* Shimmering conic ring */}
@@ -67,21 +67,21 @@ export const LoginPage: React.FC = () => {
                 </div>
               </div>
             </div>
-            <h1 className="text-2xl font-extrabold text-white mb-1">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-white mb-1">
               Mwalimu Transporters
             </h1>
-            <p className="text-white/90 text-xs font-semibold">
+            <p className="text-white/90 text-[11px] sm:text-xs font-semibold">
               Package Management System
             </p>
           </div>
 
           {/* Form Section */}
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div className="mb-4">
-              <h2 className="text-lg font-bold text-white text-center mb-1 drop-shadow-lg">
+              <h2 className="text-base sm:text-lg font-bold text-white text-center mb-1 drop-shadow-lg">
                 {role === 'admin' ? 'Welcome Back, Admin' : 'Welcome Back, Staff'}
               </h2>
-              <p className="text-white/80 text-center text-xs font-semibold">
+              <p className="text-white/80 text-center text-[11px] sm:text-xs font-semibold">
                 Select your role to continue
               </p>
 
@@ -122,11 +122,11 @@ export const LoginPage: React.FC = () => {
               </div>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4">
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-navy-600/80 to-eco-500/80 backdrop-blur-lg text-white font-bold py-3 px-4 rounded-xl hover:from-navy-700/90 hover:to-eco-600/90 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 transform hover:scale-[1.01] shadow-xl hover:shadow-2xl border border-white/20"
+                className="w-full bg-gradient-to-r from-navy-600/80 to-eco-500/80 backdrop-blur-lg text-white font-bold py-3 sm:py-3.5 px-4 rounded-xl hover:from-navy-700/90 hover:to-eco-600/90 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 transform hover:scale-[1.01] shadow-xl hover:shadow-2xl border border-white/20 text-base"
               >
                 Access Portal →
               </button>

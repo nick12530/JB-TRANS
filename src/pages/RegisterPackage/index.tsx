@@ -98,7 +98,8 @@ export const RegisterPackagePage: React.FC = () => {
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Record incoming packages quickly. Fields adapt to station ranges and prevent duplicates.</p>
       </div>
       <Card padding="lg" variant="enhanced">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        {/* Bigger, stacked fields on phones */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-base sm:text-sm">
           <FormSelect
             label="Station"
             value={station}
@@ -137,9 +138,9 @@ export const RegisterPackagePage: React.FC = () => {
             required
           />
 
-          <FormInput label="Boxes" type="number" value={boxes} onChange={(v)=>setBoxes(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" />
-          <FormInput label="Basins" type="number" value={basins} onChange={(v)=>setBasins(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" />
-          <FormInput label="Small Sacks" type="number" value={smallSacks} onChange={(v)=>setSmallSacks(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" />
+          <FormInput label="Boxes" type="number" value={boxes} onChange={(v)=>setBoxes(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" className="text-base sm:text-sm" />
+          <FormInput label="Basins" type="number" value={basins} onChange={(v)=>setBasins(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" className="text-base sm:text-sm" />
+          <FormInput label="Small Sacks" type="number" value={smallSacks} onChange={(v)=>setSmallSacks(typeof v==='number'? v : Number(v))} step={1} min={0} placeholder="0" className="text-base sm:text-sm" />
 
           {/* Recorded By at the end for confirmation before saving */}
           <FormInput
