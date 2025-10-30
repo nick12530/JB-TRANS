@@ -47,10 +47,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleC
   const navigate = useNavigate();
   const { user } = useApp();
 
+  // Let Layout control fixed positioning and visibility. Sidebar itself stays relative
   const sidebarClasses = clsx(
-    'h-full glass-sidebar transition-all duration-300 fixed left-0 top-0 bottom-0 lg:relative',
+    'h-full glass-sidebar transition-all duration-300 relative',
     isCollapsed ? 'px-2 py-4' : 'px-6 py-4',
-    !user && 'translate-x-full lg:translate-x-0'
+    !user && 'lg:translate-x-0'
   );
 
   const currentNavItems = user?.role === 'admin' ? adminNavItems : user?.role === 'staff' ? staffNavItems : clientNavItems;
