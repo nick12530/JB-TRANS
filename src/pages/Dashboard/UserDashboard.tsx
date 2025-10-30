@@ -26,7 +26,7 @@ export const UserDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <Card variant="enhanced" padding="md" className="relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-navy-400/20 to-navy-600/20 rounded-bl-full"></div>
           <div className="relative z-10">

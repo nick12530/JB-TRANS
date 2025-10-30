@@ -225,7 +225,7 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
         {statsCards.map((stat, index) => (
           <Card key={index} variant="enhanced" padding="sm" className="relative overflow-hidden">
             <div className={`absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br ${stat.bgPattern} rounded-bl-full opacity-50`}></div>

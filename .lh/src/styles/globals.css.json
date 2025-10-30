@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1759565080700,
@@ -88,6 +88,14 @@
                 {
                     "date": 1761808202253,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,10 @@\n /* Enhanced Typography */\r\n @layer base {\r\n   html {\r\n     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\r\n+    -webkit-text-size-adjust: 100%;\r\n+    text-size-adjust: 100%;\r\n   }\r\n   \r\n   html.dark {\r\n     color-scheme: dark;\r\n"
+                },
+                {
+                    "date": 1761809450603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -147,8 +147,16 @@\n     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\r\n     -webkit-text-size-adjust: 100%;\r\n     text-size-adjust: 100%;\r\n   }\r\n+\r\n+  /* Slightly increase base font size on small phones for better legibility */\r\n+  @media (max-width: 420px) {\r\n+    html { font-size: 17px; }\r\n+  }\r\n+  @media (max-width: 360px) {\r\n+    html { font-size: 18px; }\r\n+  }\r\n   \r\n   html.dark {\r\n     color-scheme: dark;\r\n   }\r\n"
+                },
+                {
+                    "date": 1761809516518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -148,8 +148,16 @@\n     -webkit-text-size-adjust: 100%;\r\n     text-size-adjust: 100%;\r\n   }\r\n \r\n+  /* Upscale typography on small phones for better readability */\r\n+  @media (max-width: 480px) {\r\n+    html {\r\n+      font-size: 18px; /* default 16 -> 18px makes all rem-based text/components bigger */\r\n+      line-height: 1.5;\r\n+    }\r\n+  }\r\n+\r\n   /* Slightly increase base font size on small phones for better legibility */\r\n   @media (max-width: 420px) {\r\n     html { font-size: 17px; }\r\n   }\r\n"
                 }
             ],
             "date": 1759565080700,

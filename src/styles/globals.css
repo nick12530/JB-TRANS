@@ -148,6 +148,22 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
+
+  /* Upscale typography on small phones for better readability */
+  @media (max-width: 480px) {
+    html {
+      font-size: 18px; /* default 16 -> 18px makes all rem-based text/components bigger */
+      line-height: 1.5;
+    }
+  }
+
+  /* Slightly increase base font size on small phones for better legibility */
+  @media (max-width: 420px) {
+    html { font-size: 17px; }
+  }
+  @media (max-width: 360px) {
+    html { font-size: 18px; }
+  }
   
   html.dark {
     color-scheme: dark;
