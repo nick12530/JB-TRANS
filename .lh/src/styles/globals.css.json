@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 22,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1759565080700,
@@ -96,6 +96,14 @@
                 {
                     "date": 1761809516518,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -148,8 +148,16 @@\n     -webkit-text-size-adjust: 100%;\r\n     text-size-adjust: 100%;\r\n   }\r\n \r\n+  /* Upscale typography on small phones for better readability */\r\n+  @media (max-width: 480px) {\r\n+    html {\r\n+      font-size: 18px; /* default 16 -> 18px makes all rem-based text/components bigger */\r\n+      line-height: 1.5;\r\n+    }\r\n+  }\r\n+\r\n   /* Slightly increase base font size on small phones for better legibility */\r\n   @media (max-width: 420px) {\r\n     html { font-size: 17px; }\r\n   }\r\n"
+                },
+                {
+                    "date": 1761810168953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,12 +151,17 @@\n \r\n   /* Upscale typography on small phones for better readability */\r\n   @media (max-width: 480px) {\r\n     html {\r\n-      font-size: 18px; /* default 16 -> 18px makes all rem-based text/components bigger */\r\n+      font-size: 20px; /* default 16 -> 20px for bigger mobile appearance */\r\n       line-height: 1.5;\r\n     }\r\n   }\r\n+  @media (max-width: 360px) {\r\n+    html {\r\n+      font-size: 19px; /* tiny screens slightly smaller than 20px to avoid overflow */\r\n+    }\r\n+  }\r\n \r\n   /* Slightly increase base font size on small phones for better legibility */\r\n   @media (max-width: 420px) {\r\n     html { font-size: 17px; }\r\n"
+                },
+                {
+                    "date": 1761810337793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,15 +151,15 @@\n \r\n   /* Upscale typography on small phones for better readability */\r\n   @media (max-width: 480px) {\r\n     html {\r\n-      font-size: 20px; /* default 16 -> 20px for bigger mobile appearance */\r\n+      font-size: 22px; /* maximize readability on typical phones */\r\n       line-height: 1.5;\r\n     }\r\n   }\r\n   @media (max-width: 360px) {\r\n     html {\r\n-      font-size: 19px; /* tiny screens slightly smaller than 20px to avoid overflow */\r\n+      font-size: 20px; /* tiny screens slightly smaller than phones above */\r\n     }\r\n   }\r\n \r\n   /* Slightly increase base font size on small phones for better legibility */\r\n"
                 }
             ],
             "date": 1759565080700,

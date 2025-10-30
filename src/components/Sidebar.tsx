@@ -95,7 +95,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleC
                 title={isCollapsed ? label : undefined}
               >
                 <Icon className="h-5 w-5 flex-shrink-0" />
-                {!isCollapsed && <span className="font-bold truncate">{label}</span>}
+                {!isCollapsed && <span className="font-bold truncate text-base md:text-sm">{label}</span>}
               </button>
             );
           })}

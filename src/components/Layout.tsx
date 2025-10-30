@@ -39,10 +39,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Mobile Sidebar as dropdown panel */}
         {sidebarOpen && (
-          <div className="lg:hidden z-30 px-3 py-3 border-b
+          <div className="lg:hidden z-30 px-3 py-3 border-b rounded-b-xl
                           border-white/30 dark:border-white/10
                           bg-white/40 dark:bg-gray-900/30
-                          backdrop-blur-xl shadow-lg">
+                          backdrop-blur-2xl shadow-xl">
             <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />
           </div>
         )}

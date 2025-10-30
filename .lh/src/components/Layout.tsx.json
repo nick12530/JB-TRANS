@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 20,
             "patches": [
                 {
                     "date": 1759565693638,
@@ -84,6 +84,10 @@
                 {
                     "date": 1761807317282,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,12 @@\n         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />\n \n         {/* Mobile Sidebar as dropdown panel */}\n         {sidebarOpen && (\n-          <div className=\"lg:hidden border-b border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur px-3 py-3 z-30\">\n+          <div className=\"lg:hidden z-30 px-3 py-3 border-b\n+                          border-white/30 dark:border-white/10\n+                          bg-white/40 dark:bg-gray-900/30\n+                          backdrop-blur-xl shadow-lg\">\n             <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />\n           </div>\n         )}\n         \n"
+                },
+                {
+                    "date": 1761810305589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,12 +38,12 @@\n         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />\n \n         {/* Mobile Sidebar as dropdown panel */}\n         {sidebarOpen && (\n-          <div className=\"lg:hidden z-30 px-3 py-3 border-b\n+          <div className=\"lg:hidden z-30 px-3 py-3 border-b rounded-b-xl\n                           border-white/30 dark:border-white/10\n                           bg-white/40 dark:bg-gray-900/30\n-                          backdrop-blur-xl shadow-lg\">\n+                          backdrop-blur-2xl shadow-xl\">\n             <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />\n           </div>\n         )}\n         \n"
                 }
             ],
             "date": 1759565693638,

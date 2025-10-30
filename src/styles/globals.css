@@ -152,8 +152,13 @@
   /* Upscale typography on small phones for better readability */
   @media (max-width: 480px) {
     html {
-      font-size: 18px; /* default 16 -> 18px makes all rem-based text/components bigger */
+      font-size: 22px; /* maximize readability on typical phones */
       line-height: 1.5;
+    }
+  }
+  @media (max-width: 360px) {
+    html {
+      font-size: 20px; /* tiny screens slightly smaller than phones above */
     }
   }
 

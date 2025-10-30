@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 29,
+            "activePatchIndex": 30,
             "patches": [
                 {
                     "date": 1759565584037,
@@ -124,6 +124,10 @@
                 {
                     "date": 1761807218431,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n \r\n interface SidebarProps {\r\n   isCollapsed?: boolean;\r\n   onToggleCollapse?: () => void;\r\n+  fullHeight?: boolean; // mobile dropdown sets this to false so it doesn't take screen height\r\n }\r\n \r\n // Admin navigation items\r\n const adminNavItems = [\r\n@@ -41,17 +42,19 @@\n \r\n // Client navigation (clients don't use the UI; keep empty to avoid showing menu)\r\n const clientNavItems: any[] = [];\r\n \r\n-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse }) => {\r\n+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse, fullHeight = true }) => {\r\n   const location = useLocation();\r\n   const navigate = useNavigate();\r\n   const { user } = useApp();\r\n \r\n+  // Let Layout control fixed positioning and visibility. Sidebar itself stays relative\r\n   const sidebarClasses = clsx(\r\n-    'h-full glass-sidebar transition-all duration-300 fixed left-0 top-0 bottom-0 lg:relative',\r\n+    fullHeight && 'h-full',\r\n+    'glass-sidebar transition-all duration-300 relative',\r\n     isCollapsed ? 'px-2 py-4' : 'px-6 py-4',\r\n-    !user && 'translate-x-full lg:translate-x-0'\r\n+    !user && 'lg:translate-x-0'\r\n   );\r\n \r\n   const currentNavItems = user?.role === 'admin' ? adminNavItems : user?.role === 'staff' ? staffNavItems : clientNavItems;\r\n \r\n"
+                },
+                {
+                    "date": 1761810318089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,9 @@\n                 )}\r\n                 title={isCollapsed ? label : undefined}\r\n               >\r\n                 <Icon className=\"h-5 w-5 flex-shrink-0\" />\r\n-                {!isCollapsed && <span className=\"font-bold truncate\">{label}</span>}\r\n+                {!isCollapsed && <span className=\"font-bold truncate text-base md:text-sm\">{label}</span>}\r\n               </button>\r\n             );\r\n           })}\r\n         </nav>\r\n"
                 }
             ],
             "date": 1759565584037,
