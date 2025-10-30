@@ -4,7 +4,7 @@ import { useApp } from '../../context/AppContext';
 import { Truck, User, Shield } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
-  const [role, setRole] = useState<'admin' | 'user'>('user');
+  const [role, setRole] = useState<'admin' | 'staff'>('staff');
   const navigate = useNavigate();
   const { setUser, setIsAuthenticated } = useApp();
 
@@ -14,9 +14,10 @@ export const LoginPage: React.FC = () => {
     // Mock login - create fake user
     const user = {
       id: '1',
-      name: role === 'admin' ? 'Admin User' : 'Regular User',
-      email: role === 'admin' ? 'admin@mwalimu.com' : 'user@mwalimu.com',
+      name: role === 'admin' ? 'Admin User' : 'Regular Staff',
+      email: role === 'admin' ? 'admin@mwalimu.com' : 'staff@mwalimu.com',
       role,
+      status: 'active' as const,
     };
     
     setUser(user);
@@ -25,42 +26,62 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div 
-      className="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{
-        backgroundImage: 'url("/login-forest.jpg?v=1")',
-      }}
-    >
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+    <div className="relative min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(https://images.pexels.com/photos/459203/pexels-photo-459203.jpeg)'
+        }}
+      >
+        {/* Subtle dark overlay for better contrast without blue tint */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+      </div>
 
-      <div className="relative w-full max-w-md">
-        {/* Main Login Card */}
-        <div className="bg-white/60 dark:bg-gray-800/50 backdrop-blur-xl shadow-2xl rounded-2xl border border-white/30 dark:border-gray-700/50 overflow-hidden">
+      <div className="relative w-full max-w-lg z-10">
+        {/* Main Login Card with Glass Morphism */}
+        <div className="bg-white/20 dark:bg-gray-900/20 backdrop-blur-2xl shadow-2xl rounded-3xl border-2 border-white/30 dark:border-white/10 overflow-hidden">
           
           {/* Header Section */}
-          <div className="bg-gradient-to-br from-bright-green to-miraa-green/90 p-8 text-center">
-            <div className="mx-auto w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4 shadow-inner">
-              <Truck className="h-8 w-8 text-white" />
+          <div className="bg-gradient-to-br from-navy-700/70 via-navy-600/70 to-eco-600/70 backdrop-blur-xl p-8 text-center shadow-inner border-b-2 border-white/20">
+            {/* Enhanced Animated Logo */}
+            <div className="relative mx-auto mb-3 w-24 h-24 anim-float">
+              {/* Shimmering conic ring */}
+              <div className="absolute inset-0 rounded-full anim-spin-slow"
+                   style={{
+                     background: 'conic-gradient(from 0deg, rgba(255,255,255,0.35), rgba(255,255,255,0.05), rgba(255,255,255,0.35))'
+                   }} />
+              {/* Inner gradient disc with shimmer */}
+              <div className="absolute inset-2 rounded-full anim-shimmer"
+                   style={{
+                     backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04), rgba(255,255,255,0.14))'
+                   }} />
+              {/* Orbiting dots */}
+              <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -ml-0.5 -mt-0.5 bg-white/80 rounded-full anim-orbit" />
+              <span className="absolute left-1/2 top-1/2 h-1 w-1 -ml-0.5 -mt-0.5 bg-white/70 rounded-full anim-orbit" style={{ animationDuration: '3.6s' }} />
+              {/* Core logo */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-md border border-white/30 shadow-xl flex items-center justify-center">
+                  <Truck className="h-8 w-8 text-white drop-shadow" />
+                </div>
+              </div>
             </div>
-            <h1 className="text-2xl font-extrabold text-white mb-2">
+            <h1 className="text-2xl font-extrabold text-white mb-1">
               Mwalimu Transporters
             </h1>
-            <p className="text-green-100 text-sm">
-              Miraa Transport Management System
+            <p className="text-white/90 text-xs font-semibold">
+              Package Management System
             </p>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-white/30 dark:border-gray-700/50" />
-
           {/* Form Section */}
-          <div className="p-8">
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 text-center mb-2">
-                {role === 'admin' ? 'Welcome Back, Admin' : 'Welcome Back, Regular User'}
+          <div className="p-6">
+            <div className="mb-4">
+              <h2 className="text-lg font-bold text-white text-center mb-1 drop-shadow-lg">
+                {role === 'admin' ? 'Welcome Back, Admin' : 'Welcome Back, Staff'}
               </h2>
-              <p className="text-gray-800/90 dark:text-gray-200/90 text-center text-sm">
+              <p className="text-white/80 text-center text-xs font-semibold">
                 Select your role to continue
               </p>
 
@@ -68,72 +89,57 @@ export const LoginPage: React.FC = () => {
               <div
                 role="tablist"
                 aria-label="Login role selector"
-                className="mt-4 grid grid-cols-2 rounded-xl overflow-hidden border border-white/30 dark:border-gray-700/50 bg-white/40 dark:bg-gray-800/40 backdrop-blur"
+                className="mt-3 grid grid-cols-2 rounded-lg overflow-hidden border border-white/30 bg-white/40 backdrop-blur-xl shadow-lg"
               >
                 <button
                   role="tab"
-                  aria-selected={role === 'user'}
-                  aria-controls="panel-user"
-                  className={`py-2.5 px-3 text-sm font-medium transition-colors ${
-                    role === 'user'
-                      ? 'bg-bright-green/90 text-white'
-                      : 'text-gray-800 dark:text-gray-200 hover:bg-white/50 dark:hover:bg-gray-700/40'
+                  aria-selected={role === 'staff'}
+                  aria-controls="panel-staff"
+                  className={`py-2.5 px-3 text-sm font-bold transition-all duration-200 ${
+                    role === 'staff'
+                      ? 'bg-eco-500/90 text-white shadow-inner backdrop-blur-sm'
+                      : 'text-gray-800 hover:bg-white/20'
                   }`}
-                  onClick={() => setRole('user')}
+                  onClick={() => setRole('staff')}
                   type="button"
                 >
-                  <span className="inline-flex items-center gap-2"><User className="h-4 w-4" /> User</span>
+                  <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4" /> Staff</span>
                 </button>
                 <button
                   role="tab"
                   aria-selected={role === 'admin'}
                   aria-controls="panel-admin"
-                  className={`py-2.5 px-3 text-sm font-medium transition-colors ${
+                  className={`py-2.5 px-3 text-sm font-bold transition-all duration-200 ${
                     role === 'admin'
-                      ? 'bg-bright-green/90 text-white'
-                      : 'text-gray-800 dark:text-gray-200 hover:bg-white/50 dark:hover:bg-gray-700/40'
+                      ? 'bg-eco-500/90 text-white shadow-inner backdrop-blur-sm'
+                      : 'text-gray-800 hover:bg-white/20'
                   }`}
                   onClick={() => setRole('admin')}
                   type="button"
                 >
-                  <span className="inline-flex items-center gap-2"><Shield className="h-4 w-4" /> Admin</span>
+                  <span className="inline-flex items-center gap-1.5"><Shield className="h-4 w-4" /> Admin</span>
                 </button>
               </div>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-6">
-              {/* Divider */}
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-white/30 dark:border-gray-700/50"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white/60 dark:bg-gray-800/50 backdrop-blur-md text-gray-800 dark:text-gray-200 rounded-md">
-                    Ready to continue?
-                  </span>
-                </div>
-              </div>
-
+            <form onSubmit={handleLogin} className="space-y-4">
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-bright-green to-miraa-green text-white font-semibold py-3 px-6 rounded-xl hover:from-miraa-green hover:to-bright-green focus:outline-none focus:ring-2 focus:ring-bright-green focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-xl"
+                className="w-full bg-gradient-to-r from-navy-600/80 to-eco-500/80 backdrop-blur-lg text-white font-bold py-3 px-4 rounded-xl hover:from-navy-700/90 hover:to-eco-600/90 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 transform hover:scale-[1.01] shadow-xl hover:shadow-2xl border border-white/20"
               >
                 Access Portal →
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="border-t border-white/30 dark:border-gray-700/50 mt-6"></div>
-
             {/* Footer */}
-            <div className="mt-6 text-center">
-              <p className="text-xs text-gray-900 dark:text-gray-200">
-                Demo Mode • Select role to access portal
+            <div className="mt-4 pt-4 border-t border-white/20 text-center">
+              <p className="text-xs text-white font-semibold drop-shadow-lg">
+                Secure Login Portal
               </p>
               <div className="flex items-center justify-center space-x-2 mt-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-gray-900 dark:text-gray-200">System Online</span>
+                <div className="w-2 h-2 bg-eco-400 rounded-full animate-pulse shadow-md shadow-eco-400/50"></div>
+                <span className="text-xs text-white/90 font-medium">System Ready</span>
               </div>
             </div>
           </div>

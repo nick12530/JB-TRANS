@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1757673733571,
@@ -20,6 +20,10 @@
                 {
                     "date": 1759566042620,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,26 +1,17 @@\n import React from 'react';\r\n import { Navigate } from 'react-router-dom';\r\n-import { safeGetItem } from '../utils/localStorage';\r\n+import { useApp } from '../context/AppContext';\r\n \r\n interface ProtectedRouteProps {\r\n   children: React.ReactNode;\r\n-  requiredRole?: 'admin' | 'barber' | 'customer';\r\n }\r\n \r\n-export default function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {\r\n-  const userData = safeGetItem('user');\r\n-  \r\n-  if (!userData) {\r\n-    return <Navigate to=\"/login\" replace />;\r\n-  }\r\n-  \r\n-  if (requiredRole && userData.role !== requiredRole) {\r\n-    return <Navigate to=\"/\" replace />;\r\n-  }\r\n+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {\r\n+  const { isAuthenticated } = useApp();\r\n \r\n-  if (userData.role === 'barber' && !userData.isApproved) {\r\n+  if (!isAuthenticated) {\r\n     return <Navigate to=\"/login\" replace />;\r\n   }\r\n \r\n   return <>{children}</>;\r\n-}\r\n+};\r\n"
+                },
+                {
+                    "date": 1761639938228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,17 @@\n   children: React.ReactNode;\r\n }\r\n \r\n export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {\r\n-  const { isAuthenticated } = useApp();\r\n+  const { isAuthenticated, user } = useApp();\r\n \r\n   if (!isAuthenticated) {\r\n     return <Navigate to=\"/login\" replace />;\r\n   }\r\n \r\n+  // Clients do not use the system UI; block access\r\n+  if (user?.role === 'client') {\r\n+    return <Navigate to=\"/login\" replace />;\r\n+  }\r\n+\r\n   return <>{children}</>;\r\n };\r\n"
                 }
             ],
             "date": 1757673733571,

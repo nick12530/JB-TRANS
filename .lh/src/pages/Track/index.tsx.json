@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/pages/Track/index.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761636804640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761637007508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,50 @@\n-import React from 'react';\r\n+import React, { useMemo, useState } from 'react';\r\n import { Card } from '../../components/Card';\r\n+import { FormInput } from '../../components/FormInput';\r\n+import { useApp } from '../../context/AppContext';\r\n \r\n export const TrackPage: React.FC = () => {\r\n+  const { packages } = useApp();\r\n+  const [q, setQ] = useState('');\r\n+\r\n+  const results = useMemo(() => {\r\n+    if (!q.trim()) return [] as typeof packages;\r\n+    const query = q.trim().toLowerCase();\r\n+    return packages.filter(p =>\r\n+      p.trackingNumber.toLowerCase().includes(query) ||\r\n+      p.recipientName.toLowerCase().includes(query) ||\r\n+      p.senderName.toLowerCase().includes(query)\r\n+    ).slice(0, 20);\r\n+  }, [q, packages]);\r\n+\r\n   return (\r\n     <div className=\"space-y-6\">\r\n       <h1 className=\"text-2xl font-bold text-gray-900 dark:text-gray-100\">Track Package</h1>\r\n       <Card padding=\"lg\" variant=\"enhanced\">\r\n-        <p className=\"text-gray-700 dark:text-gray-300\">Enter tracking number to view package status.</p>\r\n+        <FormInput label=\"Search by Tracking, Recipient or Sender\" value={q} onChange={(v)=>setQ(String(v))} placeholder=\"e.g. TRK123456\" />\r\n+        <div className=\"mt-6 space-y-3\">\r\n+          {results.map(pkg => (\r\n+            <div key={pkg.id} className=\"p-3 bg-gray-50 dark:bg-gray-800 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2\">\r\n+              <div className=\"min-w-0\">\r\n+                <p className=\"font-medium text-gray-900 dark:text-gray-100 truncate\">{pkg.trackingNumber}</p>\r\n+                <p className=\"text-sm text-gray-600 dark:text-gray-400 truncate\">{pkg.recipientName} • {pkg.destination}</p>\r\n+              </div>\r\n+              <div className=\"text-left sm:text-right\">\r\n+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${\r\n+                  pkg.status === 'delivered' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-200' :\r\n+                  pkg.status === 'in-transit' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200' :\r\n+                  'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-200'\r\n+                }`}>\r\n+                  {pkg.status}\r\n+                </span>\r\n+              </div>\r\n+            </div>\r\n+          ))}\r\n+          {q && results.length === 0 && (\r\n+            <p className=\"text-center text-gray-500 dark:text-gray-400 py-8\">No results</p>\r\n+          )}\r\n+        </div>\r\n       </Card>\r\n     </div>\r\n   );\r\n }\r\n"
+                }
+            ],
+            "date": 1761636804640,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Card } from '../../components/Card';\r\n\r\nexport const TrackPage: React.FC = () => {\r\n  return (\r\n    <div className=\"space-y-6\">\r\n      <h1 className=\"text-2xl font-bold text-gray-900 dark:text-gray-100\">Track Package</h1>\r\n      <Card padding=\"lg\" variant=\"enhanced\">\r\n        <p className=\"text-gray-700 dark:text-gray-300\">Enter tracking number to view package status.</p>\r\n      </Card>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

@@ -7,9 +7,14 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated } = useApp();
+  const { isAuthenticated, user } = useApp();
 
   if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Clients do not use the system UI; block access
+  if (user?.role === 'client') {
     return <Navigate to="/login" replace />;
   }
 

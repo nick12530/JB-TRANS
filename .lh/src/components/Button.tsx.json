@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/Button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761650017738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761653103566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,25 @@\n import React from 'react';\r\n import { clsx } from 'clsx';\r\n+import { Loader2 } from 'lucide-react';\r\n \r\n interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\r\n   variant?: 'default' | 'outline' | 'ghost' | 'destructive';\r\n   size?: 'sm' | 'md' | 'lg';\r\n   children: React.ReactNode;\r\n+  loading?: boolean;\r\n }\r\n \r\n export const Button: React.FC<ButtonProps> = ({\r\n   variant = 'default',\r\n   size = 'md',\r\n   className,\r\n   children,\r\n+  loading = false,\r\n+  disabled,\r\n   ...props\r\n }) => {\r\n-  const baseClasses = 'inline-flex items-center justify-center rounded-lg font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';\r\n+  const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none hover:shadow-md active:scale-[0.98]';\r\n   \r\n   const variantClasses = {\r\n     default: 'bg-eco-500 text-white hover:bg-eco-600 focus:ring-eco-500',\r\n     outline: 'border border-navy-500 bg-transparent text-navy-700 dark:text-navy-300 hover:bg-navy-50 dark:hover:bg-navy-900 focus:ring-navy-500',\r\n@@ -36,10 +40,12 @@\n         variantClasses[variant],\r\n         sizeClasses[size],\r\n         className\r\n       )}\r\n+      disabled={disabled || loading}\r\n       {...props}\r\n     >\r\n+      {loading && <Loader2 className=\"h-4 w-4 animate-spin\" />}\r\n       {children}\r\n     </button>\r\n   );\r\n };\r\n"
+                }
+            ],
+            "date": 1761650017738,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { clsx } from 'clsx';\r\n\r\ninterface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\r\n  variant?: 'default' | 'outline' | 'ghost' | 'destructive';\r\n  size?: 'sm' | 'md' | 'lg';\r\n  children: React.ReactNode;\r\n}\r\n\r\nexport const Button: React.FC<ButtonProps> = ({\r\n  variant = 'default',\r\n  size = 'md',\r\n  className,\r\n  children,\r\n  ...props\r\n}) => {\r\n  const baseClasses = 'inline-flex items-center justify-center rounded-lg font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';\r\n  \r\n  const variantClasses = {\r\n    default: 'bg-eco-500 text-white hover:bg-eco-600 focus:ring-eco-500',\r\n    outline: 'border border-navy-500 bg-transparent text-navy-700 dark:text-navy-300 hover:bg-navy-50 dark:hover:bg-navy-900 focus:ring-navy-500',\r\n    ghost: 'bg-transparent text-text-primary hover:bg-mint-100 dark:hover:bg-mint-800 focus:ring-mint-500',\r\n    destructive: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'\r\n  };\r\n  \r\n  const sizeClasses = {\r\n    sm: 'px-3 py-1.5 text-sm',\r\n    md: 'px-4 py-2 text-sm',\r\n    lg: 'px-6 py-3 text-base'\r\n  };\r\n\r\n  return (\r\n    <button\r\n      className={clsx(\r\n        baseClasses,\r\n        variantClasses[variant],\r\n        sizeClasses[size],\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n    </button>\r\n  );\r\n};\r\n"
+        }
+    ]
+}

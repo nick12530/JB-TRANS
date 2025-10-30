@@ -1,40 +1,51 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { AppProvider } from './context/AppContext';
-import { NotificationsProvider } from './context/NotificationsContext';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Loader } from './components/Loader';
 import { LoginPage } from './pages/Login';
 import { DashboardPage } from './pages/Dashboard';
-import { SourceRecordsPage } from './pages/SourceRecords';
-import { TransportLogPage } from './pages/TransportLog';
-import { ProfitReportsPage } from './pages/ProfitReports';
-import { DestinationRecordsPage } from './pages/DestinationRecords';
-import { AreaPerformancePage } from './pages/AreaPerformance';
-import { StaffManagementPage } from './pages/Staff';
+import { PackingPage } from './pages/Packing';
+import { DropOffPointsPage } from './pages/DropOffPoints';
+import { ClientsPage } from './pages/Clients';
 import { SettingsPage } from './pages/Settings';
-import { BuyersPage } from './pages/Buyers';
-import { AnalyticsDashboardPage } from './pages/Analytics';
-import { SystemMonitoringPage } from './pages/SystemMonitoring';
-import { DiscrepancyReportsPage } from './pages/DiscrepancyReports';
-import { AdminControlsPage } from './pages/AdminControls';
-import { AuditLogsPage } from './pages/AuditLogs';
-import { StaffControlPage } from './pages/StaffControl';
-import { SettingsCardPage } from './pages/SettingsCard';
+import { UsersPage } from './pages/Users';
+import { StationsPage } from './pages/Stations';
+import { PackagesPage } from './pages/Packages';
+import { ReportsPage } from './pages/Reports';
+import { AreaCodesPage } from './pages/AreaCodes';
+import { RegisterPackagePage } from './pages/RegisterPackage';
+import { DeliveriesPage } from './pages/Deliveries';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate app initialization (reduced from 2000ms to 500ms for faster startup)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader message="Initializing Mwalimu Transporters..." />;
+  }
+
   return (
     <AppProvider>
-      <NotificationsProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-          
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+        
           {/* Protected Routes */}
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Layout title="Dashboard" subtitle="Overview of your transport operations">
+                <Layout>
                   <DashboardPage />
                 </Layout>
               </ProtectedRoute>
@@ -42,77 +53,33 @@ function App() {
           />
           
           <Route
-            path="/source-records"
+            path="/packing"
             element={
               <ProtectedRoute>
-                <Layout title="Source Records" subtitle="Manage pickup records and goods received">
-                  <SourceRecordsPage />
+                <Layout>
+                  <PackingPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
           
           <Route
-            path="/transport-log"
+            path="/dropoff-points"
             element={
               <ProtectedRoute>
-                <Layout title="Transport Log" subtitle="Track vehicles, drivers, and deliveries">
-                  <TransportLogPage />
+                <Layout>
+                  <DropOffPointsPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
           
           <Route
-            path="/destination-records"
+            path="/clients"
             element={
               <ProtectedRoute>
-                <Layout title="Destination Records" subtitle="Record deliveries and buyer information">
-                  <DestinationRecordsPage />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route
-            path="/profit-reports"
-            element={
-              <ProtectedRoute>
-                <Layout title="Profit Reports" subtitle="Financial analysis and performance metrics">
-                  <ProfitReportsPage />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route
-            path="/area-performance"
-            element={
-              <ProtectedRoute>
-                <Layout title="Area Performance" subtitle="Pickup point analytics and statistics">
-                  <AreaPerformancePage />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route
-            path="/buyers"
-            element={
-              <ProtectedRoute>
-                <Layout title="Buyers Management" subtitle="Customer database and relationship management">
-                  <BuyersPage />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route
-            path="/staff"
-            element={
-              <ProtectedRoute>
-                <Layout title="Staff Management" subtitle="Driver and employee administration">
-                  <StaffManagementPage />
+                <Layout>
+                  <ClientsPage />
                 </Layout>
               </ProtectedRoute>
             }
@@ -122,97 +89,93 @@ function App() {
             path="/settings"
             element={
               <ProtectedRoute>
-                <Layout title="Settings" subtitle="Configure your account and preferences">
+                <Layout>
                   <SettingsPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
-          {/* Admin-only routes */}
+
+          {/* Admin Routes */}
           <Route
-            path="/analytics"
+            path="/users"
             element={
               <ProtectedRoute>
-                <Layout title="Analytics Dashboard" subtitle="Business intelligence and insights">
-                  <AnalyticsDashboardPage />
+                <Layout>
+                  <UsersPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
           <Route
-            path="/monitoring"
+            path="/stations"
             element={
               <ProtectedRoute>
-                <Layout title="System Monitoring" subtitle="Real-time system health and alerts">
-                  <SystemMonitoringPage />
+                <Layout>
+                  <StationsPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
           <Route
-            path="/discrepancies"
+            path="/packages"
             element={
               <ProtectedRoute>
-                <Layout title="Discrepancy Reports" subtitle="Track delivery issues and problems">
-                  <DiscrepancyReportsPage />
+                <Layout>
+                  <PackagesPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
           <Route
-            path="/admin-controls"
+            path="/reports"
             element={
               <ProtectedRoute>
-                <Layout title="Admin Controls" subtitle="System administration and configuration">
-                  <AdminControlsPage />
+                <Layout>
+                  <ReportsPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
           <Route
-            path="/audit-logs"
+            path="/area-codes"
             element={
               <ProtectedRoute>
-                <Layout title="Audit Logs" subtitle="Activity tracking and compliance monitoring">
-                  <AuditLogsPage />
+                <Layout>
+                  <AreaCodesPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
+
+          {/* User Routes */}
           <Route
-            path="/staff-control"
+            path="/register-package"
             element={
               <ProtectedRoute>
-                <Layout title="Staff Control" subtitle="Staff management and access control system">
-                  <StaffControlPage />
+                <Layout>
+                  <RegisterPackagePage />
                 </Layout>
               </ProtectedRoute>
             }
           />
-          
           <Route
-            path="/settings-card"
+            path="/deliveries"
             element={
               <ProtectedRoute>
-                <Layout title="Settings Card" subtitle="System configuration and application settings">
-                  <SettingsCardPage />
+                <Layout>
+                  <DeliveriesPage />
                 </Layout>
               </ProtectedRoute>
             }
           />
+          {/* Track route removed per requirements */}
           
           {/* Redirect root to dashboard or login */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
-      </NotificationsProvider>
     </AppProvider>
   );
 }

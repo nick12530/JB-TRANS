@@ -159,3 +159,21 @@ MIT License - Built for modern transport management
 ---
 
 **Built with ❤️ for modern transport operations**
+ 
+## 🗄️ Optional: Supabase persistence
+
+This app can use Supabase (Postgres) for data instead of localStorage when environment variables are provided.
+
+1. Create a Supabase project and get your Project URL and Anon key.
+2. Create a file named `.env.local` in the project root with:
+
+```
+VITE_SUPABASE_URL=your-project-url
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+3. Start the app: `npm run dev`
+
+Tables expected: `packages`, `users`, `clients`, `stations`, `area_codes`. See `supabase/schema.sql` for a starter schema.
+
+When these env vars are present, the app reads/writes via Supabase; otherwise it falls back to localStorage (`mwalimu-*` keys).

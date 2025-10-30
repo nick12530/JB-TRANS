@@ -165,7 +165,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {/* Label */}
-      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center space-x-1">
+      <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center space-x-1">
         <span>{label}</span>
         {required && <span className="text-red-500">*</span>}
         {info && <Info className="h-3 w-3 text-gray-400" />}
@@ -181,9 +181,10 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           onBlur={() => setIsFocused(false)}
           disabled={disabled}
           className={clsx(
-            'w-full px-3 py-3 rounded-lg transition-all duration-200',
+            'w-full px-4 py-3.5 rounded-xl transition-all duration-200 border-2 font-semibold',
             'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100',
-            'focus:outline-none focus:ring-2 focus:ring-opacity-50',
+            'focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-sm',
+            'hover:shadow-md hover:border-navy-300 dark:hover:border-navy-600',
             'flex items-center justify-between',
             getStatusColor(),
             leftIcon && 'pl-10',

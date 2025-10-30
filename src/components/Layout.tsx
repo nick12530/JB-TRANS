@@ -1,23 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { clsx } from 'clsx';
 import { Sidebar } from './Sidebar';
-import { Header } from './Header';
+import { Navbar } from './Navbar';
 
 interface LayoutProps {
   children: React.ReactNode;
-  title?: string;
-  subtitle?: string;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, title, subtitle }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const location = useLocation();
+
+  // Trigger page transition animation
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar />
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        >
+          <div className="absolute inset-0 bg-gray-600 bg-opacity-75"></div>
+        </div>
+      )}
+
+      {/* Sidebar */}
+      <div className={`${
+        isCollapsed ? 'lg:w-20' : 'lg:w-72'
+      } fixed inset-y-0 left-0 z-40 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <Sidebar isCollapsed={isCollapsed} onToggleCollapse={() => setIsCollapsed(!isCollapsed)} />
+      </div>
       
-      <div className="flex-1 flex flex-col ml-64 lg:ml-0">
-        <Header title={title} subtitle={subtitle} />
+      <div className="flex-1 flex flex-col min-w-0">
+        <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
         
         <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900">
-          <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
+          <div className={clsx(
+            'w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-6 transition-all duration-300 ease-in-out',
+            isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+          )}>
             <div className="space-y-4 sm:space-y-6">
               {children}
             </div>

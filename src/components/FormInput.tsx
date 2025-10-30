@@ -153,7 +153,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {/* Label */}
-      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center space-x-1">
+      <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center space-x-1">
         <span>{label}</span>
         {required && <span className="text-red-500">*</span>}
         {info && <Info className="h-3 w-3 text-gray-400" />}
@@ -189,9 +189,10 @@ export const FormInput: React.FC<FormInputProps> = ({
           maxLength={maxLength}
           minLength={minLength}
           className={clsx(
-            'w-full px-3 py-3 rounded-lg transition-all duration-200',
+            'w-full px-4 py-3.5 rounded-xl transition-all duration-200 border-2 font-semibold',
             'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100',
-            'focus:outline-none focus:ring-2 focus:ring-opacity-50',
+            'focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-sm',
+            'hover:shadow-md hover:border-navy-300 dark:hover:border-navy-600',
             getStatusColor(),
             leftIcon && 'pl-10',
             (rightIcon || showPasswordToggle || getStatusIcon()) && 'pr-10',
@@ -224,19 +225,19 @@ export const FormInput: React.FC<FormInputProps> = ({
       {/* Messages */}
       <div className="space-y-1">
         {(error || validationError) && (
-          <p className="text-sm text-red-600 dark:text-red-400 flex items-center space-x-1">
+          <p className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center space-x-1">
             <AlertCircle className="h-3 w-3" />
             <span>{error || validationError}</span>
           </p>
         )}
         {success && (
-          <p className="text-sm text-green-600 dark:text-green-400 flex items-center space-x-1">
+          <p className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center space-x-1">
             <CheckCircle className="h-3 w-3" />
             <span>{success}</span>
           </p>
         )}
         {info && !error && !validationError && (
-          <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center space-x-1">
+          <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center space-x-1">
             <Info className="h-3 w-3" />
             <span>{info}</span>
           </p>

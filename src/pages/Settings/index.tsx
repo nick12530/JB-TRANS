@@ -46,7 +46,7 @@ interface UserProfile {
   name: string;
   email: string;
   phone: string;
-  role: 'admin' | 'user';
+  role: 'admin' | 'staff' | 'client';
   department: string;
   avatar?: string;
   bio: string;
@@ -74,7 +74,7 @@ interface SystemSettings {
 }
 
 export const SettingsPage: React.FC = () => {
-  const { user, isDark, setIsDark, sourceRecords, transportLogs } = useApp();
+  const { user, isDark, setIsDark, packages, pickupStations } = useApp();
   const { showSuccessNotification, showErrorNotification } = useNotificationService();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [activeTab, setActiveTab] = useState<'profile' | 'security' | 'notifications' | 'appearance' | 'data' | 'system'>('profile');
@@ -90,7 +90,7 @@ export const SettingsPage: React.FC = () => {
     name: user?.name || '',
     email: user?.email || '',
     phone: '+254 700 000 000',
-    role: user?.role || 'user',
+    role: (user?.role as 'admin' | 'staff' | 'client') || 'staff',
     department: 'Transport Operations',
     avatar: '',
     bio: 'Transport operations specialist with focus on miraa logistics and delivery management.',
@@ -155,20 +155,26 @@ export const SettingsPage: React.FC = () => {
 
   // Data management state
   const dataStats = {
-    totalRecords: sourceRecords.length,
+    totalRecords: packages.length,
     totalSize: '2.4 MB',
     lastBackup: '2024-01-20 14:30',
     nextBackup: '2024-01-21 14:30',
   };
 
-  const tabs = [
-    { id: 'profile', label: 'Profile', icon: User, description: 'Manage your personal information' },
-    { id: 'security', label: 'Security', icon: Shield, description: 'Password and security settings' },
-    { id: 'notifications', label: 'Notifications', icon: Bell, description: 'Configure notification preferences' },
-    { id: 'appearance', label: 'Appearance', icon: Palette, description: 'Customize your interface' },
-    { id: 'data', label: 'Data Management', icon: Database, description: 'Export, import, and backup data' },
-    ...(user?.role === 'admin' ? [{ id: 'system', label: 'System', icon: SettingsIcon, description: 'System administration' }] : []),
-  ];
+  const tabs = user?.role === 'admin' 
+    ? [
+        { id: 'profile', label: 'Profile', icon: User, description: 'Manage your personal information', adminOnly: false },
+        { id: 'security', label: 'Security', icon: Shield, description: 'Password and security settings', adminOnly: false },
+        { id: 'notifications', label: 'Notifications', icon: Bell, description: 'Configure notification preferences', adminOnly: false },
+        { id: 'appearance', label: 'Appearance', icon: Palette, description: 'Customize your interface', adminOnly: false },
+        { id: 'data', label: 'Data Management', icon: Database, description: 'Export, import, and backup data', adminOnly: true },
+        { id: 'system', label: 'System', icon: SettingsIcon, description: 'System administration', adminOnly: true },
+      ]
+    : [
+        { id: 'profile', label: 'Profile', icon: User, description: 'Manage your personal information', adminOnly: false },
+        { id: 'security', label: 'Security', icon: Shield, description: 'Password and security settings', adminOnly: false },
+        { id: 'appearance', label: 'Appearance', icon: Palette, description: 'Customize your interface', adminOnly: false },
+      ];
 
   const handleAvatarUpload = () => {
     fileInputRef.current?.click();
@@ -250,8 +256,8 @@ export const SettingsPage: React.FC = () => {
           appearance: appearanceSettings,
         },
         data: {
-          sourceRecords,
-          transportLogs,
+          packages,
+          pickupStations,
         },
         exportDate: new Date().toISOString(),
         version: '1.0',

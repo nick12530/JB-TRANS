@@ -1,58 +1,96 @@
 import React from 'react';
-import { Menu, Bell, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown, Moon, Sun } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { Truck, Package } from 'lucide-react';
 
 interface NavbarProps {
   onToggleSidebar?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
-  const { user, isDark } = useApp();
+  const { user, isDark, setIsDark } = useApp();
+  
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center">
-      <button
-        onClick={onToggleSidebar}
-        className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 mr-4"
-      >
-        <Menu className="h-5 w-5" />
-      </button>
-
-      <div className="flex-1">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Miraa Transport Management System
-        </h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          Tracking goods from pickup points to destinations
-        </p>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        {user && (
-          <>
-            <button className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
-            </button>
-            
-            <div className="relative">
-              <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                <div className="h-8 w-8 bg-bright-green rounded-full flex items-center justify-center">
-                  <span className="text-white font-medium text-sm">
-                    {user.name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-                <div className="text-left hidden md:block">
-                  <div className="text-sm font-medium">{user.name}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
-                  </div>
-                </div>
-                <ChevronDown className="h-4 w-4" />
-              </button>
+    <header className="bg-gradient-to-r from-white via-mint-50 to-white dark:from-gray-800 dark:via-mint-900/10 dark:to-gray-800 border-b-2 border-eco-200 dark:border-eco-800 px-4 py-4 shadow-sm">
+      <div className="flex items-center justify-between gap-4">
+        {/* Left Section - Mobile Menu + Logo */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onToggleSidebar}
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Toggle sidebar"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+          
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 bg-gradient-to-br from-navy-500 to-eco-500 rounded-xl flex items-center justify-center shadow-lg">
+              <Truck className="h-6 w-6 text-white" />
+              <Package className="h-3 w-3 text-white absolute -top-0.5 -right-0.5" />
             </div>
-          </>
-        )}
+            <div className="hidden sm:block">
+              <h1 className="text-xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight">
+                Mwalimu Transporters
+              </h1>
+              <p className="text-xs font-bold text-eco-600 dark:text-eco-400">
+                Package Management System
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Center Section - Dynamic Title */}
+        <div className="flex-1 hidden md:flex justify-center">
+          <div className="text-center">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+              {user?.role === 'admin' ? 'Admin Portal' : user?.role === 'staff' ? 'Staff Portal' : 'Portal'}
+            </h2>
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400">
+              Package Registration & Tracking
+            </p>
+          </div>
+        </div>
+
+        {/* Right Section - User Info */}
+        <div className="flex items-center gap-3">
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Toggle dark mode"
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? (
+              <Sun className="h-5 w-5 text-yellow-500" />
+            ) : (
+              <Moon className="h-5 w-5 text-gray-600" />
+            )}
+          </button>
+          
+          {user && (
+            <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-navy-100 to-eco-100 dark:from-navy-900/40 dark:to-eco-900/20 rounded-xl border border-navy-200 dark:border-navy-700">
+              <div className="h-10 w-10 bg-gradient-to-br from-navy-500 to-eco-500 rounded-full flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-sm">
+                  {user.name.charAt(0).toUpperCase()}
+                </span>
+              </div>
+              <div className="text-left hidden md:block">
+                <div className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                  {user.name}
+                </div>
+                <div className="text-xs font-semibold text-eco-600 dark:text-eco-400 capitalize">
+                  {user.role}
+                </div>
+              </div>
+              <ChevronDown className="h-4 w-4 text-gray-600 dark:text-gray-400 hidden md:block" />
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

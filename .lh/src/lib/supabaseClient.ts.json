@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/lib/supabaseClient.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761798464554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761798464554,
+            "name": "Commit-0",
+            "content": "import { createClient, type SupabaseClient } from '@supabase/supabase-js';\r\n\r\nconst supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;\r\nconst supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;\r\n\r\nlet client: SupabaseClient | null = null;\r\n\r\nexport const getSupabaseClient = (): SupabaseClient | null => {\r\n  if (!supabaseUrl || !supabaseAnonKey) return null;\r\n  if (client) return client;\r\n  client = createClient(supabaseUrl, supabaseAnonKey, {\r\n    auth: {\r\n      persistSession: true,\r\n      autoRefreshToken: true,\r\n      detectSessionInUrl: true,\r\n    },\r\n  });\r\n  return client;\r\n};\r\n\r\nexport const isSupabaseEnabled = (): boolean => Boolean(supabaseUrl && supabaseAnonKey);\r\n\r\n\r\n"
+        }
+    ]
+}

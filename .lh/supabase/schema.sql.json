@@ -1,0 +1,18 @@
+{
+    "sourceFile": "supabase/schema.sql",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761798608794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761798608794,
+            "name": "Commit-0",
+            "content": "-- Minimal schemas aligned to src/types\r\n\r\ncreate table if not exists packages (\r\n  id text primary key,\r\n  trackingNumber text not null,\r\n  areaCode text not null,\r\n  senderName text not null,\r\n  senderPhone text not null,\r\n  recipientName text not null,\r\n  recipientPhone text not null,\r\n  destination text not null,\r\n  weight numeric not null,\r\n  status text not null,\r\n  registeredBy text not null,\r\n  registeredAt text not null,\r\n  station text not null,\r\n  notes text,\r\n  created_at timestamp with time zone default now()\r\n);\r\n\r\ncreate table if not exists users (\r\n  id text primary key,\r\n  name text not null,\r\n  role text not null,\r\n  email text,\r\n  phoneNumber text,\r\n  status text not null,\r\n  createdAt text,\r\n  updatedAt text,\r\n  lastLogin text,\r\n  department text,\r\n  assignedStation text\r\n);\r\n\r\ncreate table if not exists clients (\r\n  id text primary key,\r\n  name text not null,\r\n  phoneNumber text,\r\n  email text,\r\n  address text\r\n);\r\n\r\ncreate table if not exists stations (\r\n  id text primary key,\r\n  name text not null,\r\n  code text not null,\r\n  region text not null,\r\n  location text not null,\r\n  status text not null,\r\n  manager text,\r\n  contact text not null,\r\n  capacity numeric,\r\n  currentInventory numeric\r\n);\r\n\r\ncreate table if not exists area_codes (\r\n  id text primary key,\r\n  code text not null,\r\n  name text not null,\r\n  region text not null,\r\n  minRange integer not null,\r\n  maxRange integer not null,\r\n  status text not null,\r\n  assignedTo text,\r\n  notes text\r\n);\r\n\r\n-- Suggested RLS (enable and allow anon read/write for demo; tighten later)\r\n-- alter table packages enable row level security;\r\n-- create policy \"public read\" on packages for select using (true);\r\n-- create policy \"public write\" on packages for insert with check (true);\r\n-- create policy \"public update\" on packages for update using (true);\r\n-- create policy \"public delete\" on packages for delete using (true);\r\n\r\n"
+        }
+    ]
+}

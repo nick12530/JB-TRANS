@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/Deliveries/index.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761639571884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761639571884,
+            "name": "Commit-0",
+            "content": "import React, { useMemo } from 'react';\r\nimport { Card } from '../../components/Card';\r\nimport { useApp } from '../../context/AppContext';\r\n\r\nexport const DeliveriesPage: React.FC = () => {\r\n  const { user, packages } = useApp();\r\n  const myPkgs = useMemo(() => packages.filter(p => p.recipientPhone === user?.phoneNumber || p.recipientName === user?.name), [packages, user]);\r\n\r\n  return (\r\n    <div className=\"space-y-6\">\r\n      <h1 className=\"text-2xl font-bold text-gray-900 dark:text-gray-100\">My Deliveries</h1>\r\n      <Card padding=\"lg\" variant=\"enhanced\">\r\n        <div className=\"overflow-x-auto\">\r\n          <table className=\"min-w-full\">\r\n            <thead>\r\n              <tr className=\"text-left text-sm text-gray-600 dark:text-gray-300\">\r\n                <th className=\"py-2 pr-4\">Tracking</th>\r\n                <th className=\"py-2 pr-4\">Station</th>\r\n                <th className=\"py-2 pr-4\">Status</th>\r\n                <th className=\"py-2 pr-4\">Registered</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              {myPkgs.map(p => (\r\n                <tr key={p.id} className=\"border-t border-gray-200 dark:border-gray-700 text-sm\">\r\n                  <td className=\"py-2 pr-4\">{p.trackingNumber}</td>\r\n                  <td className=\"py-2 pr-4\">{p.station}</td>\r\n                  <td className=\"py-2 pr-4 capitalize\">{p.status}</td>\r\n                  <td className=\"py-2 pr-4\">{p.registeredAt ? new Date(p.registeredAt).toLocaleString() : 'N/A'}</td>\r\n                </tr>\r\n              ))}\r\n              {myPkgs.length === 0 && (\r\n                <tr>\r\n                  <td colSpan={4} className=\"py-6 text-center text-gray-500 dark:text-gray-400\">No deliveries</td>\r\n                </tr>\r\n              )}\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </Card>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

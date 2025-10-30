@@ -27,7 +27,7 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       {/* Logo Icon */}
-      <div className={`${sizeClasses[size]} bg-gradient-to-br from-bright-green to-green-600 rounded-lg flex items-center justify-center shadow-lg`}>
+      <div className={`${sizeClasses[size]} bg-gradient-to-br from-navy-500 to-navy-700 rounded-lg flex items-center justify-center shadow-lg`}>
         <div className="relative">
           <Truck className={`${size === 'sm' ? 'h-3 w-3' : size === 'md' ? 'h-4 w-4' : 'h-6 w-6'} text-white`} />
           <Package className={`${size === 'sm' ? 'h-2 w-2' : size === 'md' ? 'h-2.5 w-2.5' : 'h-3 w-3'} text-white absolute -top-1 -right-1`} />
@@ -40,7 +40,7 @@ export const Logo: React.FC<LogoProps> = ({
           <span className={`${textSizeClasses[size]} font-bold text-gray-900 dark:text-gray-100`}>
             Mwalimu
           </span>
-          <span className={`${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : 'text-base'} font-medium text-bright-green`}>
+          <span className={`${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : 'text-base'} font-medium text-eco-500`}>
             Transporters
           </span>
         </div>
