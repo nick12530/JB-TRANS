@@ -43,7 +43,14 @@ export const dataService = {
     if (!isSupabaseEnabled()) return writeLocal(localKeys.packages, items);
     const supabase = getSupabaseClient();
     if (!supabase) return writeLocal(localKeys.packages, items);
-    if (items.length) await supabase.from('packages').upsert(items.map(toDbPackage), { onConflict: 'id' });
+    if (items.length) {
+      const { error } = await supabase.from('packages').upsert(items.map(toDbPackage), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertPackages failed:', error.message);
+        // Fallback to local to avoid data loss on refresh
+        writeLocal(localKeys.packages, items);
+      }
+    }
   },
 
   async listUsers(): Promise<User[]> {
@@ -59,7 +66,13 @@ export const dataService = {
     if (!isSupabaseEnabled()) return writeLocal(localKeys.users, items);
     const supabase = getSupabaseClient();
     if (!supabase) return writeLocal(localKeys.users, items);
-    if (items.length) await supabase.from('users').upsert(items.map(toDbUser), { onConflict: 'id' });
+    if (items.length) {
+      const { error } = await supabase.from('users').upsert(items.map(toDbUser), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertUsers failed:', error.message);
+        writeLocal(localKeys.users, items);
+      }
+    }
   },
 
   async listClients(): Promise<Client[]> {
@@ -75,7 +88,13 @@ export const dataService = {
     if (!isSupabaseEnabled()) return writeLocal(localKeys.clients, items);
     const supabase = getSupabaseClient();
     if (!supabase) return writeLocal(localKeys.clients, items);
-    if (items.length) await supabase.from('clients').upsert(items.map(toDbClient), { onConflict: 'id' });
+    if (items.length) {
+      const { error } = await supabase.from('clients').upsert(items.map(toDbClient), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertClients failed:', error.message);
+        writeLocal(localKeys.clients, items);
+      }
+    }
   },
 
   async listStations(): Promise<PickupStation[]> {
@@ -91,7 +110,13 @@ export const dataService = {
     if (!isSupabaseEnabled()) return writeLocal(localKeys.stations, items);
     const supabase = getSupabaseClient();
     if (!supabase) return writeLocal(localKeys.stations, items);
-    if (items.length) await supabase.from('stations').upsert(items.map(toDbStation), { onConflict: 'id' });
+    if (items.length) {
+      const { error } = await supabase.from('stations').upsert(items.map(toDbStation), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertStations failed:', error.message);
+        writeLocal(localKeys.stations, items);
+      }
+    }
   },
 
   async listAreaCodes(): Promise<AreaCode[]> {
@@ -107,7 +132,13 @@ export const dataService = {
     if (!isSupabaseEnabled()) return writeLocal(localKeys.area_codes, items);
     const supabase = getSupabaseClient();
     if (!supabase) return writeLocal(localKeys.area_codes, items);
-    if (items.length) await supabase.from('area_codes').upsert(items.map(toDbAreaCode), { onConflict: 'id' });
+    if (items.length) {
+      const { error } = await supabase.from('area_codes').upsert(items.map(toDbAreaCode), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertAreaCodes failed:', error.message);
+        writeLocal(localKeys.area_codes, items);
+      }
+    }
   },
 };
 

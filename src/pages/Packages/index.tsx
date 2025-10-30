@@ -94,7 +94,41 @@ export const PackagesPage: React.FC = () => {
       </Card>
 
       <Card padding="lg" variant="enhanced">
-        <div className="overflow-x-auto">
+        {/* Mobile stacked list */}
+        <div className="md:hidden space-y-2">
+          {filtered.map(p => {
+            let b=0,bs=0,ss=0;
+            if (p.notes) {
+              for (const part of String(p.notes).split('|')) {
+                const [k, v] = (part || '').split(':');
+                const n = Number(v); const val = Number.isFinite(n) ? n : 0;
+                if (k === 'boxes') b += val;
+                if (k === 'basins') bs += val;
+                if (k === 'smallSacks') ss += val;
+              }
+            }
+            return (
+              <div key={p.id} className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <div className="flex items-center justify-between">
+                  <div className="font-semibold text-gray-900 dark:text-gray-100 truncate max-w-[70%]">{p.trackingNumber}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{new Date(p.registeredAt || '').toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+                </div>
+                <div className="mt-1 text-xs text-gray-600 dark:text-gray-300 truncate">{p.station} • {p.destination}</div>
+                <div className="mt-2 flex items-center gap-3 text-xs">
+                  <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Boxes: <b>{b}</b></span>
+                  <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Basins: <b>{bs}</b></span>
+                  <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Sacks: <b>{ss}</b></span>
+                </div>
+              </div>
+            );
+          })}
+          {filtered.length === 0 && (
+            <p className="text-center text-gray-500 dark:text-gray-400 py-4">No packages</p>
+          )}
+        </div>
+
+        {/* Desktop table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="min-w-[720px] md:min-w-full text-xs md:text-sm">
             <thead>
               <tr className="text-left text-xs md:text-sm text-gray-600 dark:text-gray-300 sticky top-0 bg-white dark:bg-gray-800 z-10">

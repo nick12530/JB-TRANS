@@ -23,6 +23,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
+  // Lock background scroll when mobile sidebar is open
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => document.body.classList.remove('overflow-hidden');
+  }, [sidebarOpen]);
+
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       {/* Mobile sidebar overlay */}
@@ -39,7 +49,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className={`${
         isCollapsed ? 'lg:w-20' : 'lg:w-72'
       } fixed inset-y-0 left-0 z-40 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        sidebarOpen ? 'translate-x-0 w-72 pointer-events-auto' : '-translate-x-full w-0 pointer-events-none'
       }`}>
         <Sidebar isCollapsed={isCollapsed} onToggleCollapse={() => setIsCollapsed(!isCollapsed)} />
       </div>

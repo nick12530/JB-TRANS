@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1759565693638,
@@ -72,6 +72,10 @@
                 {
                     "date": 1761652949230,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n-import React, { useState } from 'react';\n+import React, { useState, useEffect } from 'react';\n+import { useLocation } from 'react-router-dom';\n+import { clsx } from 'clsx';\n import { Sidebar } from './Sidebar';\n import { Navbar } from './Navbar';\n \n interface LayoutProps {\n@@ -8,9 +10,20 @@\n \n export const Layout: React.FC<LayoutProps> = ({ children }) => {\n   const [sidebarOpen, setSidebarOpen] = useState(false);\n   const [isCollapsed, setIsCollapsed] = useState(false);\n+  const [isTransitioning, setIsTransitioning] = useState(false);\n+  const location = useLocation();\n \n+  // Trigger page transition animation\n+  useEffect(() => {\n+    setIsTransitioning(true);\n+    const timer = setTimeout(() => {\n+      setIsTransitioning(false);\n+    }, 300);\n+    return () => clearTimeout(timer);\n+  }, [location.pathname]);\n+\n   return (\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\n       {/* Mobile sidebar overlay */}\n       {sidebarOpen && (\n@@ -34,9 +47,12 @@\n       <div className=\"flex-1 flex flex-col min-w-0\">\n         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />\n         \n         <main className=\"flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900\">\n-          <div className=\"w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-6\">\n+          <div className={clsx(\n+            'w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-6 transition-all duration-300 ease-in-out',\n+            isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'\n+          )}>\n             <div className=\"space-y-4 sm:space-y-6\">\n               {children}\n             </div>\n           </div>\n"
+                },
+                {
+                    "date": 1761805617553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,18 @@\n     }, 300);\n     return () => clearTimeout(timer);\n   }, [location.pathname]);\n \n+  // Lock background scroll when mobile sidebar is open\n+  useEffect(() => {\n+    if (sidebarOpen) {\n+      document.body.classList.add('overflow-hidden');\n+    } else {\n+      document.body.classList.remove('overflow-hidden');\n+    }\n+    return () => document.body.classList.remove('overflow-hidden');\n+  }, [sidebarOpen]);\n+\n   return (\n     <div className=\"flex h-screen bg-gray-50 dark:bg-gray-900\">\n       {/* Mobile sidebar overlay */}\n       {sidebarOpen && (\n@@ -38,9 +48,9 @@\n       {/* Sidebar */}\n       <div className={`${\n         isCollapsed ? 'lg:w-20' : 'lg:w-72'\n       } fixed inset-y-0 left-0 z-40 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${\n-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'\n+        sidebarOpen ? 'translate-x-0 w-72 pointer-events-auto' : '-translate-x-full w-0 pointer-events-none'\n       }`}>\n         <Sidebar isCollapsed={isCollapsed} onToggleCollapse={() => setIsCollapsed(!isCollapsed)} />\n       </div>\n       \n"
                 }
             ],
             "date": 1759565693638,
