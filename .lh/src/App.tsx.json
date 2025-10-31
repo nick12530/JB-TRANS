@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 39,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1757636387978,
@@ -164,6 +164,10 @@
                 {
                     "date": 1761717831710,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,12 +21,12 @@\n function App() {\r\n   const [isLoading, setIsLoading] = useState(true);\r\n \r\n   useEffect(() => {\r\n-    // Simulate app initialization\r\n+    // Simulate app initialization (reduced from 2000ms to 500ms for faster startup)\r\n     const timer = setTimeout(() => {\r\n       setIsLoading(false);\r\n-    }, 2000);\r\n+    }, 500);\r\n \r\n     return () => clearTimeout(timer);\r\n   }, []);\r\n \r\n"
+                },
+                {
+                    "date": 1761910429873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n import { ReportsPage } from './pages/Reports';\r\n import { AreaCodesPage } from './pages/AreaCodes';\r\n import { RegisterPackagePage } from './pages/RegisterPackage';\r\n import { DeliveriesPage } from './pages/Deliveries';\r\n+import { RegistrationsPage } from './pages/Registrations';\r\n \r\n function App() {\r\n   const [isLoading, setIsLoading] = useState(true);\r\n \r\n@@ -168,8 +169,18 @@\n                 </Layout>\r\n               </ProtectedRoute>\r\n             }\r\n           />\r\n+          <Route\r\n+            path=\"/registrations\"\r\n+            element={\r\n+              <ProtectedRoute>\r\n+                <Layout>\r\n+                  <RegistrationsPage />\r\n+                </Layout>\r\n+              </ProtectedRoute>\r\n+            }\r\n+          />\r\n           {/* Track route removed per requirements */}\r\n           \r\n           {/* Redirect root to dashboard or login */}\r\n           <Route path=\"/\" element={<Navigate to=\"/dashboard\" replace />} />\r\n"
                 }
             ],
             "date": 1757636387978,

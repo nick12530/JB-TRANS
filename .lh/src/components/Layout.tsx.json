@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1759565693638,
@@ -88,6 +88,14 @@
                 {
                     "date": 1761810305589,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,12 +38,12 @@\n         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />\n \n         {/* Mobile Sidebar as dropdown panel */}\n         {sidebarOpen && (\n-          <div className=\"lg:hidden z-30 px-3 py-3 border-b\n+          <div className=\"lg:hidden z-30 px-3 py-3 border-b rounded-b-xl\n                           border-white/30 dark:border-white/10\n                           bg-white/40 dark:bg-gray-900/30\n-                          backdrop-blur-xl shadow-lg\">\n+                          backdrop-blur-2xl shadow-xl\">\n             <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />\n           </div>\n         )}\n         \n"
+                },
+                {
+                    "date": 1761910384318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,14 @@\n           <div className=\"lg:hidden z-30 px-3 py-3 border-b rounded-b-xl\n                           border-white/30 dark:border-white/10\n                           bg-white/40 dark:bg-gray-900/30\n                           backdrop-blur-2xl shadow-xl\">\n-            <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />\n+            <Sidebar \n+              isCollapsed={false} \n+              onToggleCollapse={() => {}} \n+              fullHeight={false}\n+              onNavigate={() => setSidebarOpen(false)}\n+            />\n           </div>\n         )}\n         \n         <main className=\"flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900\">\n"
+                },
+                {
+                    "date": 1761910462124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,13 @@\n       {/* Mobile sidebar overlay removed for dropdown approach */}\n \n       {/* Desktop Sidebar (left rail) */}\n       <div className={`${isCollapsed ? 'lg:w-20' : 'lg:w-72'} hidden lg:block`}>\n-        <Sidebar isCollapsed={isCollapsed} onToggleCollapse={() => setIsCollapsed(!isCollapsed)} />\n+        <Sidebar \n+          isCollapsed={isCollapsed} \n+          onToggleCollapse={() => setIsCollapsed(!isCollapsed)}\n+          onNavigate={undefined}\n+        />\n       </div>\n       \n       <div className=\"flex-1 flex flex-col min-w-0\">\n         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />\n"
                 }
             ],
             "date": 1759565693638,

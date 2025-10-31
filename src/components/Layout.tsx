@@ -31,7 +31,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Desktop Sidebar (left rail) */}
       <div className={`${isCollapsed ? 'lg:w-20' : 'lg:w-72'} hidden lg:block`}>
-        <Sidebar isCollapsed={isCollapsed} onToggleCollapse={() => setIsCollapsed(!isCollapsed)} />
+        <Sidebar 
+          isCollapsed={isCollapsed} 
+          onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
+          onNavigate={undefined}
+        />
       </div>
       
       <div className="flex-1 flex flex-col min-w-0">
@@ -43,7 +47,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                           border-white/30 dark:border-white/10
                           bg-white/40 dark:bg-gray-900/30
                           backdrop-blur-2xl shadow-xl">
-            <Sidebar isCollapsed={false} onToggleCollapse={() => {}} fullHeight={false} />
+            <Sidebar 
+              isCollapsed={false} 
+              onToggleCollapse={() => {}} 
+              fullHeight={false}
+              onNavigate={() => setSidebarOpen(false)}
+            />
           </div>
         )}
         

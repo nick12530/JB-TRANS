@@ -128,7 +128,11 @@ export const UserDashboard: React.FC = () => {
         </h2>
         <div className="space-y-3">
           {userPackages.slice(0, 5).map((pkg) => (
-            <div key={pkg.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <button
+              key={pkg.id}
+              onClick={() => navigate('/registrations')}
+              className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left cursor-pointer"
+            >
               <div className="flex items-center space-x-3 min-w-0">
                 <div className={`p-2 rounded-lg flex-shrink-0 ${
                   pkg.status === 'delivered' ? 'bg-green-100 dark:bg-green-900/20' :
@@ -159,7 +163,7 @@ export const UserDashboard: React.FC = () => {
                   {pkg.status}
                 </span>
               </div>
-            </div>
+            </button>
           ))}
           {userPackages.length === 0 && (
             <p className="text-center text-gray-500 dark:text-gray-400 py-8">

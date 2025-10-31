@@ -20,6 +20,7 @@ interface SidebarProps {
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
   fullHeight?: boolean; // mobile dropdown sets this to false so it doesn't take screen height
+  onNavigate?: () => void; // callback to close mobile sidebar when navigating
 }
 
 // Admin navigation items
@@ -43,7 +44,7 @@ const staffNavItems = [
 // Client navigation (clients don't use the UI; keep empty to avoid showing menu)
 const clientNavItems: any[] = [];
 
-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse, fullHeight = true }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleCollapse, fullHeight = true, onNavigate }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useApp();
@@ -84,7 +85,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleC
             return (
               <button
                 key={path}
-                onClick={() => navigate(path)}
+                onClick={() => {
+                  navigate(path);
+                  onNavigate?.(); // Close mobile sidebar after navigation
+                }}
                 className={clsx(
                   'flex items-center w-full rounded-lg text-left transition-all duration-300',
                   isCollapsed ? 'px-2 py-3 justify-center' : 'px-3 py-2 space-x-3',
@@ -103,7 +107,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleC
 
         <div className="mt-auto space-y-2 flex-shrink-0">
           <button
-            onClick={() => navigate('/settings')}
+            onClick={() => {
+              navigate('/settings');
+              onNavigate?.();
+            }}
             className={clsx(
               'flex items-center w-full px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800',
               isCollapsed && 'justify-center px-2'
@@ -116,7 +123,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggleC
           
           {user && (
             <button
-              onClick={() => navigate('/login')}
+              onClick={() => {
+                navigate('/login');
+                onNavigate?.();
+              }}
               className={clsx(
                 'flex items-center w-full px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800',
                 isCollapsed && 'justify-center px-2'

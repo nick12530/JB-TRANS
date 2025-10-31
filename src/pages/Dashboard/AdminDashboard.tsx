@@ -367,7 +367,11 @@ export const AdminDashboard: React.FC = () => {
         </h2>
         <div className="space-y-3">
           {recentPackages.map(p => (
-            <div key={p.id} className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-between">
+            <button
+              key={p.id}
+              onClick={() => navigate('/registrations')}
+              className="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-between transition-colors text-left"
+            >
               <div className="min-w-0">
                 <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{p.trackingNumber}</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400 truncate">{p.recipientName} • {p.destination}</div>
@@ -375,7 +379,7 @@ export const AdminDashboard: React.FC = () => {
               <div className="text-xs text-gray-500 dark:text-gray-400 ml-3 whitespace-nowrap">
                 {p.registeredAt ? new Date(p.registeredAt).toLocaleString() : 'N/A'}
               </div>
-            </div>
+            </button>
           ))}
           {recentPackages.length === 0 && (
             <p className="text-center text-gray-500 dark:text-gray-400 py-6">No recent registrations</p>

@@ -17,6 +17,7 @@ import { ReportsPage } from './pages/Reports';
 import { AreaCodesPage } from './pages/AreaCodes';
 import { RegisterPackagePage } from './pages/RegisterPackage';
 import { DeliveriesPage } from './pages/Deliveries';
+import { RegistrationsPage } from './pages/Registrations';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -165,6 +166,16 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <DeliveriesPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/registrations"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <RegistrationsPage />
                 </Layout>
               </ProtectedRoute>
             }
