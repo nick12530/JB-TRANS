@@ -13,6 +13,7 @@ import {
   BarChart3,
   ChevronLeft,
   ChevronRight,
+  Navigation,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -27,6 +28,7 @@ interface SidebarProps {
 const adminNavItems = [
   { icon: LayoutDashboard, label: 'Admin Dashboard', path: '/dashboard', adminOnly: true },
   { icon: Users, label: 'User Management', path: '/users', adminOnly: true },
+  { icon: Navigation, label: 'Destinations', path: '/destinations', adminOnly: true },
   { icon: MapPin, label: 'Pickup Stations', path: '/stations', adminOnly: true },
   { icon: Package, label: 'Package Management', path: '/packages', adminOnly: true },
   { icon: BarChart3, label: 'Reports', path: '/reports', adminOnly: true },
@@ -37,6 +39,7 @@ const adminNavItems = [
 const staffNavItems = [
   { icon: LayoutDashboard, label: 'Staff Dashboard', path: '/dashboard', adminOnly: false },
   { icon: Package, label: 'Register Package', path: '/register-package', adminOnly: false },
+  { icon: Navigation, label: 'Destinations', path: '/destinations', adminOnly: false },
   { icon: MapPin, label: 'Pickup Stations', path: '/stations', adminOnly: false },
   { icon: Package, label: 'Package Management', path: '/packages', adminOnly: false },
 ];

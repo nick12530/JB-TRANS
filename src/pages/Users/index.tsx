@@ -10,6 +10,8 @@ export const UsersPage: React.FC = () => {
   const { users, setUsers, clients, setClients } = useApp();
   const [q, setQ] = useState('');
   const [form, setForm] = useState({ name: '', email: '', role: 'staff' as User['role'] });
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string }>({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
@@ -17,18 +19,59 @@ export const UsersPage: React.FC = () => {
     return users.filter(u => u.name.toLowerCase().includes(query) || (u.email || '').toLowerCase().includes(query));
   }, [q, users]);
 
+  const validateEmail = (email: string): boolean => {
+    if (!email) return true; // Email is optional
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const addUser = () => {
-    if (!form.name) return;
+    // Clear previous messages
+    setSuccessMessage('');
+    setFormErrors({});
+
+    // Validate form
+    const errors: { name?: string; email?: string } = {};
+    
+    if (!form.name.trim()) {
+      errors.name = 'Name is required';
+    }
+    
+    if (form.email && !validateEmail(form.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    // Check for duplicate email if provided
+    if (form.email && users.some(u => u.email && u.email.toLowerCase() === form.email.toLowerCase())) {
+      errors.email = 'This email is already in use';
+    }
+
+    // Check for duplicate name
+    if (form.name.trim() && users.some(u => u.name.toLowerCase() === form.name.trim().toLowerCase())) {
+      errors.name = 'A user with this name already exists';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    // Create new user
     const newUser: User = {
       id: Date.now().toString(),
-      name: form.name,
-      email: form.email || undefined,
+      name: form.name.trim(),
+      email: form.email.trim() || undefined,
       role: form.role,
       status: 'active',
       createdAt: new Date().toISOString(),
     } as User;
+    
     setUsers([newUser, ...users]);
     setForm({ name: '', email: '', role: 'staff' });
+    setSuccessMessage(`User "${newUser.name}" has been added successfully!`);
+    
+    // Clear success message after 3 seconds
+    setTimeout(() => setSuccessMessage(''), 3000);
   };
 
   const toggleStatus = (id: string) => {
@@ -78,10 +121,55 @@ export const UsersPage: React.FC = () => {
       <Card padding="lg" variant="enhanced">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <FormInput label="Search" value={q} onChange={(v)=>setQ(String(v))} placeholder="Name or email" />
-          <FormInput label="Name" value={form.name} onChange={(v)=>setForm({...form, name: String(v)})} />
-          <FormInput label="Email" value={form.email} onChange={(v)=>setForm({...form, email: String(v)})} />
-          <FormSelect label="Role" value={form.role} onChange={(v)=>setForm({...form, role: v as User['role']})} options={[{value:'staff',label:'Staff'},{value:'client',label:'Client'},{value:'admin',label:'Admin'}]} />
+          <FormInput 
+            label="Name" 
+            value={form.name} 
+            onChange={(v)=>{
+              setForm({...form, name: String(v)});
+              if (formErrors.name) {
+                setFormErrors({...formErrors, name: undefined});
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                addUser();
+              }
+            }}
+            error={formErrors.name}
+            required
+          />
+          <FormInput 
+            label="Email" 
+            type="email"
+            value={form.email} 
+            onChange={(v)=>{
+              setForm({...form, email: String(v)});
+              if (formErrors.email) {
+                setFormErrors({...formErrors, email: undefined});
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                addUser();
+              }
+            }}
+            error={formErrors.email}
+            placeholder="Optional"
+          />
+          <FormSelect 
+            label="Role" 
+            value={form.role} 
+            onChange={(v)=>setForm({...form, role: v as User['role']})} 
+            options={[{value:'staff',label:'Staff'},{value:'client',label:'Client'},{value:'admin',label:'Admin'}]} 
+          />
         </div>
+        {successMessage && (
+          <div className="mt-4 p-3 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 rounded-lg">
+            {successMessage}
+          </div>
+        )}
         <div className="mt-4">
           <Button onClick={addUser}>Add User</Button>
         </div>

@@ -18,6 +18,7 @@ import { AreaCodesPage } from './pages/AreaCodes';
 import { RegisterPackagePage } from './pages/RegisterPackage';
 import { DeliveriesPage } from './pages/Deliveries';
 import { RegistrationsPage } from './pages/Registrations';
+import { DestinationsPage } from './pages/Destinations';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -176,6 +177,16 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <RegistrationsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/destinations"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <DestinationsPage />
                 </Layout>
               </ProtectedRoute>
             }

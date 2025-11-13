@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { User, DropOffPoint, PackingRecord, DeliveryNotification, Client, Package, PickupStation, AreaCode } from '../types';
+import { User, DropOffPoint, PackingRecord, DeliveryNotification, Client, Package, PickupStation, AreaCode, DestinationRecord } from '../types';
 import { dataService } from '../services/dataService';
 import { isSupabaseEnabled } from '../lib/supabaseClient';
 
@@ -26,6 +26,10 @@ export interface AppContextType {
   setAreaCodes: (codes: AreaCode[]) => void;
   users: User[];
   setUsers: (users: User[]) => void;
+  destinationRecords: DestinationRecord[];
+  setDestinationRecords: (records: DestinationRecord[]) => void;
+  destinations: string[];
+  setDestinations: (destinations: string[]) => void;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -59,6 +63,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   ];
   const [areaCodes, setAreaCodes] = useState<AreaCode[]>(DEFAULT_AREA_CODES);
   const [users, setUsers] = useState<User[]>([]);
+  const [destinationRecords, setDestinationRecords] = useState<DestinationRecord[]>([]);
+  const [destinations, setDestinations] = useState<string[]>([
+    'KONGO', 'MIRITINI', 'MARIAKANI', 'SAMBURU TOWN', 'SAMBURU', 'KILIFI', 'MALINDI', 'VOI',
+    'TAVETA', 'TESO', 'DZONI', 'KALOLENI', 'MAVUENI', 'MAZERAS', 'CHASIMBA', 'MAUNGU',
+    'MANYATTA', 'TARU', 'MTITO', 'KAMBUU', 'MACKNON', 'MALIKUBWA',
+  ]);
   const [hydrated, setHydrated] = useState(false);
 
   // Load data on mount (Supabase if enabled, otherwise localStorage fallback)
@@ -66,18 +76,20 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const load = async () => {
       if (isSupabaseEnabled()) {
         try {
-          const [pkgs, usrs, cls, sts, areas] = await Promise.all([
+          const [pkgs, usrs, cls, sts, areas, dests] = await Promise.all([
             dataService.listPackages(),
             dataService.listUsers(),
             dataService.listClients(),
             dataService.listStations(),
             dataService.listAreaCodes(),
+            dataService.listDestinationRecords(),
           ]);
           setPackages(pkgs);
           setUsers(usrs);
           setClients(cls);
           setPickupStations(sts && sts.length ? sts : DEFAULT_STATIONS);
           setAreaCodes(areas && areas.length ? areas : DEFAULT_AREA_CODES);
+          setDestinationRecords(dests);
         } catch (error) {
           console.error('Failed to load data from Supabase, falling back to localStorage', error);
         }
@@ -111,6 +123,18 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           if (savedAreaCodes) {
             const parsed = JSON.parse(savedAreaCodes);
             if (Array.isArray(parsed)) setAreaCodes(parsed);
+          }
+
+          const savedDestinationRecords = localStorage.getItem('mwalimu-destination-records');
+          if (savedDestinationRecords) {
+            const parsed = JSON.parse(savedDestinationRecords);
+            if (Array.isArray(parsed)) setDestinationRecords(parsed);
+          }
+
+          const savedDestinations = localStorage.getItem('mwalimu-destinations');
+          if (savedDestinations) {
+            const parsed = JSON.parse(savedDestinations);
+            if (Array.isArray(parsed) && parsed.length > 0) setDestinations(parsed);
           }
         } catch (error) {
           console.error('Failed to load data from localStorage:', error);
@@ -211,6 +235,28 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, [areaCodes]);
 
   useEffect(() => {
+    if (!hydrated) return;
+    if (isSupabaseEnabled()) {
+      dataService.upsertDestinationRecords(destinationRecords);
+      return;
+    }
+    try {
+      localStorage.setItem('mwalimu-destination-records', JSON.stringify(destinationRecords));
+    } catch (error) {
+      console.error('Failed to save destination records to localStorage:', error);
+    }
+  }, [destinationRecords]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem('mwalimu-destinations', JSON.stringify(destinations));
+    } catch (error) {
+      console.error('Failed to save destinations to localStorage:', error);
+    }
+  }, [destinations]);
+
+  useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
       setIsDark(storedTheme === 'dark');
@@ -252,7 +298,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setAreaCodes,
     users,
     setUsers,
-  }), [user, isAuthenticated, isDark, dropOffPoints, packingRecords, deliveryNotifications, clients, packages, pickupStations, areaCodes, users]);
+    destinationRecords,
+    setDestinationRecords,
+    destinations,
+    setDestinations,
+  }), [user, isAuthenticated, isDark, dropOffPoints, packingRecords, deliveryNotifications, clients, packages, pickupStations, areaCodes, users, destinationRecords, destinations]);
 
   return (
     <AppContext.Provider value={contextValue}>

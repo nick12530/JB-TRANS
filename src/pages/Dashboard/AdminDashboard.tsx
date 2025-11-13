@@ -13,10 +13,11 @@ import {
   Clock,
   RefreshCw,
   Settings,
+  Navigation,
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
-  const { packages, pickupStations, users, areaCodes } = useApp();
+  const { packages, pickupStations, users, areaCodes, destinationRecords } = useApp();
   const navigate = useNavigate();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -31,6 +32,21 @@ export const AdminDashboard: React.FC = () => {
   const activeStations = pickupStations.filter(s => s.status === 'active').length;
   const totalAreaCodes = areaCodes.length;
   const activeAreaCodes = areaCodes.filter(a => a.status === 'active').length;
+  const totalDestinationRecords = destinationRecords.length;
+  
+  // Calculate destination totals
+  const destinationTotals = useMemo(() => {
+    const totals: Record<string, { boxes: number; smallSacks: number; basins: number }> = {};
+    for (const record of destinationRecords) {
+      if (!totals[record.destination]) {
+        totals[record.destination] = { boxes: 0, smallSacks: 0, basins: 0 };
+      }
+      totals[record.destination].boxes += record.boxes;
+      totals[record.destination].smallSacks += record.smallSacks;
+      totals[record.destination].basins += record.basins;
+    }
+    return totals;
+  }, [destinationRecords]);
 
   // Calculate station totals
   const totalStationCapacity = pickupStations.reduce((sum, station) => sum + (station.capacity || 0), 0);
@@ -410,7 +426,11 @@ export const AdminDashboard: React.FC = () => {
             <span>View Reports</span>
           </Button>
         </div>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <Button variant="outline" className="w-full flex items-center justify-center gap-2" onClick={() => navigate('/destinations')}>
+            <Navigation className="h-5 w-5" />
+            <span>Destinations</span>
+          </Button>
           <Button variant="outline" className="w-full flex items-center justify-center gap-2" onClick={() => navigate('/area-codes')}>
             <Settings className="h-5 w-5" />
             <span>Area Codes</span>
@@ -424,6 +444,85 @@ export const AdminDashboard: React.FC = () => {
             <span>Settings</span>
           </Button>
         </div>
+      </Card>
+
+      {/* Destination Records Overview */}
+      <Card variant="enhanced" padding="lg">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+            Destination Records Overview
+          </h2>
+          <Button variant="outline" size="sm" onClick={() => navigate('/destinations')}>
+            <Navigation className="h-4 w-4 mr-2" />
+            View All
+          </Button>
+        </div>
+        <div className="mb-4 p-4 bg-gradient-to-r from-navy-50 to-eco-50 dark:from-navy-900/30 dark:to-eco-900/10 rounded-lg border border-navy-200 dark:border-navy-700">
+          <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">Total Records</div>
+          <div className="text-3xl font-bold text-navy-700 dark:text-navy-300">{totalDestinationRecords}</div>
+        </div>
+        {Object.keys(destinationTotals).length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead>
+                <tr className="text-left text-sm text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                  <th className="py-2 pr-4">Destination</th>
+                  <th className="py-2 pr-4 text-center">Total Boxes</th>
+                  <th className="py-2 pr-4 text-center">Total Small Sacks</th>
+                  <th className="py-2 pr-4 text-center">Total Basins</th>
+                  <th className="py-2 pr-4 text-center">Total Items</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(destinationTotals)
+                  .sort((a, b) => {
+                    const totalA = a[1].boxes + a[1].smallSacks + a[1].basins;
+                    const totalB = b[1].boxes + b[1].smallSacks + b[1].basins;
+                    return totalB - totalA;
+                  })
+                  .slice(0, 10)
+                  .map(([destination, totals]) => {
+                    const totalItems = totals.boxes + totals.smallSacks + totals.basins;
+                    return (
+                      <tr key={destination} className="border-b border-gray-200 dark:border-gray-700 text-sm">
+                        <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">
+                          <div className="flex items-center gap-2">
+                            <Navigation className="h-4 w-4 text-eco-600" />
+                            {destination}
+                          </div>
+                        </td>
+                        <td className="py-2 pr-4 text-center">
+                          <span className="px-2 py-1 rounded bg-navy-100 dark:bg-navy-900/30 text-navy-800 dark:text-navy-200 font-semibold">
+                            {totals.boxes}
+                          </span>
+                        </td>
+                        <td className="py-2 pr-4 text-center">
+                          <span className="px-2 py-1 rounded bg-eco-100 dark:bg-eco-900/30 text-eco-800 dark:text-eco-200 font-semibold">
+                            {totals.smallSacks}
+                          </span>
+                        </td>
+                        <td className="py-2 pr-4 text-center">
+                          <span className="px-2 py-1 rounded bg-mint-100 dark:bg-mint-900/30 text-mint-800 dark:text-mint-200 font-semibold">
+                            {totals.basins}
+                          </span>
+                        </td>
+                        <td className="py-2 pr-4 text-center font-bold text-gray-900 dark:text-gray-100">
+                          {totalItems}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+            {Object.keys(destinationTotals).length > 10 && (
+              <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+                Showing top 10 destinations. <button onClick={() => navigate('/destinations')} className="text-eco-600 hover:underline">View all</button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 dark:text-gray-400 py-6">No destination records yet</p>
+        )}
       </Card>
 
       {/* Station Totals Overview */}

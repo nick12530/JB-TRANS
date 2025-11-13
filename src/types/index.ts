@@ -81,5 +81,16 @@ export interface RegionalReport {
   avgDeliveryTime: number;
 }
 
+export interface DestinationRecord {
+  id: string;
+  date: string;
+  destination: string;
+  boxes: number;
+  smallSacks: number;
+  basins: number;
+  createdAt: string;
+  createdBy?: string;
+}
+
 // Re-export new logistics types
 export * from './logistics';

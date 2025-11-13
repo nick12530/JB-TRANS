@@ -1,7 +1,7 @@
 import { getSupabaseClient, isSupabaseEnabled } from '../lib/supabaseClient';
-import type { AreaCode, Client, Package, PickupStation, User } from '../types';
+import type { AreaCode, Client, Package, PickupStation, User, DestinationRecord } from '../types';
 
-type Tables = 'packages' | 'users' | 'clients' | 'stations' | 'area_codes' | 'notifications';
+type Tables = 'packages' | 'users' | 'clients' | 'stations' | 'area_codes' | 'notifications' | 'destination_records';
 
 const localKeys: Record<Tables, string> = {
   packages: 'mwalimu-packages',
@@ -10,6 +10,7 @@ const localKeys: Record<Tables, string> = {
   stations: 'mwalimu-stations',
   area_codes: 'mwalimu-area-codes',
   notifications: 'mwalimu-notifications',
+  destination_records: 'mwalimu-destination-records',
 };
 
 function readLocal<T>(key: string, fallback: T): T {
@@ -137,6 +138,28 @@ export const dataService = {
       if (error) {
         console.error('Supabase upsertAreaCodes failed:', error.message);
         writeLocal(localKeys.area_codes, items);
+      }
+    }
+  },
+
+  async listDestinationRecords(): Promise<DestinationRecord[]> {
+    if (!isSupabaseEnabled()) return readLocal(localKeys.destination_records, [] as DestinationRecord[]);
+    const supabase = getSupabaseClient();
+    if (!supabase) return readLocal(localKeys.destination_records, [] as DestinationRecord[]);
+    const { data, error } = await supabase.from('destination_records').select('*').order('date', { ascending: false });
+    if (error) return readLocal(localKeys.destination_records, [] as DestinationRecord[]);
+    return (data ?? []).map(fromDbDestinationRecord);
+  },
+
+  async upsertDestinationRecords(items: DestinationRecord[]): Promise<void> {
+    if (!isSupabaseEnabled()) return writeLocal(localKeys.destination_records, items);
+    const supabase = getSupabaseClient();
+    if (!supabase) return writeLocal(localKeys.destination_records, items);
+    if (items.length) {
+      const { error } = await supabase.from('destination_records').upsert(items.map(toDbDestinationRecord), { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase upsertDestinationRecords failed:', error.message);
+        writeLocal(localKeys.destination_records, items);
       }
     }
   },
@@ -290,6 +313,32 @@ function fromDbAreaCode(r: any): AreaCode {
     assignedTo: r.assignedto ?? undefined,
     notes: r.notes ?? undefined,
   } as AreaCode;
+}
+
+function toDbDestinationRecord(d: DestinationRecord): any {
+  return {
+    id: d.id,
+    date: d.date,
+    destination: d.destination,
+    boxes: d.boxes,
+    smallsacks: d.smallSacks,
+    basins: d.basins,
+    createdat: d.createdAt,
+    createdby: d.createdBy ?? null,
+  };
+}
+
+function fromDbDestinationRecord(r: any): DestinationRecord {
+  return {
+    id: r.id,
+    date: r.date,
+    destination: r.destination,
+    boxes: Number(r.boxes),
+    smallSacks: Number(r.smallsacks),
+    basins: Number(r.basins),
+    createdAt: r.createdat,
+    createdBy: r.createdby ?? undefined,
+  } as DestinationRecord;
 }
 
 
